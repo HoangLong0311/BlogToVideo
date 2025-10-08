@@ -1,0 +1,23 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "main": "handleVideo.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "video": "node handleVideo.js",
+    "video:help": "node handleVideo.js --help"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "@ffprobe-installer/ffprobe": "^2.1.2",
+    "@google/generative-ai": "^0.24.1",
+    "axios": "^1.12.2",
+    "dotenv": "^17.2.3",
+    "fluent-ffmpeg": "^2.1.3"
+  }
+}
