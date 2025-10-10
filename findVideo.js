@@ -100,8 +100,6 @@ async function downloadImages(url, filename) {
     });
 }
 
-const inputText = fs.readFileSync("./eng.txt", "utf8");
-
 // Hàm tải nhiều ảnh với các từ khóa khác nhau
 async function downloadMultipleImages(keywords, count = 1) {
     console.log(`🖼️ Tải ${count} ảnh cho mỗi từ khóa: ${keywords.join(', ')}`);
@@ -139,41 +137,59 @@ async function downloadMultipleImages(keywords, count = 1) {
 }
 
 const returnVideo = async () => {
-  console.log("🔍 Tìm kiếm video và ảnh phù hợp...");
+  // const NumberOfParts = Number(parts);
+  // console.log(`🔍 Tìm kiếm ${NumberOfParts} video từ file eng.txt...`);
   
-  const videoUrl = await findVideoFromText(inputText, 10, 16);
-  const imageData = await findImageFromText(inputText);
+  // Đọc file eng.txt và chia thành các dòng
+  const engContent = fs.readFileSync("./eng.txt", "utf8");
+  const lines = engContent.split('\n').filter(line => line.trim() !== ''); // Loại bỏ dòng trống
   
-  console.log("🎬 Video phù hợp:", videoUrl);
-  console.log("🖼️ Ảnh phù hợp:", imageData?.url);
+  console.log(`📝 Tìm thấy ${lines.length} dòng nội dung trong eng.txt`);
+  // console.log(`🎯 Sẽ tải ${Math.min(NumberOfParts, lines.length)} video đầu tiên`);
   
-  if (imageData) {
-    console.log("📊 Thông tin ảnh:");
-    console.log(`   📐 Kích thước: ${imageData.width}x${imageData.height}`);
-    console.log(`   📷 Photographer: ${imageData.photographer}`);
-  }
-
-  // Download video nếu tìm thấy
-  if (videoUrl) {
-    await downloadVideo(videoUrl, 'part4.mp4');
-  } else {
-    console.log("⚠️ Không tìm thấy video phù hợp");
-  }
-
-  // Download ảnh nếu tìm thấy
-  if (imageData?.url) {
-    // Tạo tên file với timestamp để tránh trùng
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').split('T')[0];
-    const extension = imageData.url.split('.').pop()?.split('?')[0] || 'jpg';
-    const filename = `image_${timestamp}_${Date.now()}.${extension}`;
+  // Lặp qua từng dòng (hoặc đến NumberOfParts)
+  // const actualParts = Math.min(NumberOfParts, lines.length);
+  const actualParts = lines.length;
+  
+  for (let index = 1; index <= actualParts; index++) {
+    const currentLine = lines[index - 1].trim();
+    console.log(`\n� Xử lý phần ${index}/${actualParts}:`);
+    console.log(`   Nội dung: "${currentLine}"`);
     
-    await downloadImages(imageData.url, filename);
-  } else {
-    console.log("⚠️ Không tìm thấy ảnh phù hợp");
+    try {
+      // Lưu dòng hiện tại vào temp.txt
+      fs.writeFileSync('./temp.txt', currentLine, 'utf8');
+      console.log(`   ✅ Đã lưu vào temp.txt`);
+      
+      // Tìm video dựa trên nội dung temp.txt
+      const videoUrl = await findVideoFromText(currentLine, 10, 16);
+      
+      if (videoUrl) {
+        console.log(`   🎬 Tìm thấy video: ${videoUrl.substring(0, 50)}...`);
+        
+        // Download video với tên part{index}.mp4
+        const filename = `part${index}.mp4`;
+        await downloadVideo(videoUrl, filename);
+        console.log(`   ✅ Đã tải video: ${filename}`);
+      } else {
+        console.log(`   ⚠️ Không tìm thấy video phù hợp cho phần ${index}`);
+      }
+      
+      // Tạm dừng 2 giây giữa các request để tránh rate limit
+      if (index < actualParts) {
+        console.log(`   ⏳ Chờ 2 giây trước khi xử lý phần tiếp theo...`);
+        await new Promise(resolve => setTimeout(resolve, 2000));
+      }
+      
+    } catch (error) {
+      console.error(`   ❌ Lỗi khi xử lý phần ${index}:`, error.message);
+    }
   }
+  
+  console.log(`\n🎉 Hoàn thành! Đã tải ${actualParts} video.`);
 };
 
-returnVideo();
+// returnVideo();
 // findVideoFromText("beach");
 // Xuất các hàm để sử dụng ở nơi khác
 export default returnVideo;
