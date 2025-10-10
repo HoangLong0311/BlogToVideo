@@ -1,9 +1,14 @@
+// Enhanced subtitle processor với các fix chính
+import { exec } from "child_process";
 import fs from "fs";
 import path from "path";
+import { promisify } from "util";
 import { ffmpeg } from "../config/ffmpegConfig.js";
 
-// Hàm validate subtitle file
-function validateSubtitleFile(subtitlePath) {
+const execAsync = promisify(exec);
+
+// Enhanced subtitle validation
+function validateSubtitleFileEnhanced(subtitlePath) {
   if (!fs.existsSync(subtitlePath)) {
     throw new Error(`File subtitle không tồn tại: ${subtitlePath}`);
   }
@@ -13,214 +18,307 @@ function validateSubtitleFile(subtitlePath) {
     throw new Error(`File subtitle rỗng: ${subtitlePath}`);
   }
   
+  if (stats.size > 10 * 1024 * 1024) { // > 10MB
+    throw new Error(`File subtitle quá lớn (${(stats.size / 1024 / 1024).toFixed(2)}MB). Max: 10MB`);
+  }
+  
   const ext = path.extname(subtitlePath).toLowerCase();
   const supportedExts = ['.srt', '.ass', '.ssa', '.vtt'];
   if (!supportedExts.includes(ext)) {
     throw new Error(`Định dạng subtitle không hỗ trợ: ${ext}. Hỗ trợ: ${supportedExts.join(', ')}`);
   }
   
+  // Enhanced SRT format validation
+  if (ext === '.srt') {
+    const content = fs.readFileSync(subtitlePath, 'utf8');
+    const lines = content.split('\n');
+    
+    // Check basic SRT structure
+    let hasValidTimecode = false;
+    for (const line of lines) {
+      // Look for timecode pattern: 00:00:00,000 --> 00:00:00,000
+      if (/^\d{2}:\d{2}:\d{2},\d{3}\s*-->\s*\d{2}:\d{2}:\d{2},\d{3}/.test(line)) {
+        hasValidTimecode = true;
+        break;
+      }
+    }
+    
+    if (!hasValidTimecode) {
+      console.log("⚠️ CẢNH BÁO: Subtitle format có thể không chuẩn SRT");
+      console.log("   Ví dụ format đúng: 00:00:08,200 --> 00:00:10,000");
+    }
+  }
+  
   console.log(`✅ Subtitle hợp lệ: ${path.basename(subtitlePath)} (${(stats.size / 1024).toFixed(2)}KB)`);
 }
 
-// Hàm để gắn subtitle vào video với nhiều phương pháp
-export async function addSubtitleToVideo(videoPath, subtitlePath, outputPath, method = 'hardburn') {
-  return new Promise((resolve, reject) => {
-    console.log(`📝 Bắt đầu gắn subtitle (phương pháp: ${method})...`);
+// Fix SRT timing format
+function fixSrtFormat(subtitlePath) {
+  const ext = path.extname(subtitlePath).toLowerCase();
+  if (ext !== '.srt') return subtitlePath;
+  
+  try {
+    let content = fs.readFileSync(subtitlePath, 'utf8');
+    let modified = false;
     
-    // Validate inputs
+    // Fix common timing format issues
+    content = content.replace(
+      /(\d{2}:\d{2}:\d{1,2}),?(\d{3}?)\s*->\s*(\d{2}:\d{2}:\d{1,2}),?(\d{3}?)/g,
+      (match, start_time, start_ms, end_time, end_ms) => {
+        // Pad seconds to 2 digits
+        start_time = start_time.replace(/(\d{2}:\d{2}:)(\d{1})$/, '$10$2');
+        end_time = end_time.replace(/(\d{2}:\d{2}:)(\d{1})$/, '$10$2');
+        
+        // Ensure milliseconds are 3 digits
+        start_ms = (start_ms || '000').padEnd(3, '0');
+        end_ms = (end_ms || '000').padEnd(3, '0');
+        
+        const fixed = `${start_time},${start_ms} --> ${end_time},${end_ms}`;
+        if (fixed !== match) {
+          modified = true;
+          console.log(`🔧 Fixed timing: ${match} → ${fixed}`);
+        }
+        return fixed;
+      }
+    );
+    
+    if (modified) {
+      const fixedPath = subtitlePath.replace('.srt', '_fixed.srt');
+      fs.writeFileSync(fixedPath, content, 'utf8');
+      console.log(`✅ Created fixed subtitle: ${path.basename(fixedPath)}`);
+      return fixedPath;
+    }
+    
+    return subtitlePath;
+    
+  } catch (error) {
+    console.log(`⚠️ Không thể fix format SRT: ${error.message}`);
+    return subtitlePath;
+  }
+}
+
+// Safe path processing for Windows
+function createSafePath(filePath, tempDir) {
+  // Create a safe copy with ASCII name
+  const ext = path.extname(filePath);
+  const safeName = `temp_subtitle_${Date.now()}${ext}`;
+  const safePath = path.join(tempDir, safeName);
+  
+  fs.copyFileSync(filePath, safePath);
+  console.log(`🔒 Created safe path: ${safeName}`);
+  
+  return safePath;
+}
+
+// Enhanced subtitle processor
+export async function addSubtitleToVideoEnhanced(videoPath, subtitlePath, outputPath, method = 'hardburn') {
+  return new Promise(async (resolve, reject) => {
+    console.log(`📝 Bắt đầu gắn subtitle (Enhanced, phương pháp: ${method})...`);
+    
+    let tempFiles = [];
+    let activeCommand = null;
+    
+    const cleanup = () => {
+      // Graceful cleanup
+      if (activeCommand && activeCommand.ffmpegProc && !activeCommand.ffmpegProc.killed) {
+        console.log("🛑 Gracefully stopping FFmpeg...");
+        activeCommand.ffmpegProc.kill('SIGTERM'); // Graceful first
+        
+        setTimeout(() => {
+          if (activeCommand && activeCommand.ffmpegProc && !activeCommand.ffmpegProc.killed) {
+            console.log("🔪 Force killing FFmpeg...");
+            activeCommand.ffmpegProc.kill('SIGKILL');
+          }
+        }, 5000); // 5 seconds grace period
+      }
+      
+      // Clean temp files
+      tempFiles.forEach(file => {
+        try {
+          if (fs.existsSync(file)) {
+            fs.unlinkSync(file);
+            console.log(`🗑️ Cleaned temp file: ${path.basename(file)}`);
+          }
+        } catch (e) {
+          // Ignore cleanup errors
+        }
+      });
+    };
+    
     try {
+      // Enhanced validation
       if (!fs.existsSync(videoPath)) {
         throw new Error(`File video không tồn tại: ${videoPath}`);
       }
-      validateSubtitleFile(subtitlePath);
-    } catch (error) {
-      reject(error);
-      return;
-    }
-    
-    let command = ffmpeg()
-      .input(videoPath);
-
-    if (method === 'hardburn') {
-      // Phương pháp 1: Burn subtitle vào video (luôn hiển thị, không thể tắt)
-      console.log('🔥 Sử dụng phương pháp HARDBURN - subtitle sẽ được burn vào video');
       
-      // Xử lý đường dẫn cho Windows và FFmpeg
-      let processedPath = subtitlePath;
+      validateSubtitleFileEnhanced(subtitlePath);
       
-      // Chuyển đổi đường dẫn Windows sang format phù hợp với FFmpeg
-      if (process.platform === 'win32') {
-        // Thay thế backslash bằng forward slash và escape colon
-        processedPath = subtitlePath.replace(/\\/g, '/').replace(/:/g, '\\:');
+      // Check output path conflict
+      if (fs.existsSync(outputPath)) {
+        console.log(`⚠️ Output file exists, will overwrite: ${path.basename(outputPath)}`);
       }
       
-      // Sử dụng nhiều cách khác nhau để xử lý subtitle filter
-      const subtitleFilters = [
-        `subtitles='${processedPath}'`,
-        `subtitles=${processedPath}`,
-        `subtitles="${processedPath}"`,
-        // Backup: sử dụng đường dẫn gốc
-        `subtitles='${subtitlePath}'`
-      ];
+      // Fix subtitle format
+      const fixedSubtitlePath = fixSrtFormat(subtitlePath);
       
-      // Thử từng filter cho đến khi thành công
-      let filterIndex = 0;
-      let currentCommand = null;
-      let timeoutId = null;
+      // Create temp directory for safe paths
+      const tempDir = path.join(path.dirname(outputPath), '.temp_subtitle');
+      if (!fs.existsSync(tempDir)) {
+        fs.mkdirSync(tempDir, { recursive: true });
+      }
+      tempFiles.push(tempDir);
       
-      const cleanupCommand = () => {
-        if (timeoutId) {
-          clearTimeout(timeoutId);
-          timeoutId = null;
-        }
-        if (currentCommand) {
-          try {
-            currentCommand.kill('SIGKILL');
-          } catch (e) {
-            // Command đã kết thúc hoặc không thể kill
-          }
-          currentCommand = null;
-        }
-      };
-      
-      const tryFilter = () => {
-        if (filterIndex >= subtitleFilters.length) {
-          cleanupCommand();
-          reject(new Error('Tất cả các cách gắn hardburn subtitle đều thất bại'));
-          return;
-        }
+      if (method === 'hardburn') {
+        console.log('🔥 Enhanced HARDBURN method...');
         
-        // Cleanup command cũ trước khi tạo mới
-        cleanupCommand();
+        // Create safe path copy
+        const safeSubtitlePath = createSafePath(fixedSubtitlePath, tempDir);
+        tempFiles.push(safeSubtitlePath);
         
-        const currentFilter = subtitleFilters[filterIndex];
-        console.log(`🔧 Thử filter ${filterIndex + 1}/${subtitleFilters.length}: ${currentFilter}`);
+        // Use absolute path với proper escaping for Windows
+        const absoluteSubtitlePath = safeSubtitlePath.replace(/\\/g, '/').replace(/:/g, '\\:');
         
-        currentCommand = ffmpeg()
+        console.log(`🔧 Using absolute path: ${absoluteSubtitlePath}`);
+        
+        // Single, robust hardburn attempt
+        activeCommand = ffmpeg()
           .input(videoPath)
-          .videoFilters([currentFilter])
+          .videoFilters([`subtitles='${absoluteSubtitlePath}'`])
           .outputOptions([
-            '-c:a copy',           // Copy audio codec, re-encode video
-            '-crf 23',             // Chất lượng video tốt
-            '-preset medium',      // Cân bằng giữa tốc độ và chất lượng
-            '-max_muxing_queue_size 1024', // Buffer queue
-            '-avoid_negative_ts make_zero'  // Fix timestamp issues
+            '-c:a copy',
+            '-crf 23',
+            '-preset fast', // Faster than medium
+            '-max_muxing_queue_size 1024',
+            '-avoid_negative_ts make_zero',
+            '-threads 0' // Use all CPU cores
           ]);
         
-        // Timeout cho mỗi attempt (5 phút)
-        timeoutId = setTimeout(() => {
-          console.log(`\n⏰ Filter ${filterIndex + 1} timeout, thử filter tiếp theo...`);
-          filterIndex++;
-          tryFilter();
-        }, 5 * 60 * 1000);
+        // Reasonable timeout (3 minutes)
+        const timeoutId = setTimeout(() => {
+          console.log('\n⏰ Hardburn timeout (3 min), stopping...');
+          cleanup();
+          reject(new Error('Hardburn timeout sau 3 phút'));
+        }, 3 * 60 * 1000);
         
-        currentCommand
+        activeCommand
           .on('start', (cmd) => {
-            console.log('▶️ Bắt đầu burn subtitle vào video...');
-            console.log('🔧 Command:', cmd);
+            console.log('▶️ Starting enhanced hardburn...');
           })
           .on('progress', (progress) => {
             if (progress.percent) {
-              process.stdout.write(`\r🔥 Đang burn subtitle: ${Math.round(progress.percent)}%`);
+              process.stdout.write(`\r🔥 Hardburn: ${Math.round(progress.percent)}%`);
             }
           })
           .on('error', (err) => {
-            console.log(`\n❌ Filter ${filterIndex + 1} thất bại: ${err.message}`);
-            filterIndex++;
+            clearTimeout(timeoutId);
+            console.log(`\n❌ Hardburn failed: ${err.message}`);
             
-            // Delay nhỏ trước khi thử filter tiếp theo
-            setTimeout(() => {
-              tryFilter();
-            }, 1000);
+            // Try fallback to embed
+            console.log('🔄 Trying embed fallback...');
+            addSubtitleToVideoEnhanced(videoPath, subtitlePath, outputPath, 'embed')
+              .then(resolve)
+              .catch(reject)
+              .finally(cleanup);
           })
           .on('end', () => {
-            console.log(`\n✅ Burn subtitle hoàn thành với filter ${filterIndex + 1}!`);
-            cleanupCommand();
+            clearTimeout(timeoutId);
+            console.log('\n✅ Enhanced hardburn completed!');
+            cleanup();
             resolve(outputPath);
           })
           .save(outputPath);
-      };
-      
-      tryFilter(); // Bắt đầu thử
-      return; // Không thực hiện code bên dưới
-      
-    } else if (method === 'embed') {
-      // Phương pháp 2: Nhúng subtitle vào video (có thể bật/tắt trong player)
-      command = command
-        .input(subtitlePath)
-        .outputOptions([
-          '-c:v copy',           // Copy video codec
-          '-c:a copy',           // Copy audio codec
-          '-c:s mov_text',       // Subtitle codec for MP4
-          '-disposition:s:0 default', // Set subtitle as default
-          '-metadata:s:s:0 language=vie', // Set subtitle language
-          '-metadata:s:s:0 title=Vietnamese' // Set subtitle title
-        ]);
-    } else if (method === 'sidecar') {
-      // Phương pháp 3: Tạo file subtitle riêng cùng tên
-      const sidecarPath = outputPath.replace('.mp4', '.srt');
-      fs.copyFileSync(subtitlePath, sidecarPath);
-      console.log(`📋 Đã tạo file subtitle riêng: ${sidecarPath.split('\\').pop()}`);
-      
-      // Chỉ copy video, không gắn subtitle
-      command = command
-        .outputOptions([
-          '-c:v copy',
-          '-c:a copy'
-        ]);
-    }
-    
-    // Xử lý cho embed và sidecar (hardburn đã được xử lý ở trên)
-    // Thêm timeout cho embed/sidecar (3 phút)
-    const timeoutId = setTimeout(() => {
-      console.log('\n⏰ Timeout khi gắn subtitle!');
-      try {
-        command.kill('SIGKILL');
-      } catch (e) {
-        // Command đã kết thúc
-      }
-      
-      if (method === 'embed') {
-        console.log('🔄 Timeout embed, thử tạo file sidecar...');
-        addSubtitleToVideo(videoPath, subtitlePath, outputPath, 'sidecar')
-          .then(resolve)
-          .catch(reject);
-      } else {
-        reject(new Error(`Timeout khi gắn subtitle với phương pháp ${method}`));
-      }
-    }, 3 * 60 * 1000);
-    
-    command
-      .on('start', (cmd) => {
-        console.log('▶️ Bắt đầu xử lý subtitle...');
-        console.log('🔧 Command:', cmd);
-      })
-      .on('progress', (progress) => {
-        if (progress.percent) {
-          process.stdout.write(`\r📝 Đang gắn subtitle: ${Math.round(progress.percent)}%`);
-        }
-      })
-      .on('error', (err) => {
-        clearTimeout(timeoutId);
-        console.log('\n❌ Lỗi khi gắn subtitle:', err.message);
+          
+      } else if (method === 'embed') {
+        console.log('💎 Enhanced EMBED method...');
         
-        // Nếu embed không thành công, tạo file sidecar
-        if (method === 'embed') {
-          console.log('🔄 Embed thất bại, thử tạo file subtitle riêng...');
-          addSubtitleToVideo(videoPath, subtitlePath, outputPath, 'sidecar')
+        activeCommand = ffmpeg()
+          .input(videoPath)
+          .input(fixedSubtitlePath)
+          .outputOptions([
+            '-c:v copy',
+            '-c:a copy',
+            '-c:s mov_text',
+            '-disposition:s:0 default',
+            '-metadata:s:s:0 language=vie',
+            '-metadata:s:s:0 title=Vietnamese'
+          ]);
+        
+        const timeoutId = setTimeout(() => {
+          console.log('\n⏰ Embed timeout, trying sidecar...');
+          cleanup();
+          addSubtitleToVideoEnhanced(videoPath, subtitlePath, outputPath, 'sidecar')
             .then(resolve)
             .catch(reject);
-          return;
-        }
+        }, 2 * 60 * 1000); // 2 minutes
         
-        reject(err);
-      })
-      .on('end', () => {
-        clearTimeout(timeoutId);
-        console.log(`\n✅ Gắn subtitle hoàn thành (${method})!`);
-        resolve(outputPath);
-      });
-
-    command.save(outputPath);
+        activeCommand
+          .on('start', () => console.log('▶️ Starting embed...'))
+          .on('progress', (progress) => {
+            if (progress.percent) {
+              process.stdout.write(`\r💎 Embed: ${Math.round(progress.percent)}%`);
+            }
+          })
+          .on('error', (err) => {
+            clearTimeout(timeoutId);
+            console.log(`\n❌ Embed failed: ${err.message}`);
+            console.log('🔄 Fallback to sidecar...');
+            cleanup();
+            addSubtitleToVideoEnhanced(videoPath, subtitlePath, outputPath, 'sidecar')
+              .then(resolve)
+              .catch(reject);
+          })
+          .on('end', () => {
+            clearTimeout(timeoutId);
+            console.log('\n✅ Enhanced embed completed!');
+            cleanup();
+            resolve(outputPath);
+          })
+          .save(outputPath);
+          
+      } else if (method === 'sidecar') {
+        console.log('📋 Enhanced SIDECAR method...');
+        
+        // Create sidecar file
+        const sidecarPath = outputPath.replace(/\.(mp4|mkv|avi)$/i, '.srt');
+        fs.copyFileSync(fixedSubtitlePath, sidecarPath);
+        console.log(`📋 Created sidecar: ${path.basename(sidecarPath)}`);
+        
+        // Just copy video
+        activeCommand = ffmpeg()
+          .input(videoPath)
+          .outputOptions(['-c:v copy', '-c:a copy']);
+        
+        const timeoutId = setTimeout(() => {
+          console.log('\n⏰ Sidecar timeout!');
+          cleanup();
+          reject(new Error('Sidecar timeout'));
+        }, 1 * 60 * 1000); // 1 minute
+        
+        activeCommand
+          .on('start', () => console.log('▶️ Creating sidecar...'))
+          .on('progress', (progress) => {
+            if (progress.percent) {
+              process.stdout.write(`\r📋 Sidecar: ${Math.round(progress.percent)}%`);
+            }
+          })
+          .on('error', (err) => {
+            clearTimeout(timeoutId);
+            console.log(`\n❌ Sidecar failed: ${err.message}`);
+            cleanup();
+            reject(err);
+          })
+          .on('end', () => {
+            clearTimeout(timeoutId);
+            console.log('\n✅ Enhanced sidecar completed!');
+            cleanup();
+            resolve(outputPath);
+          })
+          .save(outputPath);
+      }
+      
+    } catch (error) {
+      cleanup();
+      reject(error);
+    }
   });
 }

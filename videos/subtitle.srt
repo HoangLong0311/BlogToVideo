@@ -1,13 +1,13 @@
 1
-00:00:8,200-> 00:00:10
+00:00:08,200 --> 00:00:10,000
 - Goodjob! you are my hero
 
 2
-00:00:10 --> 00:00:16,383
+00:00:10,000 --> 00:00:16,383
 We all eat several times a day,
 and we're totally in charge
 
 3
-00:00:16,383 --> 00:00:20
+00:00:16,383 --> 00:00:20,000
 of what goes on our plate
 and what stays off.

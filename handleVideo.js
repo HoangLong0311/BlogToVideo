@@ -5,8 +5,8 @@ import "./config/ffmpegConfig.js";
 import fs from "fs";
 import path from "path";
 import { mergeVideosInBatches } from "./modules/batchProcessor.js";
-import { addSubtitleToVideo } from "./modules/subtitleProcessor.js";
-import { checkVideoCompatibility } from "./modules/videoCompatibility.js";
+import { addSubtitleToVideoEnhanced } from "./modules/subtitleProcessor.js";
+import { checkVideoCompatibilityEnhanced } from "./modules/videoCompatibilityEnhanced.js";
 import { mergeVideos, mergeVideosWithNormalization, mergeVideosWithReencode } from "./modules/videoMerger.js";
 import { handleVideoError, showHelp } from "./utils/errorHandler.js";
 import { findSubtitleFiles, findVideoFiles, generateOutputName } from "./utils/fileUtils.js";
@@ -66,12 +66,12 @@ async function main(customFolder = null, subtitleMethod = 'hardburn', forceNorma
     console.log("🚀 Bắt đầu ghép video...");
     let finalOutputPath = outputPath;
     
-    // Bước 0: Kiểm tra tương thích video
-    const compatibility = await checkVideoCompatibility(videoPaths);
+    // Bước 0: Kiểm tra tương thích video (Enhanced)
+    const compatibility = await checkVideoCompatibilityEnhanced(videoPaths);
     
-    // Bước 1: Quyết định phương pháp ghép dựa trên số lượng và tương thích
+    // Bước 1: Quyết định phương pháp ghép dựa trên tương thích (TIMING SAFETY FIRST!)
     const totalSizeMB = compatibility.infos.reduce((sum, info) => sum + (info.size / (1024 * 1024)), 0);
-    const shouldUseBatch = videoPaths.length > 10 || totalSizeMB > 5000; // > 10 video hoặc > 5GB
+    const shouldUseBatch = videoPaths.length > 10 || totalSizeMB > 5000;
     
     if (forceNormalize) {
       console.log("🔧 Force normalize mode - sử dụng chuẩn hóa format để khắc phục timing issues...");
@@ -80,30 +80,25 @@ async function main(customFolder = null, subtitleMethod = 'hardburn', forceNorma
       console.log(`📦 Số lượng video lớn (${videoPaths.length}) hoặc dung lượng lớn (${totalSizeMB.toFixed(2)}MB)`);
       console.log("📦 Sử dụng phương pháp batch processing...");
       await mergeVideosInBatches(videoPaths, outputPath, 5);
-    } else if (compatibility.needsReencode) {
-      console.log("🔄 Sử dụng phương pháp re-encode để đảm bảo tương thích...");
+    } else if (compatibility.hasFpsMismatch || compatibility.hasTimingIssues) {
+      // CRITICAL: FPS/Timing issues MUST use normalization to avoid 4.5-hour bug
+      console.log("🚨 CRITICAL TIMING ISSUES DETECTED!");
+      console.log("🔧 Using normalization to prevent 4.5-hour duration bug...");
+      await mergeVideosWithNormalization(videoPaths, outputPath);
+    } else if (compatibility.needsReencode || compatibility.hasResolutionMismatch) {
+      console.log("🔄 Using re-encode for compatibility...");
       await mergeVideosWithReencode(videoPaths, outputPath);
     } else {
-      console.log("⚡ Sử dụng phương pháp copy codec (nhanh)...");
+      console.log("⚡ Using copy codec (videos are compatible)...");
       try {
         await mergeVideos(videoPaths, outputPath);
       } catch (copyError) {
-        // Nếu copy codec thất bại, thử các phương pháp khác
-        if (copyError.message.includes('Decoder') || 
-            copyError.message.includes('codec') ||
-            copyError.message.includes('format') ||
-            copyError.message.includes('timestamp') ||
-            copyError.message.includes('frame')) {
-          
-          console.log("🔄 Copy codec thất bại, thử re-encode...");
-          try {
-            await mergeVideosWithReencode(videoPaths, outputPath);
-          } catch (reencodeError) {
-            console.log("🔧 Re-encode thất bại, sử dụng normalization (chậm nhưng ổn định)...");
-            await mergeVideosWithNormalization(videoPaths, outputPath);
-          }
-        } else {
-          throw copyError;
+        console.log("⚠️  Copy codec failed, fallback to re-encode...");
+        try {
+          await mergeVideosWithReencode(videoPaths, outputPath);
+        } catch (reencodeError) {
+          console.log("🔧 Re-encode failed, using normalization (safest)...");
+          await mergeVideosWithNormalization(videoPaths, outputPath);
         }
       }
     }
@@ -118,7 +113,7 @@ async function main(customFolder = null, subtitleMethod = 'hardburn', forceNorma
       const subtitleOutputPath = generateOutputName(folder, true);
       console.log(`\n📝 Bắt đầu gắn subtitle (phương pháp: ${subtitleMethod})...`);
       
-      await addSubtitleToVideo(outputPath, subtitlePath, subtitleOutputPath, subtitleMethod);
+      await addSubtitleToVideoEnhanced(outputPath, subtitlePath, subtitleOutputPath, subtitleMethod);
       
       // Hiển thị thông tin file có subtitle
       const subtitleStats = fs.statSync(subtitleOutputPath);
