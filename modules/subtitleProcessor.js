@@ -1,10 +1,42 @@
 import fs from "fs";
+import path from "path";
 import { ffmpeg } from "../config/ffmpegConfig.js";
+
+// Hàm validate subtitle file
+function validateSubtitleFile(subtitlePath) {
+  if (!fs.existsSync(subtitlePath)) {
+    throw new Error(`File subtitle không tồn tại: ${subtitlePath}`);
+  }
+  
+  const stats = fs.statSync(subtitlePath);
+  if (stats.size === 0) {
+    throw new Error(`File subtitle rỗng: ${subtitlePath}`);
+  }
+  
+  const ext = path.extname(subtitlePath).toLowerCase();
+  const supportedExts = ['.srt', '.ass', '.ssa', '.vtt'];
+  if (!supportedExts.includes(ext)) {
+    throw new Error(`Định dạng subtitle không hỗ trợ: ${ext}. Hỗ trợ: ${supportedExts.join(', ')}`);
+  }
+  
+  console.log(`✅ Subtitle hợp lệ: ${path.basename(subtitlePath)} (${(stats.size / 1024).toFixed(2)}KB)`);
+}
 
 // Hàm để gắn subtitle vào video với nhiều phương pháp
 export async function addSubtitleToVideo(videoPath, subtitlePath, outputPath, method = 'hardburn') {
   return new Promise((resolve, reject) => {
     console.log(`📝 Bắt đầu gắn subtitle (phương pháp: ${method})...`);
+    
+    // Validate inputs
+    try {
+      if (!fs.existsSync(videoPath)) {
+        throw new Error(`File video không tồn tại: ${videoPath}`);
+      }
+      validateSubtitleFile(subtitlePath);
+    } catch (error) {
+      reject(error);
+      return;
+    }
     
     let command = ffmpeg()
       .input(videoPath);
@@ -33,30 +65,56 @@ export async function addSubtitleToVideo(videoPath, subtitlePath, outputPath, me
       
       // Thử từng filter cho đến khi thành công
       let filterIndex = 0;
+      let currentCommand = null;
+      let timeoutId = null;
+      
+      const cleanupCommand = () => {
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+          timeoutId = null;
+        }
+        if (currentCommand) {
+          try {
+            currentCommand.kill('SIGKILL');
+          } catch (e) {
+            // Command đã kết thúc hoặc không thể kill
+          }
+          currentCommand = null;
+        }
+      };
+      
       const tryFilter = () => {
         if (filterIndex >= subtitleFilters.length) {
+          cleanupCommand();
           reject(new Error('Tất cả các cách gắn hardburn subtitle đều thất bại'));
           return;
         }
         
+        // Cleanup command cũ trước khi tạo mới
+        cleanupCommand();
+        
         const currentFilter = subtitleFilters[filterIndex];
         console.log(`🔧 Thử filter ${filterIndex + 1}/${subtitleFilters.length}: ${currentFilter}`);
         
-        command = ffmpeg()
+        currentCommand = ffmpeg()
           .input(videoPath)
           .videoFilters([currentFilter])
           .outputOptions([
-            '-c:a copy',  // Copy audio codec, re-encode video
-            '-crf 23',    // Chất lượng video tốt
-            '-preset medium' // Cân bằng giữa tốc độ và chất lượng
+            '-c:a copy',           // Copy audio codec, re-encode video
+            '-crf 23',             // Chất lượng video tốt
+            '-preset medium',      // Cân bằng giữa tốc độ và chất lượng
+            '-max_muxing_queue_size 1024', // Buffer queue
+            '-avoid_negative_ts make_zero'  // Fix timestamp issues
           ]);
-          
-        setupCommand();
-        filterIndex++;
-      };
-      
-      const setupCommand = () => {
-        command
+        
+        // Timeout cho mỗi attempt (5 phút)
+        timeoutId = setTimeout(() => {
+          console.log(`\n⏰ Filter ${filterIndex + 1} timeout, thử filter tiếp theo...`);
+          filterIndex++;
+          tryFilter();
+        }, 5 * 60 * 1000);
+        
+        currentCommand
           .on('start', (cmd) => {
             console.log('▶️ Bắt đầu burn subtitle vào video...');
             console.log('🔧 Command:', cmd);
@@ -67,11 +125,17 @@ export async function addSubtitleToVideo(videoPath, subtitlePath, outputPath, me
             }
           })
           .on('error', (err) => {
-            console.log(`\n❌ Filter ${filterIndex} thất bại: ${err.message}`);
-            tryFilter(); // Thử filter tiếp theo
+            console.log(`\n❌ Filter ${filterIndex + 1} thất bại: ${err.message}`);
+            filterIndex++;
+            
+            // Delay nhỏ trước khi thử filter tiếp theo
+            setTimeout(() => {
+              tryFilter();
+            }, 1000);
           })
           .on('end', () => {
-            console.log(`\n✅ Burn subtitle hoàn thành với filter ${filterIndex}!`);
+            console.log(`\n✅ Burn subtitle hoàn thành với filter ${filterIndex + 1}!`);
+            cleanupCommand();
             resolve(outputPath);
           })
           .save(outputPath);
@@ -107,6 +171,25 @@ export async function addSubtitleToVideo(videoPath, subtitlePath, outputPath, me
     }
     
     // Xử lý cho embed và sidecar (hardburn đã được xử lý ở trên)
+    // Thêm timeout cho embed/sidecar (3 phút)
+    const timeoutId = setTimeout(() => {
+      console.log('\n⏰ Timeout khi gắn subtitle!');
+      try {
+        command.kill('SIGKILL');
+      } catch (e) {
+        // Command đã kết thúc
+      }
+      
+      if (method === 'embed') {
+        console.log('🔄 Timeout embed, thử tạo file sidecar...');
+        addSubtitleToVideo(videoPath, subtitlePath, outputPath, 'sidecar')
+          .then(resolve)
+          .catch(reject);
+      } else {
+        reject(new Error(`Timeout khi gắn subtitle với phương pháp ${method}`));
+      }
+    }, 3 * 60 * 1000);
+    
     command
       .on('start', (cmd) => {
         console.log('▶️ Bắt đầu xử lý subtitle...');
@@ -118,11 +201,12 @@ export async function addSubtitleToVideo(videoPath, subtitlePath, outputPath, me
         }
       })
       .on('error', (err) => {
+        clearTimeout(timeoutId);
         console.log('\n❌ Lỗi khi gắn subtitle:', err.message);
         
         // Nếu embed không thành công, tạo file sidecar
         if (method === 'embed') {
-          console.log('🔄 Thử tạo file subtitle riêng...');
+          console.log('🔄 Embed thất bại, thử tạo file subtitle riêng...');
           addSubtitleToVideo(videoPath, subtitlePath, outputPath, 'sidecar')
             .then(resolve)
             .catch(reject);
@@ -132,6 +216,7 @@ export async function addSubtitleToVideo(videoPath, subtitlePath, outputPath, me
         reject(err);
       })
       .on('end', () => {
+        clearTimeout(timeoutId);
         console.log(`\n✅ Gắn subtitle hoàn thành (${method})!`);
         resolve(outputPath);
       });

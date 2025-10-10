@@ -15,7 +15,7 @@ async function findVideoFromText(text, minSec = 10, maxSec = 20) {
     v.video_files.some(f => f.width == 1920 && f.height == 1080)
   });
 
-  // console.log(videos)
+  // console.log(videos);
 
   if (!videos.length) return null;
 
@@ -155,7 +155,7 @@ const returnVideo = async () => {
 
   // Download video nếu tìm thấy
   if (videoUrl) {
-    await downloadVideo(videoUrl, 'part4.mp4');
+    await downloadVideo(videoUrl, 'part2.mp4');
   } else {
     console.log("⚠️ Không tìm thấy video phù hợp");
   }

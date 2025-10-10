@@ -32,9 +32,9 @@ function getContentBetweenDollars(text) {
 // Hàm gọi model để tóm tắt văn bản
 async function summarizeText(longText) {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
 
-    const prompt = `Tóm tắt nhanh nội dung sau thành khoảng 30 từ, thêm phần tiếng anh mô tả hình ảnh hoặc video background hợp để
+    const prompt = `Tóm tắt nhanh nội dung sau thành khoảng 30 từ, dịch tiếng anh mô tả hình ảnh hoặc video background hợp để
     làm video, đặt chúng giữa 2 dấu $
 
     Nội dung gốc:
