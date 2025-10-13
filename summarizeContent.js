@@ -105,7 +105,7 @@ exportVideo();
 
 // Export các hàm để sử dụng từ file khác
 export {
-  filterContentByKeyword, getAllContentBetweenDollars, getContentByIndex,
-  getContentCount
+    filterContentByKeyword, getAllContentBetweenDollars, getContentByIndex,
+    getContentCount
 };
 

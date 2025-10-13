@@ -19,7 +19,7 @@ console.log("   3. Chạy script này");
 console.log("   4. Video đã ghép (và có subtitle) sẽ được lưu trong cùng thư mục");
 console.log("==========================================\n");
 
-async function main(customFolder = null, subtitleMethod = 'hardburn', forceNormalize = false) {
+async function combineVideo(customFolder = null, subtitleMethod = 'hardburn', forceNormalize = false) {
   const folder = customFolder ? path.resolve(customFolder) : path.join(process.cwd(), "videos");
   console.log(`🔍 Tìm kiếm video trong thư mục: ${folder}`);
   
@@ -153,7 +153,9 @@ if (customFolder) {
   console.log(`📁 Sử dụng thư mục tùy chỉnh: ${customFolder}`);
 }
 
-main(customFolder, subtitleMethod, forceNormalize).catch(err => {
+combineVideo(customFolder, subtitleMethod, forceNormalize).catch(err => {
   console.error("💥 Lỗi nghiêm trọng:", err.message);
   process.exit(1);
 });
+
+export default combineVideo;
