@@ -57,6 +57,9 @@ export function showHelp() {
   console.log("  node handleVideo.js --subtitle=sidecar      # Tạo file subtitle riêng");
   console.log("  node handleVideo.js --normalize             # Force chuẩn hóa format (khắc phục timing)");
   console.log("  node handleVideo.js --fix-timing            # Alias cho --normalize");
+  console.log("  node handleVideo.js --cleanup=yes           # Tự động xóa file gốc sau khi ghép");
+  console.log("  node handleVideo.js --cleanup=source        # Chỉ xóa file gốc, giữ file trung gian");
+  console.log("  node handleVideo.js --cleanup=no            # Giữ lại tất cả file");
   console.log("  node handleVideo.js --help                  # Hiển thị hướng dẫn này");
   console.log("\nĐịnh dạng video hỗ trợ:");
   console.log("  .mp4, .avi, .mov, .mkv, .flv, .wmv, .webm");
@@ -77,5 +80,10 @@ export function showHelp() {
   console.log("  ✅ Smart timing fix cho video có vấn đề");
   console.log("  ✅ Hiển thị progress bar trong quá trình xử lý");
   console.log("  ✅ Tạo tên file output tự động theo timestamp");
+  console.log("  ✅ Tự động dọn dẹp file gốc sau khi ghép (tùy chọn)");
+  console.log("\nTùy chọn dọn dẹp:");
+  console.log("  🗑️ --cleanup=yes     - Xóa tất cả file gốc và file trung gian");
+  console.log("  🗑️ --cleanup=source  - Chỉ xóa file gốc, giữ file không có subtitle");
+  console.log("  🗑️ --cleanup=no      - Giữ lại tất cả file (mặc định)");
   console.log("=============================================================");
 }

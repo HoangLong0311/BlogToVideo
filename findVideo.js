@@ -136,7 +136,7 @@ async function downloadMultipleImages(keywords, count = 1) {
     }
 }
 
-const returnVideo = async () => {
+async function returnVideo() {
   // const NumberOfParts = Number(parts);
   // console.log(`🔍 Tìm kiếm ${NumberOfParts} video từ file eng.txt...`);
   

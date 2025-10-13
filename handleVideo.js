@@ -19,6 +19,109 @@ console.log("   3. Chạy script này");
 console.log("   4. Video đã ghép (và có subtitle) sẽ được lưu trong cùng thư mục");
 console.log("==========================================\n");
 
+// Hàm dọn dẹp các file video gốc sau khi ghép
+async function cleanupSourceVideos(videoPaths, mergedPath, finalPath, folder) {
+  console.log("\n🗑️ === DỌN DẸP FILES ===");
+  
+  // Tính tổng dung lượng các file gốc
+  let totalSourceSize = 0;
+  const sourceFiles = [];
+  
+  videoPaths.forEach(videoPath => {
+    const stats = fs.statSync(videoPath);
+    totalSourceSize += stats.size;
+    sourceFiles.push({
+      name: path.basename(videoPath),
+      path: videoPath,
+      size: (stats.size / (1024 * 1024)).toFixed(2)
+    });
+  });
+  
+  const totalSourceSizeMB = (totalSourceSize / (1024 * 1024)).toFixed(2);
+  const finalStats = fs.statSync(finalPath);
+  const finalSizeMB = (finalStats.size / (1024 * 1024)).toFixed(2);
+  
+  console.log("📊 Thống kê dung lượng:");
+  console.log(`   📹 ${videoPaths.length} file gốc: ${totalSourceSizeMB}MB`);
+  console.log(`   🎬 File cuối cùng: ${finalSizeMB}MB`);
+  console.log(`   💾 Tiết kiệm: ${(totalSourceSize - finalStats.size > 0 ? '+' : '')}${((finalStats.size - totalSourceSize) / (1024 * 1024)).toFixed(2)}MB`);
+  
+  console.log("\n📋 Danh sách file sẽ bị xóa:");
+  sourceFiles.forEach((file, index) => {
+    console.log(`   ${index + 1}. ${file.name} (${file.size}MB)`);
+  });
+  
+  // Kiểm tra file trung gian (merged không có subtitle)
+  const hasIntermediateFile = mergedPath !== finalPath && fs.existsSync(mergedPath);
+  if (hasIntermediateFile) {
+    const intermediateStats = fs.statSync(mergedPath);
+    const intermediateSizeMB = (intermediateStats.size / (1024 * 1024)).toFixed(2);
+    console.log(`   + File trung gian: ${path.basename(mergedPath)} (${intermediateSizeMB}MB)`);
+  }
+  
+  console.log("\n🤔 Bạn có muốn dọn dẹp các file này không?");
+  console.log("   [Y] Có - Xóa tất cả file gốc và file trung gian");
+  console.log("   [S] Chỉ xóa file gốc - Giữ lại file trung gian");
+  console.log("   [N] Không - Giữ lại tất cả");
+  
+  // Trong môi trường Node.js, chúng ta sẽ thêm tham số command line cho việc này
+  // const cleanupMode = process.argv.find(arg => arg.startsWith('--cleanup='))?.split('=')[1] || 'ask';
+  
+  // if (cleanupMode === 'auto' || cleanupMode === 'yes' || cleanupMode === 'y') {
+  //   await performCleanup(sourceFiles, mergedPath, finalPath, hasIntermediateFile, true);
+  // } else if (cleanupMode === 'source' || cleanupMode === 's') {
+  //   await performCleanup(sourceFiles, mergedPath, finalPath, hasIntermediateFile, false);
+  // } else if (cleanupMode === 'no' || cleanupMode === 'n') {
+  //   console.log("✅ Giữ lại tất cả file");
+  // } else {
+  //   console.log("💡 Sử dụng tham số --cleanup=yes/source/no để tự động hóa việc dọn dẹp");
+  //   console.log("   Ví dụ: node handleVideo.js --cleanup=yes");
+  // }
+  
+  // Cleanup
+  await performCleanup(sourceFiles, mergedPath, finalPath, hasIntermediateFile, true);
+
+}
+
+// Hàm thực hiện dọn dẹp
+async function performCleanup(sourceFiles, mergedPath, finalPath, hasIntermediateFile, removeIntermediate) {
+  console.log("\n🗑️ Bắt đầu dọn dẹp...");
+  
+  let deletedCount = 0;
+  let deletedSize = 0;
+  
+  // Xóa các file gốc
+  for (const file of sourceFiles) {
+    try {
+      const stats = fs.statSync(file.path);
+      fs.unlinkSync(file.path);
+      deletedCount++;
+      deletedSize += stats.size;
+      console.log(`   ✅ Đã xóa: ${file.name}`);
+    } catch (error) {
+      console.log(`   ❌ Lỗi xóa ${file.name}: ${error.message}`);
+    }
+  }
+  
+  // Xóa file trung gian nếu được yêu cầu
+  if (removeIntermediate && hasIntermediateFile) {
+    try {
+      const stats = fs.statSync(mergedPath);
+      fs.unlinkSync(mergedPath);
+      deletedSize += stats.size;
+      console.log(`   ✅ Đã xóa file trung gian: ${path.basename(mergedPath)}`);
+    } catch (error) {
+      console.log(`   ❌ Lỗi xóa file trung gian: ${error.message}`);
+    }
+  }
+  
+  const deletedSizeMB = (deletedSize / (1024 * 1024)).toFixed(2);
+  console.log(`\n✅ Dọn dẹp hoàn thành!`);
+  console.log(`   📁 Đã xóa: ${deletedCount} file`);
+  console.log(`   💾 Tiết kiệm: ${deletedSizeMB}MB dung lượng`);
+  console.log(`   🎬 Chỉ còn lại: ${path.basename(finalPath)}`);
+}
+
 async function combineVideo(customFolder = null, subtitleMethod = 'hardburn', forceNormalize = false) {
   const folder = customFolder ? path.resolve(customFolder) : path.join(process.cwd(), "videos");
   console.log(`🔍 Tìm kiếm video trong thư mục: ${folder}`);
@@ -131,6 +234,9 @@ async function combineVideo(customFolder = null, subtitleMethod = 'hardburn', fo
     const finalSizeMB = (finalStats.size / (1024 * 1024)).toFixed(2);
     console.log(`\n🎉 HOÀN THÀNH! File cuối cùng: ${finalOutputPath.split('\\').pop()} (${finalSizeMB}MB)`);
     
+    // Bước 3: Tùy chọn dọn dẹp các file video gốc
+    await cleanupSourceVideos(videoPaths, outputPath, finalOutputPath, folder);
+    
   } catch (err) {
     handleVideoError(err);
   }
@@ -153,9 +259,9 @@ if (customFolder) {
   console.log(`📁 Sử dụng thư mục tùy chỉnh: ${customFolder}`);
 }
 
-combineVideo(customFolder, subtitleMethod, forceNormalize).catch(err => {
-  console.error("💥 Lỗi nghiêm trọng:", err.message);
-  process.exit(1);
-});
+// combineVideo(customFolder, subtitleMethod, forceNormalize).catch(err => {
+//   console.error("💥 Lỗi nghiêm trọng:", err.message);
+//   process.exit(1);
+// });
 
 export default combineVideo;
