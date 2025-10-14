@@ -2,7 +2,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import 'dotenv/config';
 import fs from "fs";
 import returnVideo from "./findVideo.js";
-import combineVideo from "./handleVideo.js";
+// import combineVideo from "./handleVideo.js";
 
 // Khởi tạo Gemini client
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -75,23 +75,42 @@ function getContentCount(contentArray) {
 // Hàm gọi model để tóm tắt văn bản, phần mẫu đầu ra không tab vào trong, nếu tab -> lỗi file srt
 async function summarizeText(longText) {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
     const prompt = `Hãy tóm tắt đoạn văn bản sau thành nội dung ngắn gọn, rõ ràng, đủ để làm kịch bản video dài khoảng
-    1 phút 45 giây, ngôn ngữ hấp dẫn, tự nhiên, không cần chú thích hay giới thiệu. Mỗi đoạn hãy mô tả 
-    bẳng tiếng anh đủ để tìm 1 video background phù hợp và đặt chúng giữa 2 dấu $. Dòng đầu tiên hãy đưa ra
-    các nội dung: Số đoạn sử dụng tiếng anh mô tả. Từ dòng thứ 2, các đoạn của bài tóm tắt có cấu trúc như sau: 
-    đoạn mô tả tiếng anh ở dòng đầu, tiếp dưới là kịch bản subtitle theo định dạng srt, mỗi câu cách nhau bởi dấu xuống dòng
-    toàn bộ đoạn subtitle đặt giữa 2 dấu #, tất cả cùng căn lề bên trái, ví dụ 1 đoạn như sau:
+    1 phút 45 giây, ngôn ngữ hấp dẫn, tự nhiên, không cần chú thích hay giới thiệu. Hãy chia nội dung làm tối thiểu 5 đoạn và
+    tối đa 8 đoạn. Mỗi đoạn hãy mô tả bẳng tiếng anh chi tiết đủ để tìm 1 video background phù hợp nhất với nội dung đoạn đó
+    và đặt chúng giữa 2 dấu $. Dòng đầu tiên hãy đưa ra các nội dung: đoạn mô tả tiếng anh ở dòng đầu, độ dài của đoạn script tương ứng bên dưới
+    bằng giây. Từ dòng thứ 2, các đoạn của bài tóm tắt có cấu trúc như sau: tiếp dưới là kịch bản subtitle theo định dạng srt, mỗi câu cách
+    nhau bởi dấu xuống dòng toàn bộ đoạn subtitle đặt giữa 2 dấu #, tất cả cùng căn lề bên trái, nên chia kịch bản
+    srt giống với tốc độ người đọc nghĩa là chia ra nhiều sub nhỏ, ví dụ 1 đoạn như sau:
 
-2
-$Nội dung tiếng anh$
+$Nội dung tiếng anh,5$
 #
 1
 00:00:00,000 --> 00:00:05,000
 Nội dung subtitle tiếng việt ở đây
 Nội dung subtitle tiếng việt ở đây
 Nội dung subtitle tiếng việt ở đây#
+
+
+$Nội dung tiếng anh,15$
+#
+1
+00:00:05,000 --> 00:00:07,000
+Đừng cố gắng chối bỏ cảm xúc tiêu cực.
+Hãy dũng cảm đối diện với những lời phê bình.#
+
+#
+2
+00:00:07,000 --> 00:00:10,000
+Buồn ư? Không sao cả!
+Nhưng hãy dùng nó làm động lực để thay đổi.#
+
+#
+3
+00:00:07,000 --> 00:00:10,000
+Suy ngẫm về những lời sếp nói, tìm ra điểm cần cải thiện.#
 
     Nội dung gốc:
     ${longText}
@@ -134,7 +153,7 @@ async function exportVideo() {
     try {
         await summarizeText(inputText);
         await returnVideo();
-        await combineVideo();
+        // await combineVideo();
         console.log("🎉 Done!");
     } catch (error) {
         console.error("❌ Lỗi:", error.message);

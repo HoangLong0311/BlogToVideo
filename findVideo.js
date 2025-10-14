@@ -137,32 +137,42 @@ async function downloadMultipleImages(keywords, count = 1) {
 }
 
 async function returnVideo() {
-  // const NumberOfParts = Number(parts);
-  // console.log(`🔍 Tìm kiếm ${NumberOfParts} video từ file eng.txt...`);
-  
   // Đọc file eng.txt và chia thành các dòng
   const engContent = fs.readFileSync("./eng.txt", "utf8");
   const lines = engContent.split('\n').filter(line => line.trim() !== ''); // Loại bỏ dòng trống
   
   console.log(`📝 Tìm thấy ${lines.length} dòng nội dung trong eng.txt`);
-  // console.log(`🎯 Sẽ tải ${Math.min(NumberOfParts, lines.length)} video đầu tiên`);
-  
-  // Lặp qua từng dòng (hoặc đến NumberOfParts)
+
   // const actualParts = Math.min(NumberOfParts, lines.length);
   const actualParts = lines.length;
   
   for (let index = 1; index <= actualParts; index++) {
-    const currentLine = lines[index - 1].trim();
-    console.log(`\n� Xử lý phần ${index}/${actualParts}:`);
+    const currentLineRaw = lines[index - 1].trim();
+    
+    // Tách nội dung và duration bằng dấu phẩy cuối cùng
+    const lastCommaIndex = currentLineRaw.lastIndexOf(',');
+    
+    let currentLine, duration;
+    if (lastCommaIndex !== -1) {
+      currentLine = currentLineRaw.substring(0, lastCommaIndex).trim();
+      duration = parseInt(currentLineRaw.substring(lastCommaIndex + 1).trim());
+    } else {
+      // Nếu không có dấu phẩy, coi cả dòng là nội dung, duration mặc định 10
+      currentLine = currentLineRaw;
+      duration = 10;
+    }
+    
+    console.log(`\n📋 Xử lý phần ${index}/${actualParts}:`);
     console.log(`   Nội dung: "${currentLine}"`);
+    console.log(`   Thời gian: ${duration}s`);
     
     try {
       // Lưu dòng hiện tại vào temp.txt
       fs.writeFileSync('./temp.txt', currentLine, 'utf8');
       console.log(`   ✅ Đã lưu vào temp.txt`);
       
-      // Tìm video dựa trên nội dung temp.txt
-      const videoUrl = await findVideoFromText(currentLine, 10, 16);
+      // Tìm video dựa trên nội dung temp.txt với duration cụ thể
+      const videoUrl = await findVideoFromText(currentLine, Math.max(duration - 2, 5), duration + 2);
       
       if (videoUrl) {
         console.log(`   🎬 Tìm thấy video: ${videoUrl.substring(0, 50)}...`);

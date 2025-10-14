@@ -11,7 +11,7 @@ import { mergeVideos, mergeVideosWithNormalization, mergeVideosWithReencode } fr
 import { handleVideoError, showHelp } from "./utils/errorHandler.js";
 import { findSubtitleFiles, findVideoFiles, generateOutputName } from "./utils/fileUtils.js";
 
-console.log("🎬 === CÔNG CỤ GHÉP VIDEO & GẮN SUBTITLE ===");
+console.log("🎬 === BẮT ĐẦU GHÉP VIDEO ===");
 console.log("📋 Hướng dẫn sử dụng:");
 console.log("   1. Đặt tất cả video cần ghép vào thư mục 'videos'");
 console.log("   2. Đặt file subtitle (.srt) vào cùng thư mục (tùy chọn)");
@@ -174,7 +174,7 @@ async function combineVideo(customFolder = null, subtitleMethod = 'hardburn', fo
     
     // Bước 1: Quyết định phương pháp ghép dựa trên tương thích (TIMING SAFETY FIRST!)
     const totalSizeMB = compatibility.infos.reduce((sum, info) => sum + (info.size / (1024 * 1024)), 0);
-    const shouldUseBatch = videoPaths.length > 10 || totalSizeMB > 5000;
+    const shouldUseBatch = videoPaths.length > 15 || totalSizeMB > 5000;
     
     if (forceNormalize) {
       console.log("🔧 Force normalize mode - sử dụng chuẩn hóa format để khắc phục timing issues...");
@@ -259,9 +259,9 @@ if (customFolder) {
   console.log(`📁 Sử dụng thư mục tùy chỉnh: ${customFolder}`);
 }
 
-// combineVideo(customFolder, subtitleMethod, forceNormalize).catch(err => {
-//   console.error("💥 Lỗi nghiêm trọng:", err.message);
-//   process.exit(1);
-// });
+combineVideo(customFolder, subtitleMethod, forceNormalize).catch(err => {
+  console.error("💥 Lỗi nghiêm trọng:", err.message);
+  process.exit(1);
+});
 
 export default combineVideo;

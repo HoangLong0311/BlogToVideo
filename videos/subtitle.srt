@@ -1,62 +1,93 @@
 
 1
-00:00:00,000 --> 00:00:05,000
-Bạn có bao giờ tự hỏi: Thư giãn trong công việc là gì?
+00:00:00,000 --> 00:00:03,000
+Bị sếp chê? Ai mà chẳng buồn!
+Đừng cố chối bỏ cảm xúc tiêu cực.
 
+2
+00:00:03,000 --> 00:00:10,000
+Hãy dũng cảm đối diện với những lời phê bình.
+Suy ngẫm về những lời sếp nói, tìm ra điểm cần cải thiện.
 
 1
-00:00:05,000 --> 00:00:10,000
-Trong cuộc sống hối hả, ai cũng muốn tìm một chút thư thái.
+00:00:10,000 --> 00:00:14,000
+Sốc lại tinh thần! Đặt ra những mục tiêu thiết thực nhất.
+Viết ra mục tiêu, đừng để nó trên giấy.
+
 2
-00:00:10,000 --> 00:00:15,000
-Nhưng đôi khi, ta quên mất rằng thư giãn không chỉ là nghỉ ngơi.
+00:00:14,000 --> 00:00:17,000
+Lên kế hoạch hành động cụ thể, từng bước chinh phục mục tiêu.
+Đừng ngại nhờ sự giúp đỡ.
+
 3
-00:00:15,000 --> 00:00:20,000
-Mà còn là tìm thấy niềm vui trong chính công việc của mình.
-
+00:00:17,000 --> 00:00:25,000
+Sếp, đồng nghiệp luôn sẵn lòng hỗ trợ nếu bạn thật sự nhiệt tình.
+Hãy nhớ, bạn không hề đơn độc trên con đường này!
 
 1
-00:00:20,000 --> 00:00:25,000
-Vậy làm sao để thư giãn khi công việc luôn đầy áp lực?
-2
 00:00:25,000 --> 00:00:30,000
-Đầu tiên, hãy chế ngự stress. Đừng để công việc cuốn bạn đi.
-3
+Tích cực xin phản hồi từ những người xung quanh.
+Đây là cách tốt nhất để biết bạn đang đi đúng hướng hay không.
+
+2
 00:00:30,000 --> 00:00:35,000
-Bắt đầu ngày mới với tinh thần lạc quan, sắp xếp công việc ngăn nắp.
-4
-00:00:35,000 --> 00:00:40,000
-Lên kế hoạch linh động, đừng quá cứng nhắc, hãy mềm dẻo ứng phó.
+Xây dựng mối quan hệ tốt đẹp với đồng nghiệp.
+Sự ủng hộ của họ sẽ giúp bạn được đánh giá công bằng hơn.
 
+3
+00:00:35,000 --> 00:00:45,000
+Khi bạn được đánh giá thấp, đồng nghiệp sẽ là những người
+công tâm nhất, bênh vực bạn, giúp bạn được công nhận.
 
 1
-00:00:40,000 --> 00:00:45,000
-Điều quan trọng nữa là tạo sự cân bằng giữa công việc và cuộc sống.
-2
 00:00:45,000 --> 00:00:50,000
-Luôn thực tế với mục tiêu, lên kế hoạch cụ thể cho từng ngày.
+Kiên nhẫn chờ đợi sự công nhận.
+Thành công không đến sau một đêm. 
 
-
-1
+2
 00:00:50,000 --> 00:00:55,000
-Và đây là 5 bí quyết thư giãn cực kỳ thú vị tại nơi làm việc:
-2
-00:00:55,000 --> 01:00:00,000
-Nhâm nhi một chiếc bánh tráng, ngửi một chút dầu gió.
-3
-01:00:00,000 --> 01:05:000
-Sử dụng thuốc nhỏ mắt, áp dụng phương pháp bàn chân nghỉ ngơi.
-4
-01:05:000 --> 01:10:000
-Hay đơn giản là đổi giày thành dép lê thoải mái.
-
+Hãy nỗ lực không ngừng, vượt qua giới hạn của bản thân.
+Sếp sẽ sớm nhận ra giá trị của bạn.
 
 1
-01:10:000 --> 01:15:000
-Thư giãn trong công việc không chỉ giúp bạn giảm căng thẳng,
+00:00:55,000 --> 00:01:00,000
+Luôn hoàn thành tốt công việc được giao.
+Đừng để sự bất mãn ảnh hưởng đến hiệu suất làm việc.
+
 2
-01:15:000 --> 01:20:000
-mà còn giúp bạn yêu công việc hơn, làm việc hiệu quả hơn.
+00:01:00,000 --> 00:01:05,000
+Làm nhiều hơn những gì được yêu cầu.
+Đừng ngại nhận thêm việc, giúp đỡ đồng nghiệp.
+
 3
-01:20:000 --> 01:25:000
-Hãy thử áp dụng những bí quyết này và cảm nhận sự khác biệt nhé!
+00:01:05,000 --> 00:01:10,000
+Sự chủ động và tinh thần trách nhiệm sẽ giúp bạn ghi điểm trong mắt sếp.
+
+1
+00:01:10,000 --> 00:01:15,000
+Cố gắng hiểu sếp cần gì, muốn gì.
+Đừng ngại tương tác, chia sẻ với sếp.
+
+2
+00:01:15,000 --> 00:01:20,000
+Làm chủ cảm xúc bản thân.
+Nóng giận chỉ làm mọi chuyện tồi tệ hơn.
+
+3
+00:01:20,000 --> 00:01:25,000
+Giữ bình tĩnh, tìm cách giải quyết vấn đề thay vì tranh cãi vô ích.
+
+1
+00:01:25,000 --> 00:01:30,000
+Dám nhận khuyết điểm khi mắc lỗi.
+Đừng đổ lỗi cho người khác.
+
+2
+00:01:30,000 --> 00:01:35,000
+Không ai hoàn hảo cả, quan trọng là bạn biết sửa sai và rút kinh nghiệm.
+
+3
+00:01:35,000 --> 00:01:45,000
+Hãy biến những lời chê thành động lực
+để tiến bộ, khẳng định bản thân
+Sếp sẽ sớm thay đổi cách nhìn về bạn!
