@@ -259,9 +259,9 @@ if (customFolder) {
   console.log(`📁 Sử dụng thư mục tùy chỉnh: ${customFolder}`);
 }
 
-combineVideo(customFolder, subtitleMethod, forceNormalize).catch(err => {
-  console.error("💥 Lỗi nghiêm trọng:", err.message);
-  process.exit(1);
-});
+// combineVideo(customFolder, subtitleMethod, forceNormalize).catch(err => {
+//   console.error("💥 Lỗi nghiêm trọng:", err.message);
+//   process.exit(1);
+// });
 
 export default combineVideo;

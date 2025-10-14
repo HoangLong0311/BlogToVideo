@@ -1,8 +1,21 @@
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import axios from "axios";
 import 'dotenv/config';
 import fs from 'fs';
 import path from 'path';
 
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+async function rewriteEng(text) {
+    try {
+        const model = genAI.getGenerativeModel({ model : "gemini-2.0-flash"})
+        const prompt = `Rewrite this content with same mean but longer and more detail description like 80 - 100 letters, just give me answer: ${text}`
+        const result = await model.generateContent(prompt);
+        return String(result.response.text());
+    } catch (error) {
+        console.error("❌ Lỗi", error);
+    }
+}
 
 async function findVideoFromText(text, minSec = 10, maxSec = 20) {
   const res = await axios.get("https://api.pexels.com/videos/search", {
@@ -149,15 +162,15 @@ async function returnVideo() {
   for (let index = 1; index <= actualParts; index++) {
     const currentLineRaw = lines[index - 1].trim();
     
-    // Tách nội dung và duration bằng dấu phẩy cuối cùng
-    const lastCommaIndex = currentLineRaw.lastIndexOf(',');
-    
+    // Tách nội dung và duration bằng dấu chấm cuối cùng
+    const lastDotIndex = currentLineRaw.lastIndexOf('.');
+
     let currentLine, duration;
-    if (lastCommaIndex !== -1) {
-      currentLine = currentLineRaw.substring(0, lastCommaIndex).trim();
-      duration = parseInt(currentLineRaw.substring(lastCommaIndex + 1).trim());
+    if (lastDotIndex !== -1) {
+      currentLine = currentLineRaw.substring(0, lastDotIndex).trim();
+      duration = parseInt(currentLineRaw.substring(lastDotIndex + 1).trim());
     } else {
-      // Nếu không có dấu phẩy, coi cả dòng là nội dung, duration mặc định 10
+      // Nếu không có dấu chấm, coi cả dòng là nội dung, duration mặc định 10
       currentLine = currentLineRaw;
       duration = 10;
     }
@@ -182,7 +195,32 @@ async function returnVideo() {
         await downloadVideo(videoUrl, filename);
         console.log(`   ✅ Đã tải video: ${filename}`);
       } else {
-        console.log(`   ⚠️ Không tìm thấy video phù hợp cho phần ${index}`);
+        let found = false;
+        let count = 0;
+        let tempText = '';
+        while (!found) {
+          console.log(`   ⚠️ Không tìm thấy video phù hợp cho phần ${index}, thử lại...`);
+          const durationbuff = Math.floor(Math.random() * 3) + 3; // random 3-5 giây
+          if (count > 4) {
+            console.log('   thử viết lại...')
+            tempText = await rewriteEng(currentLine);
+            // console.log(tempText, durationbuff, duration);
+          } else {
+            console.log('   Mở rộng duration')
+            tempText = currentLine;
+          }
+          // Lỗi 400?, duration, text, buff đều ok, khả năng await hàm 2 lần
+          const videoUrlRetry = await findVideoFromText(tempText, duration - durationbuff, duration + durationbuff);
+          console.log('   Kết quả thử lại:', videoUrlRetry);
+          if (videoUrlRetry) {
+            console.log(`   🎬 Tìm thấy video: ${videoUrlRetry.substring(0, 50)}...`);
+            const filenameRetry = `part${index}.mp4`;
+            await downloadVideo(videoUrlRetry, filenameRetry);
+            console.log(`   ✅ Đã tải video: ${filenameRetry}`);
+            found = true;
+          }
+          count++;
+        }
       }
       
       // Tạm dừng 2 giây giữa các request để tránh rate limit
@@ -199,8 +237,8 @@ async function returnVideo() {
   console.log(`\n🎉 Hoàn thành! Đã tải ${actualParts} video.`);
 };
 
-// returnVideo();
-// findVideoFromText("beach");
+returnVideo();
+// await findVideoFromText("The world is beautiful today", 10, 20);
 // Xuất các hàm để sử dụng ở nơi khác
 export default returnVideo;
 export { downloadImages, downloadMultipleImages, findImageFromText, findVideoFromText };

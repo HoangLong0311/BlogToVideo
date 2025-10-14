@@ -1,93 +1,88 @@
 
 1
-00:00:00,000 --> 00:00:03,000
-Bị sếp chê? Ai mà chẳng buồn!
-Đừng cố chối bỏ cảm xúc tiêu cực.
+00:00:09,000 --> 00:00:14,000
+Công nghệ Blockchain đang bùng nổ, mở ra kỷ nguyên mới
+cho doanh nghiệp và cơ hội việc làm hấp dẫn.
 
-2
-00:00:03,000 --> 00:00:10,000
-Hãy dũng cảm đối diện với những lời phê bình.
-Suy ngẫm về những lời sếp nói, tìm ra điểm cần cải thiện.
 
 1
-00:00:10,000 --> 00:00:14,000
-Sốc lại tinh thần! Đặt ra những mục tiêu thiết thực nhất.
-Viết ra mục tiêu, đừng để nó trên giấy.
+00:00:14,000 --> 00:00:19,000
+Blockchain giúp doanh nghiệp tiết kiệm chi phí,
+tăng tốc giao dịch, bảo mật tài sản...
+
 
 2
-00:00:14,000 --> 00:00:17,000
-Lên kế hoạch hành động cụ thể, từng bước chinh phục mục tiêu.
-Đừng ngại nhờ sự giúp đỡ.
+00:00:19,000 --> 00:00:29,000
+...và ngày càng nhiều doanh nghiệp tìm đến Blockchain
+để nâng cao hiệu quả kinh doanh.
+Nhu cầu nhân lực Blockchain cũng theo đó mà tăng vọt!
+
+
+1
+00:00:29,000 --> 00:00:34,000
+Vậy Blockchain là gì?
+Hiểu đơn giản, đây là hệ thống truyền tải dữ liệu an toàn...
+
+
+2
+00:00:34,000 --> 00:00:44,000
+...dựa trên mã hóa phức tạp, giám sát chặt chẽ
+và bảo mật tuyệt đối.
+Dù một nút bị sập, hệ thống vẫn an toàn!
+
+
+1
+00:00:44,000 --> 00:00:50,000
+Để làm được điều này, cần một đội ngũ Blockchain chuyên nghiệp.
+Vậy những vị trí nào đang "hot" nhất?
+
+
+2
+00:00:50,000 --> 00:00:56,000
+Lập trình viên Blockchain: Cơ hội rộng mở,
+giúp doanh nghiệp tối ưu hệ thống, tăng hiệu quả kinh doanh.
+
 
 3
-00:00:17,000 --> 00:00:25,000
-Sếp, đồng nghiệp luôn sẵn lòng hỗ trợ nếu bạn thật sự nhiệt tình.
-Hãy nhớ, bạn không hề đơn độc trên con đường này!
+00:00:56,000 --> 00:01:01,000
+Thậm chí, bạn có thể làm thêm part-time
+để tăng thu nhập!
+
 
 1
-00:00:25,000 --> 00:00:30,000
-Tích cực xin phản hồi từ những người xung quanh.
-Đây là cách tốt nhất để biết bạn đang đi đúng hướng hay không.
+00:01:01,000 --> 00:01:09,000
+Quản lý dự án: "Thông dịch viên" giữa doanh nghiệp
+và nhà phát triển, đảm bảo dự án đi đúng hướng.
+
 
 2
-00:00:30,000 --> 00:00:35,000
-Xây dựng mối quan hệ tốt đẹp với đồng nghiệp.
-Sự ủng hộ của họ sẽ giúp bạn được đánh giá công bằng hơn.
+00:01:09,000 --> 00:01:19,000
+Từ việc tiếp nhận yêu cầu, lập kế hoạch
+đến giám sát thực hiện, bạn sẽ là người "chèo lái"
+đưa Blockchain vào thực tế.
 
-3
-00:00:35,000 --> 00:00:45,000
-Khi bạn được đánh giá thấp, đồng nghiệp sẽ là những người
-công tâm nhất, bênh vực bạn, giúp bạn được công nhận.
 
 1
-00:00:45,000 --> 00:00:50,000
-Kiên nhẫn chờ đợi sự công nhận.
-Thành công không đến sau một đêm. 
+00:01:19,000 --> 00:01:25,000
+Nhân viên hỗ trợ cộng đồng: Giải đáp thắc mắc,
+cung cấp thông tin về Blockchain cho nhà đầu tư, doanh nghiệp.
+
 
 2
-00:00:50,000 --> 00:00:55,000
-Hãy nỗ lực không ngừng, vượt qua giới hạn của bản thân.
-Sếp sẽ sớm nhận ra giá trị của bạn.
+00:01:25,000 --> 00:01:35,000
+Bạn sẽ là người giúp họ hiểu rõ hơn về công nghệ mới này,
+giải quyết các vấn đề phát sinh,
+đảm bảo ứng dụng Blockchain hiệu quả.
+
 
 1
-00:00:55,000 --> 00:01:00,000
-Luôn hoàn thành tốt công việc được giao.
-Đừng để sự bất mãn ảnh hưởng đến hiệu suất làm việc.
+00:01:35,000 --> 00:01:43,000
+Ngoài ra, còn có các vị trí như luật sư, thiết kế, tư vấn...
+cũng đóng vai trò quan trọng trong ngành Blockchain.
+
 
 2
-00:01:00,000 --> 00:01:05,000
-Làm nhiều hơn những gì được yêu cầu.
-Đừng ngại nhận thêm việc, giúp đỡ đồng nghiệp.
-
-3
-00:01:05,000 --> 00:01:10,000
-Sự chủ động và tinh thần trách nhiệm sẽ giúp bạn ghi điểm trong mắt sếp.
-
-1
-00:01:10,000 --> 00:01:15,000
-Cố gắng hiểu sếp cần gì, muốn gì.
-Đừng ngại tương tác, chia sẻ với sếp.
-
-2
-00:01:15,000 --> 00:01:20,000
-Làm chủ cảm xúc bản thân.
-Nóng giận chỉ làm mọi chuyện tồi tệ hơn.
-
-3
-00:01:20,000 --> 00:01:25,000
-Giữ bình tĩnh, tìm cách giải quyết vấn đề thay vì tranh cãi vô ích.
-
-1
-00:01:25,000 --> 00:01:30,000
-Dám nhận khuyết điểm khi mắc lỗi.
-Đừng đổ lỗi cho người khác.
-
-2
-00:01:30,000 --> 00:01:35,000
-Không ai hoàn hảo cả, quan trọng là bạn biết sửa sai và rút kinh nghiệm.
-
-3
-00:01:35,000 --> 00:01:45,000
-Hãy biến những lời chê thành động lực
-để tiến bộ, khẳng định bản thân
-Sếp sẽ sớm thay đổi cách nhìn về bạn!
+00:01:43,000 --> 00:01:53,000
+Blockchain không chỉ là công nghệ,
+mà còn là cơ hội để bạn khẳng định bản thân
+và tạo dựng tương lai!
