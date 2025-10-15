@@ -1,114 +1,102 @@
 
 1
-00:00:09,000 --> 00:00:12,000
-Bạn đã bao giờ đọc bản mô tả công việc
-mà vẫn thấy mơ hồ?
+00:00:09,000 --> 00:00:14,000
+Bạn đã bao giờ đọc kỹ
+bản mô tả công việc chưa?
 
 
 2
-00:00:12,000 --> 00:00:18,000
-Đừng lo lắng, video này sẽ giúp bạn hiểu rõ
-bản mô tả công việc là gì và tại sao nó lại quan trọng đến vậy.
+00:00:14,000 --> 00:00:17,000
+Nhiều người bỏ qua nó,
+nhưng đó là sai lầm lớn!
 
 
 3
-00:00:18,000 --> 00:00:24,000
-Bản mô tả công việc là tài liệu mô tả chi tiết
-các nhiệm vụ, trách nhiệm của một vị trí.
+00:00:17,000 --> 00:00:24,000
+Bản mô tả công việc
+không chỉ là danh sách việc làm.
+Nó còn cho bạn biết
+công việc đó có hợp với bạn không!
 
 
 4
-00:00:24,000 --> 00:00:31,000
-Nó giúp nhà tuyển dụng tìm đúng người,
-nhân viên hiểu rõ mục tiêu và quản lý dễ dàng theo dõi tiến độ.
+00:00:24,000 --> 00:00:32,000
+Đây là bản cam kết giữa
+nhà tuyển dụng và bạn,
+nêu rõ mục tiêu, nhiệm vụ,
+và cả quyền lợi của bạn nữa đó.
 
 
 5
-00:00:31,000 --> 00:00:36,000
-Nó như một cam kết giữa quản lý và nhân viên,
-đảm bảo mọi người cùng hướng tới mục tiêu chung.
+00:00:32,000 --> 00:00:38,000
+Với nhà tuyển dụng,
+nó giúp lọc hồ sơ nhanh hơn,
+tìm đúng người
+cho vị trí đang cần.
 
 
 6
-00:00:36,000 --> 00:00:46,000
-Vậy, một bản mô tả công việc tốt cần có gì?
-Hãy tự hỏi: Ai làm? Mục tiêu là gì?
-Nhiệm vụ cụ thể ra sao?
+00:00:38,000 --> 00:00:44,000
+Còn với bạn, nó giúp bạn
+hiểu rõ mục tiêu công việc,
+góp phần vào thành công
+của cả team và công ty.
 
 
 7
-00:00:46,000 --> 00:00:53,000
-Địa điểm làm việc ở đâu?
-Khi nào thì hoàn thành công việc?
-Cần những gì để thành công?
+00:00:44,000 --> 00:00:50,000
+Một bản mô tả công việc
+thường có gì?
+Chức danh, bộ phận,
+mục tiêu công việc,...
 
 
 8
-00:00:53,000 --> 01:01:000
-Ví dụ, với vị trí nhân viên buồng phòng,
-bạn cần biết rõ về kỹ năng dọn dẹp,
-sử dụng máy móc và thái độ làm việc chuyên nghiệp.
+00:00:50,000 --> 00:00:56,000
+...các kỹ năng cần thiết,
+trách nhiệm cụ thể
+và cả những yêu cầu khác.
 
 
 9
-00:01:01,000 --> 01:08:000
-Công việc bao gồm dọn phòng, thay ga giường,
-vệ sinh nhà tắm và đáp ứng yêu cầu của khách hàng.
+00:00:56,000 --> 00:01:01,000
+Đừng quên phần
+"quyền lợi" và "phúc lợi" nhé!
 
 
 10
-01:08:000 --> 01:14:000
-Hoặc với Digital Marketing, bạn cần quản lý các kênh,
-đo lường hiệu quả và đảm bảo hình ảnh thương hiệu.
+00:01:01,000 --> 00:01:07,000
+Văn hóa công ty cũng quan trọng,
+nó giúp bạn biết mình
+có phù hợp với môi trường đó không.
 
 
 11
-01:14:000 --> 01:22:000
-Quan trọng là, người phỏng vấn và nhà tuyển dụng
-cần thống nhất về yêu cầu công việc để tránh hiểu lầm về sau.
+00:01:07,000 --> 00:01:16,000
+Tránh những lỗi sau:
+phân biệt đối xử,
+yêu cầu quá nhiều,
+thái độ tiêu cực...
 
 
 12
-01:22:000 --> 01:28:000
-Đừng quên tìm hiểu về phúc lợi!
-Ngoài lương, hãy xem xét chế độ nghỉ phép, bảo hiểm và các phụ cấp khác.
+00:01:16,000 --> 00:01:27,000
+...hoặc thông tin quá mập mờ.
+Hãy rõ ràng về trách nhiệm
+và yêu cầu công việc ngay từ đầu.
 
 
 13
-01:28:000 --> 01:35:000
-Hãy coi bản thân như khách hàng,
-và nhà tuyển dụng cần cho bạn thấy những quyền lợi hấp dẫn.
+00:01:27,000 --> 00:01:34,000
+Tóm lại, đọc kỹ
+bản mô tả công việc
+giúp bạn tìm được công việc phù hợp,
+tránh những thất vọng về sau.
 
 
 14
-01:35:000 --> 01:42:000
-Cuối cùng, văn hóa công ty cũng rất quan trọng.
-Hãy tìm hiểu về tầm nhìn, cấu trúc và các hoạt động của công ty.
-
-
-15
-01:42:000 --> 01:48:000
-Liệu bạn có phù hợp với môi trường làm việc ở đó hay không?
-
-
-16
-01:48:000 --> 01:54:000
-Tránh những lỗi sai khi viết mô tả công việc!
-Đừng phân biệt đối xử, đưa ra quá nhiều yêu cầu,
-
-
-17
-01:54:000 --> 02:01:000
-sử dụng ngôn ngữ tiêu cực hoặc tỏ ra bí ẩn.
-Hãy rõ ràng, chân thực và tôn trọng ứng viên.
-
-
-18
-02:01:000 --> 02:05:000
-Hiểu rõ bản mô tả công việc
-sẽ giúp bạn tìm được công việc phù hợp!
-
-
-19
-02:05:000 --> 02:09:000
-Chúc bạn thành công!
+00:01:34,000 --> 00:01:42,000
+Đừng bỏ qua nó,
+đó là chìa khóa
+để bạn mở cánh cửa
+thành công đấy!

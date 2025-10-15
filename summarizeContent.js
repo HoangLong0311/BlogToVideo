@@ -85,38 +85,51 @@ async function summarizeText(longText) {
     . Từ dòng thứ 2, các đoạn của bài tóm tắt có cấu trúc như sau: tiếp dưới là kịch bản subtitle theo định dạng srt, mỗi câu cách nhau bởi dấu xuống dòng toàn bộ đoạn subtitle đặt giữa 2 dấu #, tất cả cùng căn lề bên trái, nên chia kịch bản
     srt giống với tốc độ người đọc nghĩa là chia ra nhiều sub nhỏ, 1 dòng mô tả tiếng anh có thể có thông số độ dài bằng nhiều hơn 1 đoạn subtitle,
     có nghĩa là đoạn tiếng anh đó đưa ra video background cho nhiều hơn 2 đoạn subtitle bên dưới, các độ dài tương ứng với đoạn mô tả tiếng anh
-    không được quá 15s, mỗi block subtitle chỉ tối đa 2 dòng. đoạn đầu tiên luôn bắt đầu từ giây thứ 9
+    không được quá 15s, mỗi block subtitle chỉ được có nội dung không quá dài và tối đa 2 dòng. đoạn đầu tiên luôn bắt đầu từ giây thứ 9
     ví dụ 1 đoạn như sau:
 
-$Nội dung tiếng anh.5$
+$Nội dung bằng tiếng anh.5$
 #
 1
 00:00:09,000 --> 00:00:14,000
 Nội dung subtitle tiếng việt ở đây
 Nội dung subtitle tiếng việt ở đây
-Nội dung subtitle tiếng việt ở đây
 #
 
 
-$Nội dung tiếng anh.13$
+$Nội dung bằng tiếng anh.13$
 #
 2
 00:00:14,000 --> 00:00:17,000
-Đừng cố gắng chối bỏ cảm xúc tiêu cực.
-Hãy dũng cảm đối diện với những lời phê bình.
+Nội dung subtitle tiếng việt ở đây.
+Nội dung subtitle tiếng việt ở đây
 #
 
 #
 3
 00:00:17,000 --> 00:00:25,000
-Buồn ư? Không sao cả!
-Nhưng hãy dùng nó làm động lực để thay đổi.
+Nội dung subtitle tiếng việt ở đây
 #
 
+$Nội dung bằng tiếng anh.13$
 #
 4
 00:00:25,000 --> 00:00:27,000
-Suy ngẫm về những lời sếp nói, tìm ra điểm cần cải thiện.
+Nội dung subtitle tiếng việt ở đây
+#
+
+#
+5
+00:00:27,000 --> 00:00:29,000
+Nội dung subtitle tiếng việt ở đây
+Nội dung subtitle tiếng việt ở đây
+#
+
+#
+6
+00:00:29,000 --> 00:00:33,000
+Nội dung subtitle tiếng việt ở đây
+Nội dung subtitle tiếng việt ở đây
 #
 
 Không được để 2 dấu # xuống dòng liền nhau, không được để trống giữa 2 dấu #, không được để thừa dấu # ở đầu hoặc cuối file.
