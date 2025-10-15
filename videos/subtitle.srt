@@ -1,88 +1,114 @@
 
 1
-00:00:09,000 --> 00:00:14,000
-Công nghệ Blockchain đang bùng nổ, mở ra kỷ nguyên mới
-cho doanh nghiệp và cơ hội việc làm hấp dẫn.
-
-
-1
-00:00:14,000 --> 00:00:19,000
-Blockchain giúp doanh nghiệp tiết kiệm chi phí,
-tăng tốc giao dịch, bảo mật tài sản...
+00:00:09,000 --> 00:00:12,000
+Bạn đã bao giờ đọc bản mô tả công việc
+mà vẫn thấy mơ hồ?
 
 
 2
-00:00:19,000 --> 00:00:29,000
-...và ngày càng nhiều doanh nghiệp tìm đến Blockchain
-để nâng cao hiệu quả kinh doanh.
-Nhu cầu nhân lực Blockchain cũng theo đó mà tăng vọt!
-
-
-1
-00:00:29,000 --> 00:00:34,000
-Vậy Blockchain là gì?
-Hiểu đơn giản, đây là hệ thống truyền tải dữ liệu an toàn...
-
-
-2
-00:00:34,000 --> 00:00:44,000
-...dựa trên mã hóa phức tạp, giám sát chặt chẽ
-và bảo mật tuyệt đối.
-Dù một nút bị sập, hệ thống vẫn an toàn!
-
-
-1
-00:00:44,000 --> 00:00:50,000
-Để làm được điều này, cần một đội ngũ Blockchain chuyên nghiệp.
-Vậy những vị trí nào đang "hot" nhất?
-
-
-2
-00:00:50,000 --> 00:00:56,000
-Lập trình viên Blockchain: Cơ hội rộng mở,
-giúp doanh nghiệp tối ưu hệ thống, tăng hiệu quả kinh doanh.
+00:00:12,000 --> 00:00:18,000
+Đừng lo lắng, video này sẽ giúp bạn hiểu rõ
+bản mô tả công việc là gì và tại sao nó lại quan trọng đến vậy.
 
 
 3
-00:00:56,000 --> 00:01:01,000
-Thậm chí, bạn có thể làm thêm part-time
-để tăng thu nhập!
+00:00:18,000 --> 00:00:24,000
+Bản mô tả công việc là tài liệu mô tả chi tiết
+các nhiệm vụ, trách nhiệm của một vị trí.
 
 
-1
-00:01:01,000 --> 00:01:09,000
-Quản lý dự án: "Thông dịch viên" giữa doanh nghiệp
-và nhà phát triển, đảm bảo dự án đi đúng hướng.
+4
+00:00:24,000 --> 00:00:31,000
+Nó giúp nhà tuyển dụng tìm đúng người,
+nhân viên hiểu rõ mục tiêu và quản lý dễ dàng theo dõi tiến độ.
 
 
-2
-00:01:09,000 --> 00:01:19,000
-Từ việc tiếp nhận yêu cầu, lập kế hoạch
-đến giám sát thực hiện, bạn sẽ là người "chèo lái"
-đưa Blockchain vào thực tế.
+5
+00:00:31,000 --> 00:00:36,000
+Nó như một cam kết giữa quản lý và nhân viên,
+đảm bảo mọi người cùng hướng tới mục tiêu chung.
 
 
-1
-00:01:19,000 --> 00:01:25,000
-Nhân viên hỗ trợ cộng đồng: Giải đáp thắc mắc,
-cung cấp thông tin về Blockchain cho nhà đầu tư, doanh nghiệp.
+6
+00:00:36,000 --> 00:00:46,000
+Vậy, một bản mô tả công việc tốt cần có gì?
+Hãy tự hỏi: Ai làm? Mục tiêu là gì?
+Nhiệm vụ cụ thể ra sao?
 
 
-2
-00:01:25,000 --> 00:01:35,000
-Bạn sẽ là người giúp họ hiểu rõ hơn về công nghệ mới này,
-giải quyết các vấn đề phát sinh,
-đảm bảo ứng dụng Blockchain hiệu quả.
+7
+00:00:46,000 --> 00:00:53,000
+Địa điểm làm việc ở đâu?
+Khi nào thì hoàn thành công việc?
+Cần những gì để thành công?
 
 
-1
-00:01:35,000 --> 00:01:43,000
-Ngoài ra, còn có các vị trí như luật sư, thiết kế, tư vấn...
-cũng đóng vai trò quan trọng trong ngành Blockchain.
+8
+00:00:53,000 --> 01:01:000
+Ví dụ, với vị trí nhân viên buồng phòng,
+bạn cần biết rõ về kỹ năng dọn dẹp,
+sử dụng máy móc và thái độ làm việc chuyên nghiệp.
 
 
-2
-00:01:43,000 --> 00:01:53,000
-Blockchain không chỉ là công nghệ,
-mà còn là cơ hội để bạn khẳng định bản thân
-và tạo dựng tương lai!
+9
+00:01:01,000 --> 01:08:000
+Công việc bao gồm dọn phòng, thay ga giường,
+vệ sinh nhà tắm và đáp ứng yêu cầu của khách hàng.
+
+
+10
+01:08:000 --> 01:14:000
+Hoặc với Digital Marketing, bạn cần quản lý các kênh,
+đo lường hiệu quả và đảm bảo hình ảnh thương hiệu.
+
+
+11
+01:14:000 --> 01:22:000
+Quan trọng là, người phỏng vấn và nhà tuyển dụng
+cần thống nhất về yêu cầu công việc để tránh hiểu lầm về sau.
+
+
+12
+01:22:000 --> 01:28:000
+Đừng quên tìm hiểu về phúc lợi!
+Ngoài lương, hãy xem xét chế độ nghỉ phép, bảo hiểm và các phụ cấp khác.
+
+
+13
+01:28:000 --> 01:35:000
+Hãy coi bản thân như khách hàng,
+và nhà tuyển dụng cần cho bạn thấy những quyền lợi hấp dẫn.
+
+
+14
+01:35:000 --> 01:42:000
+Cuối cùng, văn hóa công ty cũng rất quan trọng.
+Hãy tìm hiểu về tầm nhìn, cấu trúc và các hoạt động của công ty.
+
+
+15
+01:42:000 --> 01:48:000
+Liệu bạn có phù hợp với môi trường làm việc ở đó hay không?
+
+
+16
+01:48:000 --> 01:54:000
+Tránh những lỗi sai khi viết mô tả công việc!
+Đừng phân biệt đối xử, đưa ra quá nhiều yêu cầu,
+
+
+17
+01:54:000 --> 02:01:000
+sử dụng ngôn ngữ tiêu cực hoặc tỏ ra bí ẩn.
+Hãy rõ ràng, chân thực và tôn trọng ứng viên.
+
+
+18
+02:01:000 --> 02:05:000
+Hiểu rõ bản mô tả công việc
+sẽ giúp bạn tìm được công việc phù hợp!
+
+
+19
+02:05:000 --> 02:09:000
+Chúc bạn thành công!

@@ -9,12 +9,39 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 async function rewriteEng(text) {
     try {
         const model = genAI.getGenerativeModel({ model : "gemini-2.0-flash"})
-        const prompt = `Rewrite this content with same mean but longer and more detail description like 80 - 100 letters, just give me answer: ${text}`
+        // const prompt = `Rewrite this content with same mean but longer and more detail description.
+        // The whole is one continuous sentence, without using , or . at the end and has 40 - 60 letters, just give me answer: ${text}`
+        const prompt = `Rewrite this content with same mean but longer and more detail description and has 40 - 60 letters, just give me answer: ${text}`
         const result = await model.generateContent(prompt);
         return String(result.response.text());
     } catch (error) {
         console.error("❌ Lỗi", error);
     }
+}
+
+async function copyVideo(sourcePath, destPath) {
+  try {
+    // Kiểm tra file nguồn có tồn tại không - FIXED
+    try {
+        await fs.access(sourcePath);
+    } catch (error) {
+        throw new Error(`File nguồn không tồn tại: ${sourcePath}`);
+    }
+
+    // Tạo thư mục đích nếu chưa tồn tại
+    const destDir = path.dirname(destPath);
+    await fs.mkdir(destDir, { recursive: true });
+
+    // Copy file
+    await fs.copyFile(sourcePath, destPath);
+    console.log(`✅ Đã copy video từ ${sourcePath} đến ${destPath}`);
+
+    return true; // Trả về kết quả thành công
+
+  } catch (error) {
+      console.error('❌ Lỗi khi copy video:', error.message);
+      throw error; // Ném lỗi ra ngoài để xử lý tiếp
+  }
 }
 
 async function findVideoFromText(text, minSec = 10, maxSec = 20) {
@@ -185,59 +212,59 @@ async function returnVideo() {
       console.log(`   ✅ Đã lưu vào temp.txt`);
       
       // Tìm video dựa trên nội dung temp.txt với duration cụ thể
-      const videoUrl = await findVideoFromText(currentLine, Math.max(duration - 2, 5), duration + 2);
-      
-      if (videoUrl) {
-        console.log(`   🎬 Tìm thấy video: ${videoUrl.substring(0, 50)}...`);
-        
-        // Download video với tên part{index}.mp4
-        const filename = `part${index}.mp4`;
-        await downloadVideo(videoUrl, filename);
-        console.log(`   ✅ Đã tải video: ${filename}`);
-      } else {
-        let found = false;
-        let count = 0;
-        let tempText = '';
-        while (!found) {
+      let found = false;
+      let count = 0;
+      let tempText = currentLine;
+      let buff = 1;
+      while (!found) {
+        const durationbuff = Math.floor(Math.random() * 3) + 2; // random 2-4 giây
+        console.log("input:", tempText, typeof tempText)
+        const videoUrl = await findVideoFromText(tempText, duration - buff, duration + buff);
+        console.log("video tìm được:", videoUrl);
+
+        if (videoUrl) {
+          console.log(`   🎬 Tìm thấy video: ${videoUrl.substring(0, 50)}...`);
+          // Download video với tên part{index}.mp4
+          const filename = `part${index}.mp4`;
+          await downloadVideo(videoUrl, filename);
+          console.log(`   ✅ Đã tải video: ${filename}`);
+          found = true;
+        } else {
           console.log(`   ⚠️ Không tìm thấy video phù hợp cho phần ${index}, thử lại...`);
-          const durationbuff = Math.floor(Math.random() * 3) + 3; // random 3-5 giây
-          if (count > 4) {
+          if (count > 4 && count <= 14) {
             console.log('   thử viết lại...')
-            tempText = await rewriteEng(currentLine);
-            // console.log(tempText, durationbuff, duration);
-          } else {
-            console.log('   Mở rộng duration')
-            tempText = currentLine;
-          }
-          // Lỗi 400?, duration, text, buff đều ok, khả năng await hàm 2 lần
-          const videoUrlRetry = await findVideoFromText(tempText, duration - durationbuff, duration + durationbuff);
-          console.log('   Kết quả thử lại:', videoUrlRetry);
-          if (videoUrlRetry) {
-            console.log(`   🎬 Tìm thấy video: ${videoUrlRetry.substring(0, 50)}...`);
-            const filenameRetry = `part${index}.mp4`;
-            await downloadVideo(videoUrlRetry, filenameRetry);
-            console.log(`   ✅ Đã tải video: ${filenameRetry}`);
+            let temp = await rewriteEng(currentLine);
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            tempText = temp.trim(); //bỏ xâu rỗng 2 đầu -> findVideoformText mới hợp lệ
+            buff = durationbuff;
+            count ++;
+          } else if (count > 14) {
+            console.log('   Không tìm được video phù hợp, nên sử dụng video default');
             found = true;
+          } else {
+            console.log('   Mở rộng duration thêm ±', durationbuff, 's');
+            buff = durationbuff;
+            count++;
           }
-          count++;
         }
       }
-      
       // Tạm dừng 2 giây giữa các request để tránh rate limit
       if (index < actualParts) {
         console.log(`   ⏳ Chờ 2 giây trước khi xử lý phần tiếp theo...`);
         await new Promise(resolve => setTimeout(resolve, 2000));
       }
-      
+
     } catch (error) {
       console.error(`   ❌ Lỗi khi xử lý phần ${index}:`, error.message);
     }
   }
-  
+  // const sourceVideo = '@/images/intro.mp4';
+  // const destVideo = '@/videos/part0.mp4';
+  // await copyVideo(sourceVideo, destVideo);
   console.log(`\n🎉 Hoàn thành! Đã tải ${actualParts} video.`);
 };
 
-returnVideo();
+// returnVideo();
 // await findVideoFromText("The world is beautiful today", 10, 20);
 // Xuất các hàm để sử dụng ở nơi khác
 export default returnVideo;

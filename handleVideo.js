@@ -28,10 +28,18 @@ async function cleanupSourceVideos(videoPaths, mergedPath, finalPath, folder) {
   const sourceFiles = [];
   
   videoPaths.forEach(videoPath => {
+    const fileName = path.basename(videoPath);
+    
+    // Bỏ qua file intro.mp4 khi dọn dẹp
+    if (fileName.toLowerCase() === 'intro.mp4') {
+      console.log(`   🔒 Bảo vệ file: ${fileName} (không xóa)`);
+      return;
+    }
+    
     const stats = fs.statSync(videoPath);
     totalSourceSize += stats.size;
     sourceFiles.push({
-      name: path.basename(videoPath),
+      name: fileName,
       path: videoPath,
       size: (stats.size / (1024 * 1024)).toFixed(2)
     });
@@ -41,15 +49,25 @@ async function cleanupSourceVideos(videoPaths, mergedPath, finalPath, folder) {
   const finalStats = fs.statSync(finalPath);
   const finalSizeMB = (finalStats.size / (1024 * 1024)).toFixed(2);
   
+  const protectedFiles = videoPaths.filter(videoPath => 
+    path.basename(videoPath).toLowerCase() === 'intro.mp4'
+  ).length;
+  
   console.log("📊 Thống kê dung lượng:");
-  console.log(`   📹 ${videoPaths.length} file gốc: ${totalSourceSizeMB}MB`);
+  console.log(`   📹 ${videoPaths.length} file gốc tổng cộng`);
+  console.log(`   🔒 ${protectedFiles} file được bảo vệ (intro.mp4)`);
+  console.log(`   🗑️ ${sourceFiles.length} file sẽ xóa: ${totalSourceSizeMB}MB`);
   console.log(`   🎬 File cuối cùng: ${finalSizeMB}MB`);
   console.log(`   💾 Tiết kiệm: ${(totalSourceSize - finalStats.size > 0 ? '+' : '')}${((finalStats.size - totalSourceSize) / (1024 * 1024)).toFixed(2)}MB`);
   
-  console.log("\n📋 Danh sách file sẽ bị xóa:");
-  sourceFiles.forEach((file, index) => {
-    console.log(`   ${index + 1}. ${file.name} (${file.size}MB)`);
-  });
+  if (sourceFiles.length > 0) {
+    console.log("\n📋 Danh sách file sẽ bị xóa:");
+    sourceFiles.forEach((file, index) => {
+      console.log(`   ${index + 1}. ${file.name} (${file.size}MB)`);
+    });
+  } else {
+    console.log("\n📋 Không có file nào sẽ bị xóa (chỉ có file được bảo vệ)");
+  }
   
   // Kiểm tra file trung gian (merged không có subtitle)
   const hasIntermediateFile = mergedPath !== finalPath && fs.existsSync(mergedPath);
@@ -86,6 +104,11 @@ async function cleanupSourceVideos(videoPaths, mergedPath, finalPath, folder) {
 // Hàm thực hiện dọn dẹp
 async function performCleanup(sourceFiles, mergedPath, finalPath, hasIntermediateFile, removeIntermediate) {
   console.log("\n🗑️ Bắt đầu dọn dẹp...");
+  
+  if (sourceFiles.length === 0 && !hasIntermediateFile) {
+    console.log("✅ Không có file nào cần xóa (chỉ có file được bảo vệ)");
+    return;
+  }
   
   let deletedCount = 0;
   let deletedSize = 0;

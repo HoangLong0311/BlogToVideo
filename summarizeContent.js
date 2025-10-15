@@ -81,10 +81,11 @@ async function summarizeText(longText) {
     const prompt = `Hãy tóm tắt đoạn văn bản sau thành nội dung rõ ràng, các phần mạch lạc đủ để làm kịch bản video dài khoảng
     1 phút 50 giây đến 2 phút, ngôn ngữ hấp dẫn, tự nhiên, không cần chú thích hay giới thiệu. Hãy chia nội dung làm tối thiểu 5 đoạn và
     tối đa 8 đoạn. Mỗi đoạn hãy mô tả bẳng tiếng anh chi tiết đủ để tìm 1 video background phù hợp nhất với nội dung đoạn đó
-    và đặt chúng giữa 2 dấu $. Dòng đầu tiên hãy đưa ra các nội dung: đoạn mô tả tiếng anh ở dòng đầu.độ dài của đoạn script tương ứng bên dưới
-    bằng giây. Từ dòng thứ 2, các đoạn của bài tóm tắt có cấu trúc như sau: tiếp dưới là kịch bản subtitle theo định dạng srt, mỗi câu cách
-    nhau bởi dấu xuống dòng toàn bộ đoạn subtitle đặt giữa 2 dấu #, tất cả cùng căn lề bên trái, nên chia kịch bản
-    srt giống với tốc độ người đọc nghĩa là chia ra nhiều sub nhỏ, mỗi đoạn không nên quá 13s. đoạn đầu tiên luôn bắt đầu từ giây thứ 9
+    và đặt chúng giữa 2 dấu $. Dòng đầu tiên hãy đưa ra các nội dung: đoạn mô tả bằng tiếng anh ở dòng đầu.độ dài của đoạn script file srt tương ứng bên dưới bằng giây
+    . Từ dòng thứ 2, các đoạn của bài tóm tắt có cấu trúc như sau: tiếp dưới là kịch bản subtitle theo định dạng srt, mỗi câu cách nhau bởi dấu xuống dòng toàn bộ đoạn subtitle đặt giữa 2 dấu #, tất cả cùng căn lề bên trái, nên chia kịch bản
+    srt giống với tốc độ người đọc nghĩa là chia ra nhiều sub nhỏ, 1 dòng mô tả tiếng anh có thể có thông số độ dài bằng nhiều hơn 1 đoạn subtitle,
+    có nghĩa là đoạn tiếng anh đó đưa ra video background cho nhiều hơn 2 đoạn subtitle bên dưới, các độ dài tương ứng với đoạn mô tả tiếng anh
+    không được quá 15s, mỗi block subtitle chỉ tối đa 2 dòng. đoạn đầu tiên luôn bắt đầu từ giây thứ 9
     ví dụ 1 đoạn như sau:
 
 $Nội dung tiếng anh.5$
@@ -99,25 +100,26 @@ Nội dung subtitle tiếng việt ở đây
 
 $Nội dung tiếng anh.13$
 #
-1
+2
 00:00:14,000 --> 00:00:17,000
 Đừng cố gắng chối bỏ cảm xúc tiêu cực.
 Hãy dũng cảm đối diện với những lời phê bình.
 #
 
 #
-2
+3
 00:00:17,000 --> 00:00:25,000
 Buồn ư? Không sao cả!
 Nhưng hãy dùng nó làm động lực để thay đổi.
 #
 
 #
-3
+4
 00:00:25,000 --> 00:00:27,000
 Suy ngẫm về những lời sếp nói, tìm ra điểm cần cải thiện.
 #
 
+Không được để 2 dấu # xuống dòng liền nhau, không được để trống giữa 2 dấu #, không được để thừa dấu # ở đầu hoặc cuối file.
     Nội dung gốc:
     ${longText}
     `;
@@ -140,11 +142,12 @@ Suy ngẫm về những lời sếp nói, tìm ra điểm cần cải thiện.
 
     // log nội dung
     const text = getAllContentBetweenSharp(responseText).join('\n');
+    const resultText = result.response.text();
     subtitleWrite(text);
-    console.log(text);
+    console.log(text, resultText);
 
     // console.log(responseText);
-    return String(responseText).charAt(0);
+    return String(responseText.charAt(0));
 
   } catch (error) {
     console.error("❌ Lỗi hàm:", error);
