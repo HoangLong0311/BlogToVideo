@@ -28,7 +28,7 @@ async function cleanupSourceVideos(videoPaths, mergedPath, finalPath, folder) {
   const sourceFiles = [];
   
   videoPaths.forEach(videoPath => {
-    const fileName = path.basename(videoPath);
+      const fileName = path.basename(videoPath);
     
     // Bỏ qua file intro.mp4 khi dọn dẹp
     if (fileName.toLowerCase() === 'intro.mp4') {
@@ -197,7 +197,7 @@ async function combineVideo(customFolder = null, subtitleMethod = 'hardburn', fo
     
     // Bước 1: Quyết định phương pháp ghép dựa trên tương thích (TIMING SAFETY FIRST!)
     const totalSizeMB = compatibility.infos.reduce((sum, info) => sum + (info.size / (1024 * 1024)), 0);
-    const shouldUseBatch = videoPaths.length > 15 || totalSizeMB > 5000;
+    const shouldUseBatch = videoPaths.length > 999 || totalSizeMB > 5000;
     
     if (forceNormalize) {
       console.log("🔧 Force normalize mode - sử dụng chuẩn hóa format để khắc phục timing issues...");

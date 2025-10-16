@@ -41,6 +41,18 @@ function getAllContentBetweenDollars(text) {
     return matches.map(match => match.slice(1, -1));
 }
 
+function getAllContentBetweenDollarsExec(text) {
+    const regex = /\$(.*?)\$/g;
+    const matches = [];
+    let match;
+    
+    while ((match = regex.exec(text)) !== null) {
+        matches.push(match[1]); // match[1] là nội dung trong nhóm
+    }
+    
+    return matches;
+}
+
 function getAllContentBetweenSharp(text) {
     const regex = /#([^#]*)#/gs;
     const matches = [];
@@ -76,63 +88,74 @@ function getContentCount(contentArray) {
 // Hàm gọi model để tóm tắt văn bản, phần mẫu đầu ra không tab vào trong, nếu tab -> lỗi file srt
 async function summarizeText(longText) {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const model = genAI.getGenerativeModel({ model: "models/gemini-2.0-flash" });
 
-    const prompt = `Hãy tóm tắt đoạn văn bản sau thành nội dung rõ ràng, các phần mạch lạc đủ để làm kịch bản video dài khoảng
-    1 phút 50 giây đến 2 phút, ngôn ngữ hấp dẫn, tự nhiên, không cần chú thích hay giới thiệu. Hãy chia nội dung làm tối thiểu 5 đoạn và
-    tối đa 8 đoạn. Mỗi đoạn hãy mô tả bẳng tiếng anh chi tiết đủ để tìm 1 video background phù hợp nhất với nội dung đoạn đó
-    và đặt chúng giữa 2 dấu $. Dòng đầu tiên hãy đưa ra các nội dung: đoạn mô tả bằng tiếng anh ở dòng đầu.độ dài của đoạn script file srt tương ứng bên dưới bằng giây
-    . Từ dòng thứ 2, các đoạn của bài tóm tắt có cấu trúc như sau: tiếp dưới là kịch bản subtitle theo định dạng srt, mỗi câu cách nhau bởi dấu xuống dòng toàn bộ đoạn subtitle đặt giữa 2 dấu #, tất cả cùng căn lề bên trái, nên chia kịch bản
-    srt giống với tốc độ người đọc nghĩa là chia ra nhiều sub nhỏ, 1 dòng mô tả tiếng anh có thể có thông số độ dài bằng nhiều hơn 1 đoạn subtitle,
-    có nghĩa là đoạn tiếng anh đó đưa ra video background cho nhiều hơn 2 đoạn subtitle bên dưới, các độ dài tương ứng với đoạn mô tả tiếng anh
-    không được quá 15s, mỗi block subtitle chỉ được có nội dung không quá dài và tối đa 2 dòng. đoạn đầu tiên luôn bắt đầu từ giây thứ 9
-    ví dụ 1 đoạn như sau:
+    const prompt = `Bạn hãy cô đọng các nội dung chính và tóm tắt nội dung sau thành kịch bản phụ đề chuẩn SRT với các yêu cầu:
+    1. **QUY TẮC NỘI DUNG:**
+- Mỗi cue tối đa 2 dòng tiếng Việt, Mỗi dòng tối thiểu 40 ký tự (tính cả khoảng trắng)
+- Tốc độ đọc: 150-180 từ/phút
+- Thời gian hiển thị mỗi cue: 3-7 giây tùy độ dài
+- Thêm nội dung mô tả video background hợp lí cho các cue và phải bằng English, cần chi tiết và sát cue nhất cùng với đó là độ dài video bằng với thời gian chạy của các cue tương ứng với video đó
+và ngăn cách với mô tả bởi .
+- Các cue đặt giữa 2 dấu #, các nội dung tiếng anh và độ dài đặt giữa 2 dấu $
+- 1 dòng mô tả tiếng anh có thể có thông số độ dài bằng nhiều hơn 1 đoạn subtitle, có nghĩa là đoạn tiếng anh đó đưa ra video background
+cho nhiều hơn 2 đoạn subtitle bên dưới, các độ dài tương ứng với đoạn mô tả tiếng anh không được quá 15s.
+- dòng mô tả tiếng anh chỉ được sử dụng dấu . để ngăn cách với độ dài, không sử dụng dấu chấm trong câu mô tả.
+- Không cơ cấu đoạn kịch bản theo kiểu mỗi cue là 1 video, ví dụ 10 cue thì 10 video là sai yêu cầu.
+
+2. **QUY TẮC THỜI GIAN:**
+- Bắt đầu từ 00:00:09,000
+- Tính toán thời gian hợp lý cho tốc độ đọc
+- Khoảng cách giữa các cue: 0.2-0.5 giây
+- Format thời gian: HH:MM:SS,mmm.
+- Toàn bộ thời gian không vượt quá 2 phút, tối thiểu 1 phút 40s
+
+3. **NGUYÊN TẮC TÓM TẮT:**
+- Ngôn ngữ tự nhiên, dễ hiểu, hấp dẫn
+- Tập trung vào ý chính, luận điểm quan trọng
+- Giữ các số liệu, ví dụ quan trọng
+- Loại bỏ dẫn dắt, lặp lại không cần thiết
+- Đảm bảo mạch văn logic giữa các cue, mỗi cue liên kết tự nhiên và phải các câu trong cue phải là câu hoàn chỉnh.
+
+**VÍ DỤ ĐẦU RA MẪU:**
 
 $Nội dung bằng tiếng anh.5$
-#
-1
-00:00:09,000 --> 00:00:14,000
+#1
+00:00:09,000 --> 00:MM:SS,mmm.
 Nội dung subtitle tiếng việt ở đây
 Nội dung subtitle tiếng việt ở đây
 #
-
 
 $Nội dung bằng tiếng anh.13$
-#
-2
-00:00:14,000 --> 00:00:17,000
+#2
+00:MM:SS,mmm --> 00:MM:SS,mmm
 Nội dung subtitle tiếng việt ở đây.
 Nội dung subtitle tiếng việt ở đây
 #
 
-#
-3
-00:00:17,000 --> 00:00:25,000
+#3
+00:MM:SS,mmm --> 00:MM:SS,mmm
 Nội dung subtitle tiếng việt ở đây
 #
 
 $Nội dung bằng tiếng anh.13$
-#
-4
-00:00:25,000 --> 00:00:27,000
+#4
+00:MM:SS,mmm --> 00:MM:SS,mmm
 Nội dung subtitle tiếng việt ở đây
 #
 
-#
-5
-00:00:27,000 --> 00:00:29,000
+#5
+00:MM:SS,mmm --> 00:MM:SS,mmm
 Nội dung subtitle tiếng việt ở đây
 Nội dung subtitle tiếng việt ở đây
 #
 
-#
-6
-00:00:29,000 --> 00:00:33,000
+#6
+00:MM:SS,mmm --> 00:MM:SS,mmm
 Nội dung subtitle tiếng việt ở đây
 Nội dung subtitle tiếng việt ở đây
 #
 
-Không được để 2 dấu # xuống dòng liền nhau, không được để trống giữa 2 dấu #, không được để thừa dấu # ở đầu hoặc cuối file.
     Nội dung gốc:
     ${longText}
     `;
@@ -141,7 +164,7 @@ Không được để 2 dấu # xuống dòng liền nhau, không được để
     const responseText = String(result.response.text());
     
     // Lấy tất cả nội dung giữa dấu $ thành mảng
-    const allEngContent = getAllContentBetweenDollars(responseText);
+    const allEngContent = getAllContentBetweenDollarsExec(responseText);
     
     // Ghi mảng nội dung vào file (mỗi phần trên một dòng)
     const engText = allEngContent.join('\n');
@@ -182,9 +205,8 @@ async function exportVideo() {
     }
 }
 
-exportVideo();
-
 // summarizeText(inputText);
+exportVideo();
 
 // Export các hàm để sử dụng từ file khác
 export {

@@ -219,7 +219,7 @@ async function returnVideo() {
       while (!found) {
         const durationbuff = Math.floor(Math.random() * 3) + 2; // random 2-4 giây
         console.log("input:", tempText, typeof tempText)
-        const videoUrl = await findVideoFromText(tempText, duration - buff, duration + buff);
+        const videoUrl = await findVideoFromText(tempText, duration - 1, duration + buff);
         console.log("video tìm được:", videoUrl);
 
         if (videoUrl) {
@@ -242,7 +242,7 @@ async function returnVideo() {
             console.log('   Không tìm được video phù hợp, nên sử dụng video default');
             found = true;
           } else {
-            console.log('   Mở rộng duration thêm ±', durationbuff, 's');
+            console.log('   Mở rộng duration thêm ', durationbuff, 's');
             buff = durationbuff;
             count++;
           }

@@ -61,24 +61,175 @@ function fixSrtFormat(subtitlePath) {
     let content = fs.readFileSync(subtitlePath, 'utf8');
     let modified = false;
     
-    // Fix common timing format issues
+    // 1. Fix format thiếu milliseconds (hh:mm:ss -> hh:mm:ss,000)
     content = content.replace(
-      /(\d{2}:\d{2}:\d{1,2}),?(\d{3}?)\s*->\s*(\d{2}:\d{2}:\d{1,2}),?(\d{3}?)/g,
-      (match, start_time, start_ms, end_time, end_ms) => {
+      /(\d{2}:\d{2}:\d{2})\s*(-->)\s*(\d{2}:\d{2}:\d{2})(?![,\d])/g,
+      (match, start_time, arrow, end_time) => {
+        const fixed = `${start_time},000 ${arrow} ${end_time},000`;
+        if (fixed !== match) {
+          modified = true;
+          console.log(`🔧 Added missing milliseconds: ${match} → ${fixed}`);
+        }
+        return fixed;
+      }
+    );
+
+    // 2. Fix format thiếu giờ - xử lý đơn giản từng pattern
+    // Pattern: mm:ss,ms --> 00:mm:ss,ms
+    content = content.replace(
+      /(?:^|\n)(\d{1,2}):(\d{2}),(\d{3})\s*(-->)\s*(\d{1,2}):(\d{2}),(\d{3})(?=\s*$)/gm,
+      (match, start_min, start_sec, start_ms, arrow, end_min, end_sec, end_ms) => {
+        const fixed = `00:${start_min.padStart(2, '0')}:${start_sec},${start_ms} ${arrow} 00:${end_min.padStart(2, '0')}:${end_sec},${end_ms}`;
+        if (fixed !== match.trim()) {
+          modified = true;
+          console.log(`🔧 Added missing hour: ${match.trim()} → ${fixed}`);
+        }
+        return match.startsWith('\n') ? '\n' + fixed : fixed;
+      }
+    );
+
+    // 2b. Fix mixed format - start có giờ, end thiếu giờ  
+    content = content.replace(
+      /(\d{2}:\d{2}:\d{2},\d{3})\s*(-->)\s*(\d{1,2}):(\d{2}),(\d{3})/g,
+      (match, start_time, arrow, end_min, end_sec, end_ms) => {
+        const fixed = `${start_time} ${arrow} 00:${end_min.padStart(2, '0')}:${end_sec},${end_ms}`;
+        if (fixed !== match) {
+          modified = true;
+          console.log(`🔧 Fixed mixed format (start has hour, end missing): ${match} → ${fixed}`);
+        }
+        return fixed;
+      }
+    );
+    
+    // Pattern: mm:s,ms --> 00:mm:0s,ms (giây 1 chữ số)
+    content = content.replace(
+      /(?:^|\n)(\d{1,2}):(\d{1}),(\d{3})\s*(-->)\s*(\d{1,2}):(\d{1,3}),(\d{3})(?=\s*$)/gm,
+      (match, start_min, start_sec, start_ms, arrow, end_min, end_sec_or_min, end_ms) => {
+        let fixedEnd;
+        if (end_sec_or_min.length <= 2) {
+          fixedEnd = `00:${end_min.padStart(2, '0')}:${end_sec_or_min.padStart(2, '0')},${end_ms}`;
+        } else {
+          // Trường hợp như 01:00,800 -> end_min=01, end_sec_or_min=00, end_ms=800
+          fixedEnd = `00:${end_min.padStart(2, '0')}:${end_sec_or_min},${end_ms}`;
+        }
+        const fixed = `00:${start_min.padStart(2, '0')}:0${start_sec},${start_ms} ${arrow} ${fixedEnd}`;
+        if (fixed !== match.trim()) {
+          modified = true;
+          console.log(`🔧 Fixed single digit format: ${match.trim()} → ${fixed}`);
+        }
+        return match.startsWith('\n') ? '\n' + fixed : fixed;
+      }
+    );
+
+    // 3. Fix format đầy đủ - chuẩn hóa milliseconds và seconds  
+    content = content.replace(
+      /(\d{2}:\d{2}:\d{1,2}),(\d{1,3})\s*(-->)\s*(\d{2}:\d{2}:\d{1,2}),(\d{1,3})/g,
+      (match, start_time, start_ms, arrow, end_time, end_ms) => {
         // Pad seconds to 2 digits
         start_time = start_time.replace(/(\d{2}:\d{2}:)(\d{1})$/, '$10$2');
         end_time = end_time.replace(/(\d{2}:\d{2}:)(\d{1})$/, '$10$2');
         
-        // Ensure milliseconds are 3 digits
-        start_ms = (start_ms || '000').padEnd(3, '0');
-        end_ms = (end_ms || '000').padEnd(3, '0');
+        // Ensure milliseconds are exactly 3 digits
+        start_ms = start_ms.padEnd(3, '0').substring(0, 3);
+        end_ms = end_ms.padEnd(3, '0').substring(0, 3);
         
-        const fixed = `${start_time},${start_ms} --> ${end_time},${end_ms}`;
+        const fixed = `${start_time},${start_ms} ${arrow} ${end_time},${end_ms}`;
         if (fixed !== match) {
           modified = true;
-          console.log(`🔧 Fixed timing: ${match} → ${fixed}`);
+          console.log(`🔧 Fixed timing format: ${match} → ${fixed}`);
         }
         return fixed;
+      }
+    );
+    
+    // 4. Fix mixed format trong cùng một line (vd: 00:53:8,800 --> 01:00,800)
+    content = content.replace(
+      /(\d{2}:\d{2}:\d{1}),(\d{3})\s*(-->)\s*(\d{1,2}):(\d{2}),(\d{3})/g,
+      (match, start_time, start_ms, arrow, end_min, end_sec, end_ms) => {
+        // Fix start time - pad seconds
+        const fixedStart = start_time.replace(/(\d{2}:\d{2}:)(\d{1})$/, '$10$2');
+        // Fix end time - add missing hour
+        const fixedEnd = `00:${end_min.padStart(2, '0')}:${end_sec},${end_ms}`;
+        const fixed = `${fixedStart},${start_ms} ${arrow} ${fixedEnd}`;
+        if (fixed !== match) {
+          modified = true;
+          console.log(`🔧 Fixed mixed format: ${match} → ${fixed}`);
+        }
+        return fixed;
+      }
+    );
+    
+    // 5. Fix format mm:ss,s --> 00:mm:ss,s00 (milliseconds không đủ 3 chữ số)
+    content = content.replace(
+      /(?:^|\n)(\d{1,2}):(\d{2}),(\d{1,2})\s*(-->)\s*(\d{1,2}):(\d{2}),(\d{1,2})(?=\s*$)/gm,
+      (match, start_min, start_sec, start_ms, arrow, end_min, end_sec, end_ms) => {
+        const fixed = `00:${start_min.padStart(2, '0')}:${start_sec},${start_ms.padEnd(3, '0')} ${arrow} 00:${end_min.padStart(2, '0')}:${end_sec},${end_ms.padEnd(3, '0')}`;
+        if (fixed !== match.trim()) {
+          modified = true;
+          console.log(`🔧 Fixed short milliseconds: ${match.trim()} → ${fixed}`);
+        }
+        return match.startsWith('\n') ? '\n' + fixed : fixed;
+      }
+    );
+    
+    // 6. Fix invalid format mm:ss:sss (dấu : thay vì , cho milliseconds)
+    content = content.replace(
+      /(\d{1,2}):(\d{2}):(\d{3})\s*(-->)\s*(\d{1,2}):(\d{2}),(\d{3})/g,
+      (match, start_min, start_sec, start_ms, arrow, end_min, end_sec, end_ms) => {
+        const fixed = `00:${start_min.padStart(2, '0')}:${start_sec},${start_ms} ${arrow} 00:${end_min.padStart(2, '0')}:${end_sec},${end_ms}`;
+        if (fixed !== match) {
+          modified = true;
+          console.log(`🔧 Fixed colon format: ${match} → ${fixed}`);
+        }
+        return fixed;
+      }
+    );
+    
+    // 7. Fix invalid format hh:mm:sss (dấu : cho milliseconds trong format đầy đủ)
+    content = content.replace(
+      /(\d{2}):(\d{2}):(\d{2}):(\d{3})\s*(-->)\s*(\d{1,2}):(\d{2}),(\d{3})/g,
+      (match, start_hour, start_min, start_sec, start_ms, arrow, end_min, end_sec, end_ms) => {
+        const fixed = `${start_hour}:${start_min}:${start_sec},${start_ms} ${arrow} 00:${end_min.padStart(2, '0')}:${end_sec},${end_ms}`;
+        if (fixed !== match) {
+          modified = true;
+          console.log(`🔧 Fixed full colon format: ${match} → ${fixed}`);
+        }
+        return fixed;
+      }
+    );
+    
+    // 8. Fix special format mm:sss,ms (phút bình thường, "giây" 3 chữ số - thực ra là mm:ss)
+    content = content.replace(
+      /(\d{2}:\d{2}:\d{2},\d{3})\s*(-->)\s*(\d{1,2}):(\d{3}),(\d{3})/g,
+      (match, start_time, arrow, end_min, end_fake_sec, end_ms) => {
+        // Chuyển đổi end_fake_sec (3 chữ số) thành phút:giây
+        const minutes = Math.floor(parseInt(end_fake_sec) / 100); // Chữ số đầu là phút  
+        const seconds = parseInt(end_fake_sec) % 100;             // 2 chữ số cuối là giây
+        
+        const fixed = `${start_time} ${arrow} 00:${(parseInt(end_min) + minutes).toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')},${end_ms}`;
+        if (fixed !== match) {
+          modified = true;
+          console.log(`🔧 Fixed special mm:sss format: ${match} → ${fixed}`);
+          console.log(`   Converted ${end_fake_sec} → ${minutes}:${seconds.toString().padStart(2, '0')}`);
+        }
+        return fixed;
+      }
+    );
+
+    // 9. Fix remaining mm:ss,ms patterns (thiếu giờ) - final catch
+    content = content.replace(
+      /(?:^|\n)(\d{1,2}):(\d{2}),(\d{3})\s*(-->)\s*(\d{1,2}):(\d{2}),(\d{3})(?=\s*$)/gm,
+      (match, start_min, start_sec, start_ms, arrow, end_min, end_sec, end_ms) => {
+        // Chỉ fix nếu chưa có giờ (không bắt đầu với 00:)
+        if (!match.trim().startsWith('00:')) {
+          const fixed = `00:${start_min.padStart(2, '0')}:${start_sec},${start_ms} ${arrow} 00:${end_min.padStart(2, '0')}:${end_sec},${end_ms}`;
+          if (fixed !== match.trim()) {
+            modified = true;
+            console.log(`🔧 Added missing hour (final): ${match.trim()} → ${fixed}`);
+          }
+          return match.startsWith('\n') ? '\n' + fixed : fixed;
+        }
+        return match;
       }
     );
     
