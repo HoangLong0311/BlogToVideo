@@ -215,10 +215,10 @@ async function returnVideo() {
       let found = false;
       let count = 0;
       let tempText = currentLine;
-      let buff = 1;
+      let buff = 0;
       while (!found) {
-        const durationbuff = Math.floor(Math.random() * 3) + 2; // random 2-4 giây
-        console.log("input:", tempText, typeof tempText)
+        const durationbuff = Math.floor(Math.random() * 2) + 1; // random 1 - 2 giây
+        console.log("input:", tempText, buff)
         const videoUrl = await findVideoFromText(tempText, duration - 1, duration + buff);
         console.log("video tìm được:", videoUrl);
 

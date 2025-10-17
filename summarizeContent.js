@@ -88,11 +88,11 @@ function getContentCount(contentArray) {
 // Hàm gọi model để tóm tắt văn bản, phần mẫu đầu ra không tab vào trong, nếu tab -> lỗi file srt
 async function summarizeText(longText) {
   try {
-    const model = genAI.getGenerativeModel({ model: "models/gemini-2.0-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
-    const prompt = `Bạn hãy cô đọng các nội dung chính và tóm tắt nội dung sau thành kịch bản phụ đề chuẩn SRT với các yêu cầu:
+    const prompt = `Bạn hãy xác định các nội dung chính và tóm tắt nội dung sau thành kịch bản phụ đề chuẩn SRT với các yêu cầu:
     1. **QUY TẮC NỘI DUNG:**
-- Mỗi cue tối đa 2 dòng tiếng Việt, Mỗi dòng tối thiểu 40 ký tự (tính cả khoảng trắng)
+- Mỗi cue có nội dung bằng tiếng Việt tối đa nằm trên 2 dòng, Mỗi dòng tối thiểu 40 ký tự (tính cả khoảng trắng)
 - Tốc độ đọc: 150-180 từ/phút
 - Thời gian hiển thị mỗi cue: 3-7 giây tùy độ dài
 - Thêm nội dung mô tả video background hợp lí cho các cue và phải bằng English, cần chi tiết và sát cue nhất cùng với đó là độ dài video bằng với thời gian chạy của các cue tương ứng với video đó
@@ -101,7 +101,7 @@ và ngăn cách với mô tả bởi .
 - 1 dòng mô tả tiếng anh có thể có thông số độ dài bằng nhiều hơn 1 đoạn subtitle, có nghĩa là đoạn tiếng anh đó đưa ra video background
 cho nhiều hơn 2 đoạn subtitle bên dưới, các độ dài tương ứng với đoạn mô tả tiếng anh không được quá 15s.
 - dòng mô tả tiếng anh chỉ được sử dụng dấu . để ngăn cách với độ dài, không sử dụng dấu chấm trong câu mô tả.
-- Không cơ cấu đoạn kịch bản theo kiểu mỗi cue là 1 video, ví dụ 10 cue thì 10 video là sai yêu cầu.
+- Không cơ cấu theo kiểu mỗi cue là 1 video, ví dụ 10 cue thì 10 video là sai yêu cầu.
 
 2. **QUY TẮC THỜI GIAN:**
 - Bắt đầu từ 00:00:09,000
@@ -109,6 +109,7 @@ cho nhiều hơn 2 đoạn subtitle bên dưới, các độ dài tương ứng 
 - Khoảng cách giữa các cue: 0.2-0.5 giây
 - Format thời gian: HH:MM:SS,mmm.
 - Toàn bộ thời gian không vượt quá 2 phút, tối thiểu 1 phút 40s
+- thời gian các video background tối thiểu 5s đến 13s.
 
 3. **NGUYÊN TẮC TÓM TẮT:**
 - Ngôn ngữ tự nhiên, dễ hiểu, hấp dẫn

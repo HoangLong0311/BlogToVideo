@@ -100,6 +100,28 @@ function fixSrtFormat(subtitlePath) {
         return fixed;
       }
     );
+
+    // 2c. Fix critical timeline break - end thiếu giây gây nhảy lên giờ
+    content = content.replace(
+      /(\d{2}:\d{2}:\d{2},\d{3})\s*(-->)\s*(\d{2}):(\d{2}),(\d{3})/g,
+      (match, start_time, arrow, end_hour, end_min, end_ms) => {
+        // Kiểm tra nếu end_hour thực ra là phút (01:00,000 -> 00:01:00,000)
+        const startParts = start_time.split(/[:,]/);
+        const startTotalSeconds = parseInt(startParts[0]) * 3600 + parseInt(startParts[1]) * 60 + parseInt(startParts[2]);
+        
+        // Nếu end_hour <= 59 và có khả năng là phút thay vì giờ
+        if (parseInt(end_hour) <= 59) {
+          const fixed = `${start_time} ${arrow} 00:${end_hour.padStart(2, '0')}:${end_min.padStart(2, '0')},${end_ms}`;
+          if (fixed !== match) {
+            modified = true;
+            console.log(`🔧 Fixed timeline break (end missing seconds): ${match} → ${fixed}`);
+            console.log(`   Converted ${end_hour}:${end_min} → 00:${end_hour}:${end_min} (hour→minute:second)`);
+          }
+          return fixed;
+        }
+        return match;
+      }
+    );
     
     // Pattern: mm:s,ms --> 00:mm:0s,ms (giây 1 chữ số)
     content = content.replace(
@@ -198,7 +220,20 @@ function fixSrtFormat(subtitlePath) {
       }
     );
     
-    // 8. Fix special format mm:sss,ms (phút bình thường, "giây" 3 chữ số - thực ra là mm:ss)
+    // 8. Fix cascade timeline - cue bắt đầu với 01:00:xx thay vì 00:01:xx  
+    content = content.replace(
+      /01:00:(\d{2}),(\d{3})\s*(-->)\s*01:00:(\d{2}),(\d{3})/g,
+      (match, start_sec, start_ms, arrow, end_sec, end_ms) => {
+        const fixed = `00:01:${start_sec},${start_ms} ${arrow} 00:01:${end_sec},${end_ms}`;
+        if (fixed !== match) {
+          modified = true;
+          console.log(`🔧 Fixed cascade timeline (01:00:xx → 00:01:xx): ${match} → ${fixed}`);
+        }
+        return fixed;
+      }
+    );
+
+    // 9. Fix special format mm:sss,ms (phút bình thường, "giây" 3 chữ số)
     content = content.replace(
       /(\d{2}:\d{2}:\d{2},\d{3})\s*(-->)\s*(\d{1,2}):(\d{3}),(\d{3})/g,
       (match, start_time, arrow, end_min, end_fake_sec, end_ms) => {
@@ -216,7 +251,7 @@ function fixSrtFormat(subtitlePath) {
       }
     );
 
-    // 9. Fix remaining mm:ss,ms patterns (thiếu giờ) - final catch
+    // 10. Fix remaining mm:ss,ms patterns (thiếu giờ) - final catch
     content = content.replace(
       /(?:^|\n)(\d{1,2}):(\d{2}),(\d{3})\s*(-->)\s*(\d{1,2}):(\d{2}),(\d{3})(?=\s*$)/gm,
       (match, start_min, start_sec, start_ms, arrow, end_min, end_sec, end_ms) => {
