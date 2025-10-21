@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import 'dotenv/config';
-import { getAllContentBetweenDollarsExec, getAllContentBetweenSharp, subtitleWrite, writeFile } from "../utils/inputTextPreprocessor.js";
+import { getAllContentBetweenDollarsExec, getAllContentBetweenSharp, subtitleWrite, writeFile } from "../utils/inputPreprocessor.js";
 
 const genAI = new GoogleGenerativeAI("AIzaSyAVHAzjUYgA5IhhRK97oUxQo1Qrbz9H6Kk");
 const MODELS = {
@@ -44,6 +44,6 @@ async function callGemini(command, inputText) {
     }
 }
 
-const a = await callGemini("Write a detailed summary of the following text:", "This is a sample text to be summarized.");
+// const a = await callGemini("Write a detailed summary of the following text:", "This is a sample text to be summarized.");
 
 export default callGemini;

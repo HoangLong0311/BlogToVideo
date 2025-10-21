@@ -48,8 +48,8 @@ async function callGROQ(command, input, model = MODELS.LLAMA_3_1_8B) {
 }
 
 // Test function
-// const result = await callGROQ("Hello, GROQ! Can you summarize the benefits of using GROQ SDK?");
-// console.log("GROQ Response:", result, typeof result);
+const result = await callGROQ("Hello, GROQ! Can you summarize the benefits of using GROQ SDK?");
+console.log("GROQ Response:", result, typeof result);
 
 export { callGROQ, MODELS };
 export default callGROQ;

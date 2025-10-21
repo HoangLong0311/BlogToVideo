@@ -1,99 +1,98 @@
 1
-00:00:09,000 --> 00:00:15,000
-Quan niệm "chân yếu tay mềm" áp đặt lên phụ nữ
-trong nội trợ đã ăn sâu vào tiềm thức, nhưng liệu
+00:00:09,000 --> 00:00:20,000
+FTE là thuật ngữ quen thuộc trong ngành
+kinh tế tài chính và được sử dụng nhiều.
+Nếu muốn tham gia vào lĩnh vực này, bạn
+cần biết rõ khái niệm FTE là gì nhé!
 
 2
-00:00:15,200 --> 00:00:21,200
-phụ nữ chỉ phù hợp với bếp núc? Thực tế chứng minh
-phụ nữ làm được mọi việc, từ lao động chân tay
+00:00:20,500 --> 00:00:29,500
+FTE được viết đầy đủ là Full-time
+Equivalent, dịch ra là đại lượng tương
+đương toàn thời gian. Đây là giá trị tính
+toán khối lượng công việc cụ thể.
 
 3
-00:00:21,400 --> 00:00:25,400
-đến kỹ thuật cao, trí tuệ của phụ nữ ngang bằng
-với đàn ông, họ kiếm tiền giỏi không kém cạnh.
+00:00:30,000 --> 00:00:38,000
+Mục đích của phương pháp này là để tính
+toán số giờ làm việc cần thiết để tối ưu
+số người làm. Doanh nghiệp thường quy
+ước 1 nhân lực full time tương đương 1 FTE.
 
 4
-00:00:25,600 --> 00:00:32,600
-Chị tôi, một người tài giỏi, đã từ bỏ sự nghiệp
-để chăm sóc gia đình. Nhưng chồng chị đã phản bội,
-bỏ mặc chị. Chị đã phải vất vả để làm lại cuộc đời.
+00:00:38,500 --> 00:00:48,500
+Nhân viên làm part-time được tính là 1/2
+FTE. Để quản trị nhân lực hiệu quả, hiện
+nay có hai cách tính FTE phổ biến. Hãy
+tìm hiểu và đưa ra lựa chọn phù hợp nhất.
 
 5
-00:00:32,800 --> 00:00:38,800
-Nhiều phụ nữ hy sinh vì gia đình, nhưng không phải
-ai cũng được đền đáp xứng đáng.Tại sao chỉ phụ nữ
-phải lựa chọn giữa sự nghiệp và gia đình?
+00:00:49,000 --> 00:01:00,000
+Cách 1: FTE bằng Workload/Working Time
+Norm. Workload là số giờ làm việc tính
+được, Working Time Norm là định mức
+cho thời gian làm việc.
 
 6
-00:00:39,000 --> 00:00:46,000
-Các chị em công sở thường trẻ trung hơn các chị em
-ở nhà. Đi làm giúp phụ nữ giảm stress, được tư duy
-và tiếp xúc với những điều mới mẻ, khiến họ
+00:01:00,500 --> 00:01:09,500
+Cách này thích hợp nhất khi cần hoạch định
+chiến lược nhân sự và tuyển dụng cho
+doanh nghiệp. Ví dụ: 1 nhân viên cần 480
+giờ workload để hoàn thành nhiệm vụ.
 
 7
-00:00:46,200 --> 00:00:51,200
-trẻ lâu hơn. Phụ nữ thích làm đẹp, và đi làm
-cho họ cơ hội để thể hiện điều đó. Họ cũng tự chủ
-hơn về kinh tế, không phải phụ thuộc vào chồng.
+00:01:10,000 --> 00:01:22,000
+Công ty đặt ra chế độ làm việc 8 giờ/ngày,
+5 ngày/tuần, 4 tuần/tháng, tương đương
+160 giờ/tháng. Ta tính được FTE áp dụng
+cho chính sách giờ làm việc cụ thể là 3 FTE.
 
 8
-00:00:51,400 --> 00:00:55,400
-Nhiều đàn ông gia trưởng muốn vợ ở nhà để dễ
-bề kiểm soát. Nhưng đó là một ích kỷ không tưởng.
+00:01:22,500 --> 00:01:35,500
+Kết luận: Doanh nghiệp cần 3 nhân viên full-
+time để hoàn thành công việc trong 1
+tháng với 480 giờ. Cách 2: Tính FTE dựa
+trên nguồn nhân lực hiện tại trong doanh nghiệp.
 
 9
-00:00:55,600 --> 00:01:01,600
-Đàn ông vẫn còn mang tư tưởng phong kiến "đàn ông
-thì đi làm còn đàn bà thì đi chợ". Họ cho rằng
-con cái không được mẹ quan tâm 24/7 sẽ hư hỏng.
+00:01:36,000 --> 00:01:46,000
+Doanh nghiệp sẽ đánh giá được hiệu suất
+công việc của từng nhân viên thông qua
+cách tính này. Bước 1: Thống kê toàn bộ
+thời gian làm việc thực tế của nhân viên.
 
 10
-00:01:01,800 --> 00:01:08,800
-"Đàn ông xây nhà, đàn bà xây tổ ấm" là một quan
-niệm sai lầm. Phụ nữ cũng có thể tự mua nhà, và
-đàn ông cũng phải chung sức để giữ gìn hạnh phúc
+00:01:46,500 --> 00:01:52,500
+Bước 2: Xác định rõ Working Time Norm
+dựa trên số giờ và năm làm việc.
 
 11
-00:01:09,000 --> 00:01:13,000
-gia đình. Hôn nhân cần sự chia sẻ, đồng cảm,
-công bằng và tôn trọng giữa hai bên.
+00:01:53,000 --> 00:02:02,000
+Bước 3: Tính Working time của toàn bộ
+nhân viên đã làm việc trong 1 năm.
+Bước 4: Tính FTE toàn bộ doanh nghiệp.
 
 12
-00:01:13,200 --> 00:01:20,200
-Phụ nữ đi làm như hoa nở ban ngày, vẻ đẹp của họ
-được cảm nhận rõ hơn, rực rỡ hơn. Họ có cơ hội
-hoàn thiện bản thân, cả về tri thức, tâm hồn lẫn
+00:02:02,500 --> 00:02:09,500
+Lấy kết quả ở bước 3 chia cho kết quả
+ở bước 2 sẽ ra kết quả FTE cần tính.
 
 13
-00:01:20,400 --> 00:01:24,400
-vẻ bề ngoài. Đi làm giúp phụ nữ giảm stress,
-hướng ngoại và chịu đựng áp lực tốt hơn.
+00:02:10,000 --> 00:02:22,000
+FTE được tính chính xác và vận dụng vào
+thực tiễn thì đem lại nhiều ý nghĩa cho sự
+phát triển của doanh nghiệp. Nhà quản trị
+dễ dàng xây dựng chiến lược nhân sự.
 
 14
-00:01:24,600 --> 00:01:28,600
-Một nghịch lý là đàn ông có vợ ở nhà có khả năng
-ngoại tình cao hơn. Họ so sánh vợ với những người
+00:02:22,500 --> 00:02:32,500
+Đại lượng này sẽ như cánh tay phải đắc lực
+của bộ phận nhân sự với khả năng dự trù
+ngân sách chính xác.
 
 15
-00:01:28,800 --> 00:01:33,800
-phụ nữ đi làm khác và thấy vợ "kém xuân" hơn.
-Đó là do họ tự giảm đi sự hấp dẫn của vợ bằng
-việc cấm đi làm.
-
-16
-00:01:34,000 --> 00:01:41,000
-Phụ nữ đi làm giúp họ giảm tải những trầm cảm trong
-cuộc sống.Thu nhập của gia đình sẽ tăng lên, áp lực
-kinh tế của đàn ông cũng được giảm tải bớt. Tuy
-
-17
-00:01:41,200 --> 00:01:46,200
-nhiên điều này phải đi đôi với việc san sẻ việc
-nhà của đàn ông với vợ của mình. Suy cho cùng,
-phụ nữ phải cố gắng để được đi làm ngoài xã hội.
-
-18
-00:01:46,400 --> 00:01:50,400
-Đó là mưu cầu hạnh phúc của con người, là sự
-phát triển tất yếu của gia đình và xã hội.
+00:02:33,000 --> 00:02:42,000
+Nhà quản trị có thể xem xét mức độ hoàn
+thành KPI của nhân viên. Doanh nghiệp
+phải biết cách kết hợp giữa nhân viên full
+time và part time.

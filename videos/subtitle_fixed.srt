@@ -1,84 +1,104 @@
 1
-00:00:09,000 --> 00:00:20,000
-Người ta thường nghĩ nội trợ chỉ dành cho phụ nữ,
-những người "chân yếu tay mềm" chỉ hợp với bếp núc.
+00:00:09,000 --> 00:00:16,000
+Thị trường cổ phiếu Việt Nam luôn có
+sự biến động bất ngờ mỗi ngày.
+Có nhiều khái niệm mà người ngoài
+ngành gần như không nắm bắt được.
 
 2
-00:00:20,500 --> 00:00:31,500
-Nhưng thực tế, phụ nữ ngày nay làm được mọi việc,
-từ công nhân, thợ xây đến IT, kiến trúc sư, không hề thua kém.
+00:00:16,200 --> 00:00:25,200
+Vậy Stockbroker là gì? Hãy cùng tìm
+hiểu về lịch sử, yêu cầu và vai trò
+của người môi giới chứng khoán trong
+thị trường chứng khoán nhé.
 
 3
-00:00:32,000 --> 00:00:40,500
-Trí tuệ của phụ nữ vốn ngang bằng với đàn ông,
-chỉ số thông minh không phụ thuộc vào giới tính.
+00:00:25,400 --> 00:00:30,400
+Nhà môi giới chứng khoán là chuyên
+gia thực hiện lệnh mua bán chứng
+khoán thay cho khách hàng.
 
 4
-00:00:41,000 --> 00:00:52,000
-Phụ nữ hiện nay quá giỏi, kiếm tiền, khởi nghiệp, phát minh,
-điều hành doanh nghiệp chẳng thua kém gì đàn ông.
+00:00:30,600 --> 00:00:40,600
+Họ có thể là đại diện đã đăng ký, cố
+vấn đầu tư, làm việc cho công ty môi
+giới, xử lý giao dịch cho khách hàng
+bán lẻ và các tổ chức lớn nhỏ.
 
 5
-00:00:52,500 --> 00:01:03,500
-Người ta ví phụ nữ như những bông hoa, không chỉ đẹp
-mà còn mọc và lớn lên độc lập, sức sống mãnh liệt.
+00:00:40,800 --> 00:00:47,800
+Môi giới chứng khoán thường nhận
+hoa hồng cho dịch vụ của họ. Họ có
+thể cung cấp tư vấn tài chính, quản
+lý đầu tư.
 
 6
-00:01:04,000 --> 00:01:14,500
-Chị tôi, xinh đẹp và tài giỏi, đã từ bỏ sự nghiệp
-để ở nhà chăm sóc chồng, tự bẻ đi đôi cánh của mình.
+00:00:48,000 --> 00:00:55,000
+Việc mua bán cổ phiếu được ghi nhận
+đầu tiên ở Rome vào thế kỷ thứ 2
+trước Công nguyên. Năm 1602, Sở
+giao dịch chứng khoán Amsterdam ra đời.
 
 7
-00:01:15,000 --> 00:01:21,500
-Nhưng cuối cùng, chị lại bị phản bội khi người đàn ông
-đã đủ đầy về vật chất, phủi bỏ mọi sự hy sinh.
+00:00:55,200 --> 00:01:00,200
+Năm 1792, thị trường chứng khoán
+New York mở cửa. Ngày nay, nhờ công
+nghệ, bất kỳ ai cũng có thể đầu tư.
 
 8
-00:01:22,000 --> 00:01:32,500
-Những người như chị tôi không thiếu, họ hy sinh vì gia đình,
-tin rằng sự hy sinh sẽ được đền đáp bằng hạnh phúc.
+00:01:00,040 --> 00:01:09,040
+Để trở thành môi giới chứng khoán,
+bạn cần đáp ứng yêu cầu về giáo dục,
+thường là bằng cử nhân về tài chính,
+luật, hoặc quản trị kinh doanh.
 
 9
-00:01:33,000 --> 00:01:43,500
-Nhưng mấy ai dám đánh đổi như phụ nữ? Nhiều người đàn ông
-mặc nhiên coi nội trợ là việc của vợ, chẳng hề chia sẻ.
+00:01:09,240 --> 00:01:16,240
+Hiểu biết sâu sắc về luật tài chính,
+kế toán, kinh tế, và kỹ năng giao
+tiếp tốt cũng rất quan trọng.
 
 10
-00:01:44,000 --> 00:01:55,000
-Các chị công sở thường trông trẻ hơn chị nội trợ,
-trong khi nhiều ông chồng nói "ở nhà sướng hơn".
+00:01:16,440 --> 00:01:21,440
+Yêu cầu cấp phép hoạt động có sự
+khác nhau giữa các quốc gia. Tại
+Hoa Kỳ cần giấy phép FINRA Series 7.
 
 11
-00:01:55,500 --> 00:02:06,000
-Đi làm, phụ nữ có bạn bè, giảm stress, được tư duy,
-tiếp xúc với trào lưu và tự chủ về kinh tế.
+00:01:21,640 --> 00:01:28,640
+Tại Canada cần hoàn thành Khóa học
+Chứng khoán Canada. Tại Hồng Kông
+cần vượt qua ba kỳ thi HKSI.
 
 12
-00:02:06,500 --> 00:02:15,000
-Tôi chứng kiến nhiều phụ nữ không thoát khỏi "địa ngục hôn nhân"
-vì không có tiền, phải nương tựa vào người khiến mình đau khổ.
+00:01:28,840 --> 00:01:35,840
+Vai trò của môi giới chứng khoán đã
+thay đổi đáng kể từ khi internet
+phát triển. Các công ty môi giới giảm
+giá chi phối phần lớn tương tác.
 
 13
-00:02:15,500 --> 00:02:26,000
-Đàn ông gia trưởng vẫn còn nhiều, họ muốn vợ ở nhà
-và cho rằng việc chăm con là nghĩa vụ của phụ nữ.
+00:01:36,040 --> 00:01:44,040
+Phí dịch vụ thấp hơn giúp nhiều nhà
+đầu tư tiếp cận thị trường hơn. Mặc
+dù có thể mua cổ phiếu trực tiếp,
+làm việc với môi giới đơn giản hơn.
 
 14
-00:02:26,500 --> 00:02:37,000
-Nhưng cả hai vợ chồng đều phải vất vả kiếm tiền,
-nên cần chia sẻ công việc nhà, tôn trọng lẫn nhau.
+00:01:44,240 --> 00:01:51,240
+Sự phát triển của internet đã mở
+đường cho các nhà môi giới giảm giá,
+giúp việc đầu tư trở nên dễ dàng hơn
+ngay cả với tài khoản nhỏ.
 
 15
-00:02:37,500 --> 00:02:48,500
-Phụ nữ đi làm như hoa nở ban ngày, vẻ đẹp được cảm nhận rõ hơn,
-rực rỡ hơn và được nâng niu, trân trọng.
+00:01:51,440 --> 00:01:56,440
+Nhờ môi giới giảm giá, bất kỳ ai
+cũng có thể đầu tư, ngay cả ở nước
+ngoài.
 
 16
-00:02:49,000 --> 00:02:58,000
-Phụ nữ đi làm có cơ hội hoàn thiện vẻ đẹp,
-từ tri thức, tâm hồn đến vẻ bề ngoài, sành điệu hơn.
-
-17
-00:02:58,500 --> 00:03:06,000
-Dù tự nguyện hay bị ép buộc, phụ nữ vẫn phải cố gắng đi làm,
-để được tôn trọng và gìn giữ hạnh phúc.
+00:01:56,640 --> 00:02:03,640
+Tuy nhiên, nền tảng giảm giá thiếu
+dịch vụ cá nhân hóa. Mong rằng thông
+tin này hữu ích với bạn đọc. Thân ái!

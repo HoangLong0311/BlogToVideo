@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import fs from "fs";
-import callGemini from './api/callGemini.js';
 // import callGROQ from './api/callGROQ.js';
+import callGemini from './api/callGemini.js';
 import returnVideo from "./findVideo.js";
 import combineVideo from "./handleVideo.js";
 
@@ -13,7 +13,8 @@ const command = fs.readFileSync("./command.txt", "utf8");
 
 async function exportVideo() {
     try {
-        await summarizeText(inputText);
+        await callGemini(command, inputText);
+        // await summarizeText(inputText);
         await returnVideo();
         await combineVideo();
         console.log("🎉 Done!");
@@ -22,9 +23,9 @@ async function exportVideo() {
     }
 }
 
-const res = await callGemini(command, inputText);
+// const res = await callGemini(command, inputText);
 // const res1 = await callGROQ(command, inputText);
-console.log("GROQ Response:", res);
-// exportVideo();
+// console.log("GROQ Response:", res);
+exportVideo();
 
 
