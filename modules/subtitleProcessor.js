@@ -122,6 +122,31 @@ function fixSrtFormat(subtitlePath) {
         return match;
       }
     );
+
+    // 2d. Fix abnormal timeline jumps - detect và fix timeline inconsistency
+    content = content.replace(
+      /(\d{2}:\d{2}:\d{2},\d{3})\s*(-->)\s*(\d{2}):(\d{2}):(\d{2}),(\d{3})/g,
+      (match, start_time, arrow, end_hour, end_min, end_sec, end_ms) => {
+        const startParts = start_time.split(/[:,]/);
+        const startTotalSeconds = parseInt(startParts[0]) * 3600 + parseInt(startParts[1]) * 60 + parseInt(startParts[2]);
+        const endTotalSeconds = parseInt(end_hour) * 3600 + parseInt(end_min) * 60 + parseInt(end_sec);
+        
+        // Nếu end time quá xa so với start time (> 5 phút gap) và start < 5 phút
+        if (startTotalSeconds < 300 && endTotalSeconds > startTotalSeconds + 300) {
+          // Có thể là lỗi format: 01:01:14,500 thực ra là 00:01:14,500
+          if (parseInt(end_hour) === 1 && parseInt(end_min) <= 59) {
+            const fixed = `${start_time} ${arrow} 00:${end_min.padStart(2, '0')}:${end_sec.padStart(2, '0')},${end_ms}`;
+            if (fixed !== match) {
+              modified = true;
+              console.log(`🔧 Fixed abnormal timeline jump: ${match} → ${fixed}`);
+              console.log(`   Detected suspicious jump: ${Math.floor(startTotalSeconds/60)}m${startTotalSeconds%60}s → ${Math.floor(endTotalSeconds/60)}m${endTotalSeconds%60}s`);
+            }
+            return fixed;
+          }
+        }
+        return match;
+      }
+    );
     
     // Pattern: mm:s,ms --> 00:mm:0s,ms (giây 1 chữ số)
     content = content.replace(
@@ -228,6 +253,32 @@ function fixSrtFormat(subtitlePath) {
         if (fixed !== match) {
           modified = true;
           console.log(`🔧 Fixed cascade timeline (01:00:xx → 00:01:xx): ${match} → ${fixed}`);
+        }
+        return fixed;
+      }
+    );
+
+    // 8b. Fix extended cascade - cue với format 01:01:xx, 01:02:xx pattern
+    content = content.replace(
+      /01:0([1-9]):(\d{2}),(\d{3})\s*(-->)\s*01:0([1-9]):(\d{2}),(\d{3})/g,
+      (match, start_min, start_sec, start_ms, arrow, end_min, end_sec, end_ms) => {
+        const fixed = `00:0${start_min}:${start_sec},${start_ms} ${arrow} 00:0${end_min}:${end_sec},${end_ms}`;
+        if (fixed !== match) {
+          modified = true;
+          console.log(`🔧 Fixed extended cascade (01:0${start_min}:xx → 00:0${start_min}:xx): ${match} → ${fixed}`);
+        }
+        return fixed;
+      }
+    );
+
+    // 8c. Fix general hour-to-minute cascade (01:XX:XX → 00:XX:XX for first few minutes)
+    content = content.replace(
+      /01:([0-5]\d):(\d{2}),(\d{3})\s*(-->)\s*01:([0-5]\d):(\d{2}),(\d{3})/g,
+      (match, start_min, start_sec, start_ms, arrow, end_min, end_sec, end_ms) => {
+        const fixed = `00:${start_min}:${start_sec},${start_ms} ${arrow} 00:${end_min}:${end_sec},${end_ms}`;
+        if (fixed !== match) {
+          modified = true;
+          console.log(`🔧 Fixed hour-to-minute cascade (01:${start_min}:${start_sec} → 00:${start_min}:${start_sec}): ${match} → ${fixed}`);
         }
         return fixed;
       }

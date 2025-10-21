@@ -1,91 +1,84 @@
 1
-00:00:09,000 --> 00:00:16,000
-Viết CV khi chưa có kinh nghiệm
-thật không dễ dàng.
+00:00:09,000 --> 00:00:20,000
+Người ta thường nghĩ nội trợ chỉ dành cho phụ nữ,
+những người "chân yếu tay mềm" chỉ hợp với bếp núc.
 
 2
-00:00:16,500 --> 00:00:23,500
-Kinh nghiệm thường là yếu tố
-quyết định để nhà tuyển dụng
+00:00:20,500 --> 00:00:31,500
+Nhưng thực tế, phụ nữ ngày nay làm được mọi việc,
+từ công nhân, thợ xây đến IT, kiến trúc sư, không hề thua kém.
 
 3
-00:00:23,500 --> 00:00:27,500
-trao cơ hội phỏng vấn.
-Nhưng vẫn có bí quyết!
+00:00:32,000 --> 00:00:40,500
+Trí tuệ của phụ nữ vốn ngang bằng với đàn ông,
+chỉ số thông minh không phụ thuộc vào giới tính.
 
 4
-00:00:28,000 --> 00:00:34,500
-CV cho người chưa có kinh nghiệm
-cần làm nổi bật kỹ năng,
-mục tiêu, học vấn...
+00:00:41,000 --> 00:00:52,000
+Phụ nữ hiện nay quá giỏi, kiếm tiền, khởi nghiệp, phát minh,
+điều hành doanh nghiệp chẳng thua kém gì đàn ông.
 
 5
-00:00:34,500 --> 00:00:40,500
-...sở thích, chứng chỉ,
-hoạt động và dự án.
+00:00:52,500 --> 00:01:03,500
+Người ta ví phụ nữ như những bông hoa, không chỉ đẹp
+mà còn mọc và lớn lên độc lập, sức sống mãnh liệt.
 
 6
-00:00:41,000 --> 00:00:47,000
-Trình bày ngắn gọn, rõ ràng
-và liên quan đến công việc.
-Chia cột và dùng Bullet points.
+00:01:04,000 --> 00:01:14,500
+Chị tôi, xinh đẹp và tài giỏi, đã từ bỏ sự nghiệp
+để ở nhà chăm sóc chồng, tự bẻ đi đôi cánh của mình.
 
 7
-00:00:47,500 --> 00:00:52,500
-Thông tin cá nhân cần chính xác:
-Họ tên, vị trí ứng tuyển,
-email, số điện thoại.
+00:01:15,000 --> 00:01:21,500
+Nhưng cuối cùng, chị lại bị phản bội khi người đàn ông
+đã đủ đầy về vật chất, phủi bỏ mọi sự hy sinh.
 
 8
-00:00:53,000 --> 00:01:00,000
-Làm nổi bật kỹ năng
-phục vụ công việc:
-Viết lách, tin học văn phòng,
-SEO, thiết kế đồ họa...
+00:01:22,000 --> 00:01:32,500
+Những người như chị tôi không thiếu, họ hy sinh vì gia đình,
+tin rằng sự hy sinh sẽ được đền đáp bằng hạnh phúc.
 
 9
-00:01:00,500 --> 00:01:05,500
-...kỹ năng giao tiếp,
-làm việc nhóm.
+00:01:33,000 --> 00:01:43,500
+Nhưng mấy ai dám đánh đổi như phụ nữ? Nhiều người đàn ông
+mặc nhiên coi nội trợ là việc của vợ, chẳng hề chia sẻ.
 
 10
-00:01:06,000 --> 00:01:12,500
-Nhấn mạnh trình độ học vấn:
-Tên trường, thời gian học,
-chuyên ngành liên quan.
+00:01:44,000 --> 00:01:55,000
+Các chị công sở thường trông trẻ hơn chị nội trợ,
+trong khi nhiều ông chồng nói "ở nhà sướng hơn".
 
 11
-00:01:13,000 --> 00:01:18,500
-Xếp loại và điểm trung bình
-(nếu có kết quả tốt).
+00:01:55,500 --> 00:02:06,000
+Đi làm, phụ nữ có bạn bè, giảm stress, được tư duy,
+tiếp xúc với trào lưu và tự chủ về kinh tế.
 
 12
-00:01:19,000 --> 00:01:25,000
-Chứng nhận, giải thưởng,
-thành tích đạt được
-cũng rất quan trọng.
+00:02:06,500 --> 00:02:15,000
+Tôi chứng kiến nhiều phụ nữ không thoát khỏi "địa ngục hôn nhân"
+vì không có tiền, phải nương tựa vào người khiến mình đau khổ.
 
 13
-00:01:25,500 --> 00:01:32,000
-Thể hiện mục tiêu nghề nghiệp
-tự tin và chuyên nghiệp,
-phù hợp với công ty.
+00:02:15,500 --> 00:02:26,000
+Đàn ông gia trưởng vẫn còn nhiều, họ muốn vợ ở nhà
+và cho rằng việc chăm con là nghĩa vụ của phụ nữ.
 
 14
-00:01:32,500 --> 00:01:38,000
-Đừng quên các hoạt động
-tham gia và sở thích cá nhân.
+00:02:26,500 --> 00:02:37,000
+Nhưng cả hai vợ chồng đều phải vất vả kiếm tiền,
+nên cần chia sẻ công việc nhà, tôn trọng lẫn nhau.
 
 15
-00:01:38,500 --> 00:01:44,500
-Bố cục CV cân đối,
-dung lượng vừa phải (1 trang).
+00:02:37,500 --> 00:02:48,500
+Phụ nữ đi làm như hoa nở ban ngày, vẻ đẹp được cảm nhận rõ hơn,
+rực rỡ hơn và được nâng niu, trân trọng.
 
 16
-00:01:45,000 --> 00:01:51,000
-Chọn phông chữ dễ nhìn
-và kiểm soát lỗi chính tả.
+00:02:49,000 --> 00:02:58,000
+Phụ nữ đi làm có cơ hội hoàn thiện vẻ đẹp,
+từ tri thức, tâm hồn đến vẻ bề ngoài, sành điệu hơn.
 
 17
-00:01:51,500 --> 00:01:55,500
-Chúc bạn thành công!
+00:02:58,500 --> 00:03:06,000
+Dù tự nguyện hay bị ép buộc, phụ nữ vẫn phải cố gắng đi làm,
+để được tôn trọng và gìn giữ hạnh phúc.

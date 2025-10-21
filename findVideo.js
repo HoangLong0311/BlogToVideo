@@ -8,7 +8,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 async function rewriteEng(text) {
     try {
-        const model = genAI.getGenerativeModel({ model : "gemini-2.0-flash"})
+        const model = genAI.getGenerativeModel({ model : "gemini-2.0-flash-exp"})
         // const prompt = `Rewrite this content with same mean but longer and more detail description.
         // The whole is one continuous sentence, without using , or . at the end and has 40 - 60 letters, just give me answer: ${text}`
         const prompt = `Rewrite this content with same mean but longer and more detail description and has 40 - 60 letters, just give me answer: ${text}`
@@ -217,7 +217,7 @@ async function returnVideo() {
       let tempText = currentLine;
       let buff = 0;
       while (!found) {
-        const durationbuff = Math.floor(Math.random() * 2) + 1; // random 1 - 2 giây
+        const durationbuff = Math.floor(Math.random() * 2) + 2; // random 2 - 3 giây
         console.log("input:", tempText, buff)
         const videoUrl = await findVideoFromText(tempText, duration - 1, duration + buff);
         console.log("video tìm được:", videoUrl);

@@ -5,6 +5,7 @@ import returnVideo from "./findVideo.js";
 import combineVideo from "./handleVideo.js";
 
 // Khởi tạo Gemini client
+// const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 async function subtitleWrite(subtitleText) {
@@ -84,7 +85,7 @@ function getContentCount(contentArray) {
     return contentArray.length;
 }
 
-
+let temp = "";
 // Hàm gọi model để tóm tắt văn bản, phần mẫu đầu ra không tab vào trong, nếu tab -> lỗi file srt
 async function summarizeText(longText) {
   try {
@@ -92,7 +93,7 @@ async function summarizeText(longText) {
 
     const prompt = `Bạn hãy xác định các nội dung chính và tóm tắt nội dung sau thành kịch bản phụ đề chuẩn SRT với các yêu cầu:
     1. **QUY TẮC NỘI DUNG:**
-- Mỗi cue có nội dung bằng tiếng Việt tối đa nằm trên 2 dòng, Mỗi dòng tối thiểu 40 ký tự (tính cả khoảng trắng)
+- Mỗi cue có nội dung bằng tiếng Việt được chia thành tối đa 2 dòng, Mỗi dòng tối thiểu 40 ký tự (tính cả khoảng trắng)
 - Tốc độ đọc: 150-180 từ/phút
 - Thời gian hiển thị mỗi cue: 3-7 giây tùy độ dài
 - Thêm nội dung mô tả video background hợp lí cho các cue và phải bằng English, cần chi tiết và sát cue nhất cùng với đó là độ dài video bằng với thời gian chạy của các cue tương ứng với video đó
@@ -108,7 +109,7 @@ cho nhiều hơn 2 đoạn subtitle bên dưới, các độ dài tương ứng 
 - Tính toán thời gian hợp lý cho tốc độ đọc
 - Khoảng cách giữa các cue: 0.2-0.5 giây
 - Format thời gian: HH:MM:SS,mmm.
-- Toàn bộ thời gian không vượt quá 2 phút, tối thiểu 1 phút 40s
+- Toàn bộ thời gian không vượt quá 2 phút 30s, tối thiểu 1 phút 50s
 - thời gian các video background tối thiểu 5s đến 13s.
 
 3. **NGUYÊN TẮC TÓM TẮT:**
@@ -117,6 +118,10 @@ cho nhiều hơn 2 đoạn subtitle bên dưới, các độ dài tương ứng 
 - Giữ các số liệu, ví dụ quan trọng
 - Loại bỏ dẫn dắt, lặp lại không cần thiết
 - Đảm bảo mạch văn logic giữa các cue, mỗi cue liên kết tự nhiên và phải các câu trong cue phải là câu hoàn chỉnh.
+
+4. **QUY TẮC TUYỆT ĐỐI TRÁNH:**
+- KHÔNG để trong 1 cue có nhiều hơn 2 dòng
+- KHÔNG được cho mỗi cue là 1 video, ví dụ 10 cue thì 10 video là sai yêu cầu.
 
 **VÍ DỤ ĐẦU RA MẪU:**
 
@@ -161,7 +166,10 @@ Nội dung subtitle tiếng việt ở đây
     ${longText}
     `;
 
-    const result = await model.generateContent(prompt);
+    let result = await model.generateContent(prompt);
+    // if (result == null || result.response == undefined) {
+    //     result = await callGROQ(prompt);
+    // }
     const responseText = String(result.response.text());
     
     // Lấy tất cả nội dung giữa dấu $ thành mảng
@@ -182,7 +190,7 @@ Nội dung subtitle tiếng việt ở đây
     const resultText = result.response.text();
     subtitleWrite(text);
     console.log(text, resultText);
-
+    temp = prompt;
     // console.log(responseText);
     return String(responseText.charAt(0));
 
@@ -207,6 +215,8 @@ async function exportVideo() {
 }
 
 // summarizeText(inputText);
+// const res = await callGROQ(temp);
+// console.log("GROQ Response:", res);
 exportVideo();
 
 // Export các hàm để sử dụng từ file khác
