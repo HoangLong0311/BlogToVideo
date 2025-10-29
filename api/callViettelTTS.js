@@ -22,7 +22,7 @@ const voices = {
 
 export async function callViettelTTS(text, filename) {
     try {
-        const apiKey = process.env.VIETTEL_TTS_API_KEY || "fba55b727897ca6b874715d1a17a7901";
+        const apiKey = process.env.VIETTEL_TTS_API_KEY;
         const url = 'https://viettelai.vn/tts/speech_synthesis';
 
         if (!apiKey) {
@@ -60,4 +60,4 @@ export async function callViettelTTS(text, filename) {
     }
 }
 
-await callViettelTTS("Xin chào, tôi là một giọng nói nhân tạo.", "output.mp3");
+// await callViettelTTS("Xin chào, tôi là một giọng nói nhân tạo.", "output.mp3");

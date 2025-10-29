@@ -10,9 +10,9 @@ async function subtitleWrite(subtitleText) {
 }
 
 // Ghi ra eng.txt để đưa qua pexel
-async function writeFile(text) {
+async function writeFile(text, filepath) {
     try {
-        await fs.writeFileSync('./eng.txt', text, 'utf8');
+        await fs.writeFileSync(filepath, text, 'utf8');
         console.log('Ghi file thành công');
     } catch (err) {
         console.error('Lỗi ghi file:', err);
@@ -60,6 +60,20 @@ function getAllContentBetweenSharp(text) {
     return matches;
 }
 
+function getAllContentBetweenWarning(text) {
+    const regex = /!!([^!!]*)!!/gs;
+    const matches = [];
+    let match;
+    
+    while ((match = regex.exec(text)) !== null) {
+        // Lấy toàn bộ nội dung bao gồm cả dấu xuống dòng, loại bỏ dấu # ở đầu và cuối
+        const content = match[1];
+        matches.push(content);
+    }
+    
+    return matches;
+}
+
 // Utility: Lọc nội dung theo từ khóa
 function filterContentByKeyword(contentArray, keyword) {
     return contentArray.filter(content => 
@@ -80,8 +94,7 @@ function getContentCount(contentArray) {
 export {
     filterContentByKeyword, getAllContentBetweenDollars,
     getAllContentBetweenDollarsExec,
-    getAllContentBetweenSharp, getContentBetweenDollars, getContentByIndex,
-    getContentCount, subtitleWrite,
-    writeFile
+    getAllContentBetweenSharp, getAllContentBetweenWarning, getContentBetweenDollars, getContentByIndex,
+    getContentCount, subtitleWrite, writeFile
 };
 

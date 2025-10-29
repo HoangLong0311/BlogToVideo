@@ -1,6 +1,7 @@
-Từ nội dung sau hãy tạo kịch bản phụ đề chuẩn SRT với các yêu cầu:
-1. **QUY TẮC NỘI DUNG:**
-- Mỗi cue có nội dung bằng tiếng Việt được chia thành 2 dòng, Mỗi dòng tối thiểu 30 ký tự (tính cả khoảng trắng)
+Bạn hãy xác định các nội dung chính và tóm tắt nội dung sau thành kịch bản phụ đề chuẩn SRT với các yêu cầu:
+    1. **QUY TẮC NỘI DUNG:**
+- Mỗi cue có nội dung bằng tiếng Việt được chia thành 2 dòng, Mỗi dòng tối thiểu 40 ký tự (tính cả khoảng trắng)
+- Tốc độ đọc: 150-180 từ/phút
 - Thời gian hiển thị mỗi cue: 3-7 giây tùy độ dài
 - Thêm nội dung mô tả video background hợp lí cho các cue và phải bằng English, cần chi tiết và sát cue nhất cùng với đó là độ dài video bằng với thời gian chạy của các cue tương ứng với video đó
 và ngăn cách với mô tả bởi .

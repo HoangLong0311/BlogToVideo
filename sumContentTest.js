@@ -23,9 +23,9 @@ async function exportVideo() {
     }
 }
 
-// const res = await callGemini(command, inputText);
+const res = await callGemini(command, inputText);
 // const res1 = await callGROQ(command, inputText);
 // console.log("GROQ Response:", res);
-exportVideo();
+// exportVideo();
 
 
