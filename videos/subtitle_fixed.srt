@@ -1,104 +1,150 @@
 1
-00:00:09,000 --> 00:00:16,000
-Thị trường cổ phiếu Việt Nam luôn có
-sự biến động bất ngờ mỗi ngày.
-Có nhiều khái niệm mà người ngoài
-ngành gần như không nắm bắt được.
+00:00:09,000 --> 00:00:13,600
+Xã hội phát triển, y tế ngày càng được
+quan tâm với nhiều dịch vụ có ích, phục vụ
 
 2
-00:00:16,200 --> 00:00:25,200
-Vậy Stockbroker là gì? Hãy cùng tìm
-hiểu về lịch sử, yêu cầu và vai trò
-của người môi giới chứng khoán trong
-thị trường chứng khoán nhé.
+00:00:13,600 --> 00:00:21,600
+cho nhu cầu sống. Phương pháp chữa bệnh
+truyền thống không còn phù hợp, cần đến
+thiết bị y tế hiện đại để hỗ trợ điều trị.
 
 3
-00:00:25,400 --> 00:00:30,400
-Nhà môi giới chứng khoán là chuyên
-gia thực hiện lệnh mua bán chứng
-khoán thay cho khách hàng.
+00:00:21,600 --> 00:00:28,600
+Vậy thiết bị y tế là gì? Hãy cùng tìm hiểu
+về thiết bị đang duy trì sự sống của chúng ta
+qua bài viết dưới đây bạn nhé!
 
 4
-00:00:30,600 --> 00:00:40,600
-Họ có thể là đại diện đã đăng ký, cố
-vấn đầu tư, làm việc cho công ty môi
-giới, xử lý giao dịch cho khách hàng
-bán lẻ và các tổ chức lớn nhỏ.
+00:00:28,600 --> 00:00:33,500
+Thiết bị y tế là thiết bị được sử dụng
+cho mục đích y tế, thường có trong
 
 5
-00:00:40,800 --> 00:00:47,800
-Môi giới chứng khoán thường nhận
-hoa hồng cho dịch vụ của họ. Họ có
-thể cung cấp tư vấn tài chính, quản
-lý đầu tư.
+00:00:33,500 --> 00:00:41,500
+bệnh viện và trung tâm y tế. Khác biệt
+với thiết bị sinh hoạt hàng ngày, chúng
+hỗ trợ bác sĩ chăm sóc sức khỏe, chẩn đoán
 
 6
-00:00:48,000 --> 00:00:55,000
-Việc mua bán cổ phiếu được ghi nhận
-đầu tiên ở Rome vào thế kỷ thứ 2
-trước Công nguyên. Năm 1602, Sở
-giao dịch chứng khoán Amsterdam ra đời.
+00:00:41,500 --> 00:00:48,500
+và điều trị bệnh, cải thiện tình trạng
+bệnh nhân. Sử dụng thiết bị chưa kiểm
+chứng sẽ bị xử lý theo quy định của pháp luật.
 
 7
-00:00:55,200 --> 00:01:00,200
-Năm 1792, thị trường chứng khoán
-New York mở cửa. Ngày nay, nhờ công
-nghệ, bất kỳ ai cũng có thể đầu tư.
+00:00:48,500 --> 00:00:56,500
+Thiết bị y tế phải được chính phủ cho phép
+sử dụng. Có nhiều loại thiết bị y tế
+với mục đích khác nhau, không thể áp dụng
 
 8
-00:01:00,040 --> 00:01:09,040
-Để trở thành môi giới chứng khoán,
-bạn cần đáp ứng yêu cầu về giáo dục,
-thường là bằng cử nhân về tài chính,
-luật, hoặc quản trị kinh doanh.
+00:00:56,500 --> 00:01:03,500
+thiết bị này cho bệnh khác. Nhân viên quản lý
+bệnh viện phối hợp với nhân viên y tế để
+quản lý thiết bị y tế và vật tư tiêu hao.
 
 9
-00:01:09,240 --> 00:01:16,240
-Hiểu biết sâu sắc về luật tài chính,
-kế toán, kinh tế, và kỹ năng giao
-tiếp tốt cũng rất quan trọng.
+00:01:03,500 --> 00:01:09,500
+Thiết bị y tế được chia thành 2 nhóm và
+4 loại theo mức độ rủi ro tiềm ẩn liên
+quan đến thiết kế kỹ thuật và sản xuất.
 
 10
-00:01:16,440 --> 00:01:21,440
-Yêu cầu cấp phép hoạt động có sự
-khác nhau giữa các quốc gia. Tại
-Hoa Kỳ cần giấy phép FINRA Series 7.
+00:01:09,500 --> 00:01:16,500
+Nhóm 1 gồm loại A, rủi ro thấp nhất,
+ví dụ như nhiệt kế y tế, găng tay dùng
+một lần, bông băng, giường điều trị thông thường.
 
 11
-00:01:21,640 --> 00:01:28,640
-Tại Canada cần hoàn thành Khóa học
-Chứng khoán Canada. Tại Hồng Kông
-cần vượt qua ba kỳ thi HKSI.
+00:01:16,500 --> 00:01:23,500
+Đơn vị sở hữu công bố chất lượng và tự
+chịu trách nhiệm. Nhóm 2 gồm loại B, C
+và D, mức độ rủi ro cao hơn, khả năng
 
 12
-00:01:28,840 --> 00:01:35,840
-Vai trò của môi giới chứng khoán đã
-thay đổi đáng kể từ khi internet
-phát triển. Các công ty môi giới giảm
-giá chi phối phần lớn tương tác.
+00:01:23,500 --> 00:01:30,500
+gây hậu quả nặng hơn. Loại B rủi ro
+trung bình thấp, loại C rủi ro trung bình
+cao, loại D rủi ro cao nhất.
 
 13
-00:01:36,040 --> 00:01:44,040
-Phí dịch vụ thấp hơn giúp nhiều nhà
-đầu tư tiếp cận thị trường hơn. Mặc
-dù có thể mua cổ phiếu trực tiếp,
-làm việc với môi giới đơn giản hơn.
+00:01:30,500 --> 00:01:36,500
+Loại D phức tạp nhất, điều trị bệnh nặng
+hoặc thay thế bộ phận cơ thể. Phải thử
+nghiệm lâm sàng trước khi sử dụng chính thức.
 
 14
-00:01:44,240 --> 00:01:51,240
-Sự phát triển của internet đã mở
-đường cho các nhà môi giới giảm giá,
-giúp việc đầu tư trở nên dễ dàng hơn
-ngay cả với tài khoản nhỏ.
+00:01:36,500 --> 00:01:44,500
+Không phải cơ sở y tế nào cũng được phép
+lưu hành sử dụng. Thiết bị nhập về phải
+đáp ứng tiêu chuẩn của chính phủ. Việc phân
 
 15
-00:01:51,440 --> 00:01:56,440
-Nhờ môi giới giảm giá, bất kỳ ai
-cũng có thể đầu tư, ngay cả ở nước
-ngoài.
+00:01:44,500 --> 00:01:51,500
+loại dựa trên nguyên tắc chung của chính
+phủ, theo mức độ rủi ro cao nhất nếu
+thiết bị thuộc nhiều mức độ rủi ro khác nhau.
 
 16
-00:01:56,640 --> 00:02:03,640
-Tuy nhiên, nền tảng giảm giá thiếu
-dịch vụ cá nhân hóa. Mong rằng thông
-tin này hữu ích với bạn đọc. Thân ái!
+00:01:51,500 --> 00:01:57,500
+Trong quá trình sử dụng, cơ sở y tế có
+trách nhiệm quản lý và sử dụng đúng
+mục đích, chức năng, chế độ, đảm bảo tiết kiệm.
+
+17
+00:01:57,500 --> 00:01:64,500
+Cần kiểm tra, bảo dưỡng, sửa chữa định
+kỳ theo thời gian quy định của nhà sản
+xuất, đảm bảo chất lượng thiết bị sẵn sàng.
+
+18
+00:01:064,500 --> 01:071,500
+Lưu trữ, quản lý hồ sơ đầy đủ về thiết
+bị y tế, hạch toán kịp thời và đầy đủ
+theo quy định của pháp luật về kế toán.
+
+19
+00:01:71,500 --> 00:01:78,500
+Chịu sự thanh tra, kiểm tra của cơ quan
+quản lý có thẩm quyền. Bác sĩ, y tá, điều
+dưỡng có trách nhiệm bảo quản và thông báo
+
+20
+00:01:78,500 --> 00:01:82,500
+khi có vấn đề xảy ra.
+
+21
+00:01:82,500 --> 00:01:90,500
+Với loại C, D, người vận hành phải cực
+kỳ cẩn thận, vì ảnh hưởng nghiêm trọng
+tới sức khỏe. Cần tuyệt đối cẩn trọng để
+
+22
+00:01:90,500 --> 00:01:97,500
+tránh gây mất an toàn và hiểm nguy cho
+người bệnh. Cần lưu ý về việc sử dụng
+sai bấm ghim phẫu thuật, siêu âm tại giường.
+
+23
+00:01:97,500 --> 00:02:04,500
+Nguy cơ lây nhiễm do sai sót trong quá
+trình kiểm soát nhiễm khuẩn, thiếu thông
+tin về thiết bị cấy ghép khi chụp MRI.
+
+24
+00:02:04,500 --> 00:02:11,500
+Lỗi dùng thuốc do khác biệt thời gian
+trong bệnh án điện tử. Phải xem xét kỹ
+tình trạng bệnh để kê đơn thuốc.
+
+25
+00:02:11,500 --> 00:02:19,500
+Trên đây là những thông tin tìm hiểu về
+thiết bị y tế. Hy vọng bài viết mang
+tới nhiều thông tin bổ ích cho độc giả.
+
+26
+00:02:19,500 --> 00:02:24,500
+Đừng quên truy cập Timviec365.vn để
+không bỏ lỡ thông tin thú vị mỗi ngày!

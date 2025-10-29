@@ -1,98 +1,150 @@
 1
-00:00:09,000 --> 00:00:20,000
-FTE là thuật ngữ quen thuộc trong ngành
-kinh tế tài chính và được sử dụng nhiều.
-Nếu muốn tham gia vào lĩnh vực này, bạn
-cần biết rõ khái niệm FTE là gì nhé!
+00:00:09,000 --> 00:00:13,600
+Xã hội phát triển, y tế ngày càng được
+quan tâm với nhiều dịch vụ có ích, phục vụ
 
 2
-00:00:20,500 --> 00:00:29,500
-FTE được viết đầy đủ là Full-time
-Equivalent, dịch ra là đại lượng tương
-đương toàn thời gian. Đây là giá trị tính
-toán khối lượng công việc cụ thể.
+00:00:13,600 --> 00:00:21,600
+cho nhu cầu sống. Phương pháp chữa bệnh
+truyền thống không còn phù hợp, cần đến
+thiết bị y tế hiện đại để hỗ trợ điều trị.
 
 3
-00:00:30,000 --> 00:00:38,000
-Mục đích của phương pháp này là để tính
-toán số giờ làm việc cần thiết để tối ưu
-số người làm. Doanh nghiệp thường quy
-ước 1 nhân lực full time tương đương 1 FTE.
+00:00:21,600 --> 00:00:28,600
+Vậy thiết bị y tế là gì? Hãy cùng tìm hiểu
+về thiết bị đang duy trì sự sống của chúng ta
+qua bài viết dưới đây bạn nhé!
 
 4
-00:00:38,500 --> 00:00:48,500
-Nhân viên làm part-time được tính là 1/2
-FTE. Để quản trị nhân lực hiệu quả, hiện
-nay có hai cách tính FTE phổ biến. Hãy
-tìm hiểu và đưa ra lựa chọn phù hợp nhất.
+00:00:28,600 --> 00:00:33,500
+Thiết bị y tế là thiết bị được sử dụng
+cho mục đích y tế, thường có trong
 
 5
-00:00:49,000 --> 00:01:00,000
-Cách 1: FTE bằng Workload/Working Time
-Norm. Workload là số giờ làm việc tính
-được, Working Time Norm là định mức
-cho thời gian làm việc.
+00:00:33,500 --> 00:00:41,500
+bệnh viện và trung tâm y tế. Khác biệt
+với thiết bị sinh hoạt hàng ngày, chúng
+hỗ trợ bác sĩ chăm sóc sức khỏe, chẩn đoán
 
 6
-00:01:00,500 --> 00:01:09,500
-Cách này thích hợp nhất khi cần hoạch định
-chiến lược nhân sự và tuyển dụng cho
-doanh nghiệp. Ví dụ: 1 nhân viên cần 480
-giờ workload để hoàn thành nhiệm vụ.
+00:00:41,500 --> 00:00:48,500
+và điều trị bệnh, cải thiện tình trạng
+bệnh nhân. Sử dụng thiết bị chưa kiểm
+chứng sẽ bị xử lý theo quy định của pháp luật.
 
 7
-00:01:10,000 --> 00:01:22,000
-Công ty đặt ra chế độ làm việc 8 giờ/ngày,
-5 ngày/tuần, 4 tuần/tháng, tương đương
-160 giờ/tháng. Ta tính được FTE áp dụng
-cho chính sách giờ làm việc cụ thể là 3 FTE.
+00:00:48,500 --> 00:00:56,500
+Thiết bị y tế phải được chính phủ cho phép
+sử dụng. Có nhiều loại thiết bị y tế
+với mục đích khác nhau, không thể áp dụng
 
 8
-00:01:22,500 --> 00:01:35,500
-Kết luận: Doanh nghiệp cần 3 nhân viên full-
-time để hoàn thành công việc trong 1
-tháng với 480 giờ. Cách 2: Tính FTE dựa
-trên nguồn nhân lực hiện tại trong doanh nghiệp.
+00:00:56,500 --> 01:03,500
+thiết bị này cho bệnh khác. Nhân viên quản lý
+bệnh viện phối hợp với nhân viên y tế để
+quản lý thiết bị y tế và vật tư tiêu hao.
 
 9
-00:01:36,000 --> 00:01:46,000
-Doanh nghiệp sẽ đánh giá được hiệu suất
-công việc của từng nhân viên thông qua
-cách tính này. Bước 1: Thống kê toàn bộ
-thời gian làm việc thực tế của nhân viên.
+00:01:03,500 --> 01:09,500
+Thiết bị y tế được chia thành 2 nhóm và
+4 loại theo mức độ rủi ro tiềm ẩn liên
+quan đến thiết kế kỹ thuật và sản xuất.
 
 10
-00:01:46,500 --> 00:01:52,500
-Bước 2: Xác định rõ Working Time Norm
-dựa trên số giờ và năm làm việc.
+00:01:09,500 --> 01:016,500
+Nhóm 1 gồm loại A, rủi ro thấp nhất,
+ví dụ như nhiệt kế y tế, găng tay dùng
+một lần, bông băng, giường điều trị thông thường.
 
 11
-00:01:53,000 --> 00:02:02,000
-Bước 3: Tính Working time của toàn bộ
-nhân viên đã làm việc trong 1 năm.
-Bước 4: Tính FTE toàn bộ doanh nghiệp.
+00:01:16,500 --> 01:023,500
+Đơn vị sở hữu công bố chất lượng và tự
+chịu trách nhiệm. Nhóm 2 gồm loại B, C
+và D, mức độ rủi ro cao hơn, khả năng
 
 12
-00:02:02,500 --> 00:02:09,500
-Lấy kết quả ở bước 3 chia cho kết quả
-ở bước 2 sẽ ra kết quả FTE cần tính.
+00:01:23,500 --> 01:030,500
+gây hậu quả nặng hơn. Loại B rủi ro
+trung bình thấp, loại C rủi ro trung bình
+cao, loại D rủi ro cao nhất.
 
 13
-00:02:10,000 --> 00:02:22,000
-FTE được tính chính xác và vận dụng vào
-thực tiễn thì đem lại nhiều ý nghĩa cho sự
-phát triển của doanh nghiệp. Nhà quản trị
-dễ dàng xây dựng chiến lược nhân sự.
+00:01:30,500 --> 01:036,500
+Loại D phức tạp nhất, điều trị bệnh nặng
+hoặc thay thế bộ phận cơ thể. Phải thử
+nghiệm lâm sàng trước khi sử dụng chính thức.
 
 14
-00:02:22,500 --> 00:02:32,500
-Đại lượng này sẽ như cánh tay phải đắc lực
-của bộ phận nhân sự với khả năng dự trù
-ngân sách chính xác.
+00:01:36,500 --> 01:044,500
+Không phải cơ sở y tế nào cũng được phép
+lưu hành sử dụng. Thiết bị nhập về phải
+đáp ứng tiêu chuẩn của chính phủ. Việc phân
 
 15
-00:02:33,000 --> 00:02:42,000
-Nhà quản trị có thể xem xét mức độ hoàn
-thành KPI của nhân viên. Doanh nghiệp
-phải biết cách kết hợp giữa nhân viên full
-time và part time.
+00:01:44,500 --> 01:051,500
+loại dựa trên nguyên tắc chung của chính
+phủ, theo mức độ rủi ro cao nhất nếu
+thiết bị thuộc nhiều mức độ rủi ro khác nhau.
+
+16
+00:01:51,500 --> 01:057,500
+Trong quá trình sử dụng, cơ sở y tế có
+trách nhiệm quản lý và sử dụng đúng
+mục đích, chức năng, chế độ, đảm bảo tiết kiệm.
+
+17
+00:01:57,500 --> 01:064,500
+Cần kiểm tra, bảo dưỡng, sửa chữa định
+kỳ theo thời gian quy định của nhà sản
+xuất, đảm bảo chất lượng thiết bị sẵn sàng.
+
+18
+00:01:064,500 --> 01:071,500
+Lưu trữ, quản lý hồ sơ đầy đủ về thiết
+bị y tế, hạch toán kịp thời và đầy đủ
+theo quy định của pháp luật về kế toán.
+
+19
+00:01:71,500 --> 01:078,500
+Chịu sự thanh tra, kiểm tra của cơ quan
+quản lý có thẩm quyền. Bác sĩ, y tá, điều
+dưỡng có trách nhiệm bảo quản và thông báo
+
+20
+00:01:78,500 --> 01:082,500
+khi có vấn đề xảy ra.
+
+21
+00:01:82,500 --> 01:090,500
+Với loại C, D, người vận hành phải cực
+kỳ cẩn thận, vì ảnh hưởng nghiêm trọng
+tới sức khỏe. Cần tuyệt đối cẩn trọng để
+
+22
+00:01:90,500 --> 01:097,500
+tránh gây mất an toàn và hiểm nguy cho
+người bệnh. Cần lưu ý về việc sử dụng
+sai bấm ghim phẫu thuật, siêu âm tại giường.
+
+23
+00:01:97,500 --> 01:104,500
+Nguy cơ lây nhiễm do sai sót trong quá
+trình kiểm soát nhiễm khuẩn, thiếu thông
+tin về thiết bị cấy ghép khi chụp MRI.
+
+24
+00:02:04,500 --> 01:111,500
+Lỗi dùng thuốc do khác biệt thời gian
+trong bệnh án điện tử. Phải xem xét kỹ
+tình trạng bệnh để kê đơn thuốc.
+
+25
+00:02:11,500 --> 01:119,500
+Trên đây là những thông tin tìm hiểu về
+thiết bị y tế. Hy vọng bài viết mang
+tới nhiều thông tin bổ ích cho độc giả.
+
+26
+00:02:19,500 --> 01:124,500
+Đừng quên truy cập Timviec365.vn để
+không bỏ lỡ thông tin thú vị mỗi ngày!
