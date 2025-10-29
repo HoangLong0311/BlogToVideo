@@ -1,8 +1,17 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import 'dotenv/config';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { getAllContentBetweenDollarsExec, getAllContentBetweenSharp, subtitleWrite, writeFile } from "../utils/inputPreprocessor.js";
 
-const genAI = new GoogleGenerativeAI("AIzaSyAVHAzjUYgA5IhhRK97oUxQo1Qrbz9H6Kk");
+// Lấy đường dẫn thư mục hiện tại
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Config dotenv với path đến file .env ở thư mục gốc
+dotenv.config({ path: path.join(__dirname, '..', '.env') });
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const MODELS = {
     GEMINI_2_0_FLASH: 'gemini-2.0-flash',
     GEMINI_1_5: 'gemini-1.5',
@@ -44,6 +53,6 @@ async function callGemini(command, inputText) {
     }
 }
 
-// const a = await callGemini("Write a detailed summary of the following text:", "This is a sample text to be summarized.");
+const a = await callGemini("Write a detailed summary of the following text:", "This is a sample text to be summarized.");
 
 export default callGemini;

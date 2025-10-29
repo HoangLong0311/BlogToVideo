@@ -1,7 +1,14 @@
 import dotenv from 'dotenv';
-import 'dotenv/config';
 import Groq from "groq-sdk";
-dotenv.config();
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Lấy đường dẫn thư mục hiện tại
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Config dotenv với path đến file .env ở thư mục gốc
+dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
 console.log('API Key loaded:', process.env.GROQ_API_KEY ? 'Yes ✓' : 'No ✗');
 console.log('API Key value:', process.env.GROQ_API_KEY);
