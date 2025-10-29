@@ -302,7 +302,77 @@ function fixSrtFormat(subtitlePath) {
       }
     );
 
-    // 10. Fix remaining mm:ss,ms patterns (thiếu giờ) - final catch
+    // 10. Fix invalid seconds (>59) - critical timing fix
+    content = content.replace(
+      /(\d{2}:\d{2}:)(\d{2}),(\d{3})\s*(-->)\s*(\d{2}:\d{2}:)(\d{2}),(\d{3})/g,
+      (match, start_prefix, start_sec, start_ms, arrow, end_prefix, end_sec, end_ms) => {
+        let fixed = match;
+        let startSecInt = parseInt(start_sec);
+        let endSecInt = parseInt(end_sec);
+        
+        if (startSecInt > 59) {
+          // Convert excess seconds to minutes
+          const extraMin = Math.floor(startSecInt / 60);
+          const realSec = startSecInt % 60;
+          const timeParts = start_prefix.split(':');
+          const newMin = parseInt(timeParts[1]) + extraMin;
+          start_prefix = `${timeParts[0]}:${newMin.toString().padStart(2, '0')}:`;
+          start_sec = realSec.toString().padStart(2, '0');
+          
+          modified = true;
+          console.log(`🔧 Fixed invalid seconds (start): ${startSecInt}s → ${newMin}:${realSec}`);
+        }
+        
+        if (endSecInt > 59) {
+          // Convert excess seconds to minutes
+          const extraMin = Math.floor(endSecInt / 60);
+          const realSec = endSecInt % 60;
+          const timeParts = end_prefix.split(':');
+          const newMin = parseInt(timeParts[1]) + extraMin;
+          end_prefix = `${timeParts[0]}:${newMin.toString().padStart(2, '0')}:`;
+          end_sec = realSec.toString().padStart(2, '0');
+          
+          modified = true;
+          console.log(`🔧 Fixed invalid seconds (end): ${endSecInt}s → ${newMin}:${realSec}`);
+        }
+        
+        const result = `${start_prefix}${start_sec},${start_ms} ${arrow} ${end_prefix}${end_sec},${end_ms}`;
+        return result;
+      }
+    );
+
+    // 11. Fix malformed 3-digit seconds - 064 -> 04
+    content = content.replace(
+      /(\d{2}:\d{2}:)0(\d{2}),(\d{3})\s*(-->)\s*(\d{1,2}):0(\d{2}),(\d{3})/g,
+      (match, start_prefix, start_sec, start_ms, arrow, end_min, end_sec, end_ms) => {
+        const fixed = `${start_prefix}${start_sec},${start_ms} ${arrow} 00:${end_min.padStart(2, '0')}:${end_sec},${end_ms}`;
+        if (fixed !== match) {
+          modified = true;
+          console.log(`🔧 Fixed malformed seconds format: ${match} → ${fixed}`);
+        }
+        return fixed;
+      }
+    );
+    
+    // 11b. Fix mixed format with 3-digit seconds and missing hour
+    content = content.replace(
+      /(\d{2}:\d{2}:)(\d{3}),(\d{3})\s*(-->)\s*(\d{1,2}):(\d{3}),(\d{3})/g,
+      (match, start_prefix, start_3digit, start_ms, arrow, end_min, end_3digit, end_ms) => {
+        // Extract valid seconds from 3-digit format (remove leading zero)
+        const start_real_sec = start_3digit.startsWith('0') ? start_3digit.slice(1) : start_3digit.slice(-2);
+        const end_real_sec = end_3digit.startsWith('0') ? end_3digit.slice(1) : end_3digit.slice(-2);
+        
+        const fixed = `${start_prefix}${start_real_sec.padStart(2, '0')},${start_ms} ${arrow} 00:${end_min.padStart(2, '0')}:${end_real_sec.padStart(2, '0')},${end_ms}`;
+        if (fixed !== match) {
+          modified = true;
+          console.log(`🔧 Fixed 3-digit seconds format: ${match} → ${fixed}`);
+          console.log(`   ${start_3digit} → ${start_real_sec}, ${end_3digit} → ${end_real_sec}`);
+        }
+        return fixed;
+      }
+    );
+
+    // 12. Fix remaining mm:ss,ms patterns (thiếu giờ) - final catch
     content = content.replace(
       /(?:^|\n)(\d{1,2}):(\d{2}),(\d{3})\s*(-->)\s*(\d{1,2}):(\d{2}),(\d{3})(?=\s*$)/gm,
       (match, start_min, start_sec, start_ms, arrow, end_min, end_sec, end_ms) => {
@@ -319,10 +389,125 @@ function fixSrtFormat(subtitlePath) {
       }
     );
     
+    // 13. Final validation and cleanup - check for any remaining invalid timecodes
+    const lines = content.split('\n');
+    let finalContent = [];
+    let finalModified = false;
+    
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      
+      // Check if line contains timecode
+      if (/\d{1,2}:\d{1,2}:\d{1,2},\d{1,3}\s*-->\s*\d{1,2}:\d{1,2}:\d{1,2},\d{1,3}/.test(line)) {
+        // Validate and fix any remaining issues
+        const fixedLine = line.replace(
+          /(\d{1,2}):(\d{1,2}):(\d{1,2}),(\d{1,3})\s*(-->)\s*(\d{1,2}):(\d{1,2}):(\d{1,2}),(\d{1,3})/,
+          (match, sh, sm, ss, sms, arrow, eh, em, es, ems) => {
+            // Ensure all parts are properly formatted
+            sh = sh.padStart(2, '0');
+            sm = sm.padStart(2, '0');
+            ss = ss.padStart(2, '0');
+            sms = sms.padEnd(3, '0').substring(0, 3);
+            
+            eh = eh.padStart(2, '0');
+            em = em.padStart(2, '0');
+            es = es.padStart(2, '0');
+            ems = ems.padEnd(3, '0').substring(0, 3);
+            
+            // Fix any seconds > 59
+            if (parseInt(ss) > 59) {
+              const extraMin = Math.floor(parseInt(ss) / 60);
+              ss = (parseInt(ss) % 60).toString().padStart(2, '0');
+              sm = (parseInt(sm) + extraMin).toString().padStart(2, '0');
+              finalModified = true;
+              console.log(`🔧 Final fix - invalid start seconds: ${match}`);
+            }
+            
+            if (parseInt(es) > 59) {
+              const extraMin = Math.floor(parseInt(es) / 60);
+              es = (parseInt(es) % 60).toString().padStart(2, '0');
+              em = (parseInt(em) + extraMin).toString().padStart(2, '0');
+              finalModified = true;
+              console.log(`🔧 Final fix - invalid end seconds: ${match}`);
+            }
+            
+            // Fix any minutes > 59
+            if (parseInt(sm) > 59) {
+              const extraHour = Math.floor(parseInt(sm) / 60);
+              sm = (parseInt(sm) % 60).toString().padStart(2, '0');
+              sh = (parseInt(sh) + extraHour).toString().padStart(2, '0');
+              finalModified = true;
+              console.log(`🔧 Final fix - invalid start minutes: ${match}`);
+            }
+            
+            if (parseInt(em) > 59) {
+              const extraHour = Math.floor(parseInt(em) / 60);
+              em = (parseInt(em) % 60).toString().padStart(2, '0');
+              eh = (parseInt(eh) + extraHour).toString().padStart(2, '0');
+              finalModified = true;
+              console.log(`🔧 Final fix - invalid end minutes: ${match}`);
+            }
+            
+            return `${sh}:${sm}:${ss},${sms} ${arrow} ${eh}:${em}:${es},${ems}`;
+          }
+        );
+        
+        finalContent.push(fixedLine);
+      } else {
+        finalContent.push(line);
+      }
+    }
+    
+    // 14. Post-process timeline consistency check
+    for (let i = 0; i < finalContent.length; i++) {
+      const line = finalContent[i];
+      if (/\d{2}:\d{2}:\d{2},\d{3}\s*-->\s*\d{2}:\d{2}:\d{2},\d{3}/.test(line)) {
+        const timecodeMatch = line.match(/(\d{2}):(\d{2}):(\d{2}),(\d{3})\s*-->\s*(\d{2}):(\d{2}):(\d{2}),(\d{3})/);
+        if (timecodeMatch) {
+          const [, sh, sm, ss, sms, eh, em, es, ems] = timecodeMatch;
+          
+          // Calculate total seconds for comparison
+          const startTotal = parseInt(sh) * 3600 + parseInt(sm) * 60 + parseInt(ss);
+          const endTotal = parseInt(eh) * 3600 + parseInt(em) * 60 + parseInt(es);
+          
+          // Check for backward timeline (end < start)
+          if (endTotal < startTotal) {
+            // Likely timeline reversal, swap or fix
+            const nextLineIndex = i + 6; // Skip to next cue (number, timecode, text, text, text, blank)
+            if (nextLineIndex < finalContent.length) {
+              const nextLine = finalContent[nextLineIndex];
+              if (/\d{2}:\d{2}:\d{2},\d{3}\s*-->\s*\d{2}:\d{2}:\d{2},\d{3}/.test(nextLine)) {
+                const nextMatch = nextLine.match(/(\d{2}):(\d{2}):(\d{2}),(\d{3})\s*-->\s*(\d{2}):(\d{2}):(\d{2}),(\d{3})/);
+                if (nextMatch) {
+                  const [, nsh, nsm, nss, nsms, neh, nem, nes, nems] = nextMatch;
+                  // Use next cue's start time as current cue's end time
+                  const fixedLine = line.replace(
+                    /(\d{2}:\d{2}:\d{2},\d{3}\s*-->\s*)\d{2}:\d{2}:\d{2},\d{3}/,
+                    `$1${nsh}:${nsm}:${nss},${nsms}`
+                  );
+                  finalContent[i] = fixedLine;
+                  finalModified = true;
+                  console.log(`🔧 Fixed timeline reversal: ${line.trim()} → ${fixedLine.trim()}`);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    if (finalModified) {
+      content = finalContent.join('\n');
+      modified = true;
+    }
+
     if (modified) {
       const fixedPath = subtitlePath.replace('.srt', '_fixed.srt');
       fs.writeFileSync(fixedPath, content, 'utf8');
       console.log(`✅ Created fixed subtitle: ${path.basename(fixedPath)}`);
+      
+      // Run final validation
+      validateSubtitleFileEnhanced(fixedPath);
       return fixedPath;
     }
     
