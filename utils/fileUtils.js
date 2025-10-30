@@ -44,7 +44,8 @@ export function generateOutputName(folder, withSubtitle = false) {
     .replace('T', '_')
     .split('.')[0];
   const suffix = withSubtitle ? '_with_subtitle' : '';
-  return path.join(folder, `merged_video${suffix}_${timestamp}.mp4`);
+  // return path.join(folder, `merged_video${suffix}_${timestamp}.mp4`);
+  return path.join(folder, `final_video${suffix}.mp4`);
 }
 
 // Hàm cleanup file tạm
@@ -56,4 +57,15 @@ export function cleanupTempFile(filePath) {
       console.log(`⚠️ Không thể xóa file tạm: ${path.basename(filePath)}`);
     }
   }
+}
+
+export default function cleanupFileContents(files) {
+  files.forEach(file => {
+    try {
+      fs.writeFileSync(file, '');
+      console.log(`🧹 Đã dọn sạch nội dung file: ${file}`);
+    } catch (err) {
+      console.log(`⚠️ Không thể dọn sạch nội dung file: ${file}`);
+    }
+  });
 }
