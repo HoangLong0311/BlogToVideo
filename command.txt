@@ -1,28 +1,24 @@
 Từ nội dung sau hãy tạo kịch bản phụ đề chuẩn SRT với các yêu cầu:
 1. **QUY TẮC NỘI DUNG:**
-- Mỗi cue có nội dung bằng tiếng Việt được chia thành 2 dòng, Mỗi dòng tối thiểu 30 ký tự (tính cả khoảng trắng)
+- Mỗi cue có nội dung bằng tiếng Việt hiển thị trên đúng 2 dòng, Mỗi dòng tối thiểu 40 ký tự (tính cả khoảng trắng)
 - Thời gian hiển thị mỗi cue: 3-7 giây tùy độ dài
-- Thêm nội dung mô tả video background hợp lí cho các cue và phải bằng English, cần chi tiết và sát cue nhất cùng với đó là độ dài video bằng với thời gian chạy của các cue tương ứng với video đó
-và ngăn cách với mô tả bởi .
+- Thêm nội dung mô tả video background phù hợp cho các cue và phải bằng English.
 - Các cue đặt giữa 2 dấu #, các nội dung tiếng anh và độ dài đặt giữa 2 dấu $
 - 1 dòng mô tả tiếng anh có thể có thông số độ dài bằng nhiều hơn 1 đoạn subtitle, có nghĩa là đoạn tiếng anh đó đưa ra video background
-cho nhiều hơn 2 đoạn subtitle bên dưới, các độ dài tương ứng với đoạn mô tả tiếng anh không được quá 15s.
-- dòng mô tả tiếng anh chỉ được sử dụng dấu . để ngăn cách với độ dài, không sử dụng dấu chấm trong câu mô tả.
+cho từ 1 đến 2 đoạn subtitle bên dưới
+- dòng mô tả tiếng anh chỉ được sử dụng dấu . để ngăn cách với độ dài.
 - Không cơ cấu theo kiểu mỗi cue là 1 video, ví dụ 10 cue thì 10 video là sai yêu cầu.
 
 2. **QUY TẮC THỜI GIAN:**
 - Bắt đầu từ 00:00:09,000
 - Tính toán thời gian hợp lý cho tốc độ đọc
-- Khoảng cách giữa các cue: 0.2-0.5 giây
+- Khoảng cách giữa các cue: 0.2-0.4 giây
 - Format thời gian: HH:MM:SS,mmm.
-- Toàn bộ thời gian không vượt quá 2 phút 30s, tối thiểu 1 phút 50s
-- thời gian các video background tối thiểu 5s đến 13s.
+- Tổng thời gian các cue và video không vượt quá 2 phút 30s, tối thiểu 1 phút 50s
+- thời gian các video background tối thiểu 5s và tối đa 17s.
+- Thời gian các video background phải khớp với thời gian các cue
 
 3. **NGUYÊN TẮC TÓM TẮT:**
-- Ngôn ngữ tự nhiên, dễ hiểu, hấp dẫn
-- Tập trung vào ý chính, luận điểm quan trọng
-- Giữ các số liệu, ví dụ quan trọng
-- Loại bỏ dẫn dắt, lặp lại không cần thiết
 - Đảm bảo mạch văn logic giữa các cue, mỗi cue liên kết tự nhiên và phải các câu trong cue phải là câu hoàn chỉnh.
 - Không để cue chứa các câu ngắt quãng, không rõ ràng.
 
