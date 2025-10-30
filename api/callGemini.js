@@ -22,9 +22,9 @@ const MODELS = {
     GEMINI_2_5_PRO: 'gemini-2.5-pro'
 };
 
-async function exportReadingText(time, inputText) {
+async function exportReadingText(time_min, time_max, inputText) {
     try {
-        const model = genAI.getGenerativeModel({ model: MODELS.GEMINI_2_5_FLASH });
+        const model = genAI.getGenerativeModel({ model: MODELS.GEMINI_2_0_FLASH });
         // const prompt = `Hãy tóm tắt đoạn văn bản chuyển thành kịch bản đọc với tốc độ trung bình khoảng 120-140 từ / phút, và có thời lượng tương ứng với thời gian ${time} giây, chỉ cần đưa nội dung đã xử lí xong
         // không cần giải thích, nội dung: ${inputText}`;
 
@@ -33,9 +33,12 @@ async function exportReadingText(time, inputText) {
         **YÊU CẦU:**
         - Tôi sẽ cung cấp một đoạn văn bản dài
         - Bạn hãy biến nó thành một kịch bản thuyết minh hoàn chỉnh
-        - Thời lượng: ${time} giây (tốc độ đọc 140 từ/phút)
+        - Thời lượng nói: tối thiểu ${time_min} giây và tối đa ${time_max} giây (tốc độ đọc 140 từ/phút)
         - Giọng văn: (trang trọng, thân thiện, truyền cảm, etc.)
         - Đối tượng: người xem video
+        - Ngôn ngữ tự nhiên, dễ hiểu, hấp dẫn, mang đến thông tin cần thiết cho người xem.
+        - Tập trung vào ý chính, luận điểm quan trọng
+        - Giữ các số liệu, ví dụ quan trọng
 
         **NỘI DUNG GỐC:**
         ${inputText}
@@ -55,8 +58,8 @@ async function exportReadingText(time, inputText) {
 async function callGemini(command, inputText) {
     try {
         // Lấy Kịch bản đọc
-        const textToRead = await exportReadingText("150", inputText);
-        await callViettelTTS(textToRead, './output.mp3');
+        const textToRead = await exportReadingText("130", "150", inputText);
+        await callViettelTTS(textToRead, './audio/output.mp3');
 
         // Tạo subtitle
         const model = genAI.getGenerativeModel({ model: MODELS.GEMINI_2_0_FLASH });
@@ -82,7 +85,7 @@ async function callGemini(command, inputText) {
         allEngContent.forEach((content, index) => {
             console.log(`${index + 1}. ${content}`);
         });
-        console.log(text, resultText);
+        console.log(resultText);
         // console.log(responseText);
         return true;
 
