@@ -1,6 +1,6 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
-import fs from 'fs';
+// import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -52,12 +52,13 @@ export async function callViettelTTS(text, filename) {
         // Lưu audio buffer thành file MP3
         const audioBuffer = Buffer.from(response.data);
         fs.writeFileSync(filename, audioBuffer);
-        
-        console.log(`✅ Đã lưu file âm thanh: ${filename} (${audioBuffer.length} bytes)`);
+        const time = Math.ceil((response.data.length * 8) / (128 * 1024));
+        // console.log(`✅ Đã lưu file âm thanh: ${filename} (${audioBuffer.length} bytes)`);
+        return time;
     } catch (error) {
         console.error("❌ Lỗi khi gọi API Viettel TTS:", error);
         throw error;
     }
 }
 
-// await callViettelTTS("Xin chào, tôi là một giọng nói nhân tạo.", "output.mp3");
+await callViettelTTS("Có thể nói, việc trao quyền chính là quá trình cho nhân viên thấy được ý nghĩa trong công việc của họ cũng như là quá trình giúp các doanh nghiệp tin tưởng hơn vào năng lực của nhân viên của mình. Đây cũng là một sự điều chỉnh mang tính cách mạng đồng thời giúp cho cả nhân viên và doanh nghiệp đều có được những lợi ích cần thiết của mình.Trên đây là những thông tin chi tiết về Empowerment. Mong rằng, qua bài viết này, các bạn đã hiểu được Empowerment.", "output.mp3");

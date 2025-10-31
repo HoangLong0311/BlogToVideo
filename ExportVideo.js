@@ -3,7 +3,8 @@ import fs from "fs";
 import callGemini from './api/callGemini.js';
 import returnVideo from "./findVideo.js";
 import combineVideo from "./handleVideo.js";
-// import cleanupFileContents from './utils/fileUtils.js';
+import { mergeAudioToVideo } from './modules/mediaProcessor.js';
+import cleanupFileContents from './utils/fileUtils.js';
 
 // Đoạn văn bản ví dụ
 const inputText = fs.readFileSync("./input.txt", "utf8"); // Nội dung blog;
@@ -13,7 +14,7 @@ const command = fs.readFileSync("./command.txt", "utf8"); // Lệnh sinh subtitl
 const filesToCleanup = [
   './reading.txt',
   './eng.txt',
-  './videos/subtitles.srt',
+  './videos/subtitle.srt',
 ];
 
 // Hàm gọi model để tóm tắt văn bản.
@@ -23,7 +24,8 @@ async function exportVideo() {
         // await summarizeText(inputText);
         await returnVideo();
         await combineVideo();
-        // await cleanupFileContents(filesToCleanup);
+        await mergeAudioToVideo();
+        await cleanupFileContents(filesToCleanup);
         console.log("🎉 Done!");
     } catch (error) {
         console.error("❌ Lỗi:", error.message);

@@ -1,22 +1,18 @@
-Từ nội dung sau hãy tạo kịch bản phụ đề chuẩn SRT với các yêu cầu:
-1. **QUY TẮC NỘI DUNG:**
+- Bắt đầu từ 00:00:09,000
+- Tính toán thời gian hợp lý cho tốc độ đọc
+- Khoảng cách giữa các cue: 0.2-0.4 giây
+- Format thời gian: HH:MM:SS,mmm.
+- thời gian các video background tối thiểu 5s và tối đa 17s.
+- Thời gian các video background phải khớp với thời gian các cue
+
+2. **QUY TẮC NỘI DUNG:**
 - Mỗi cue có nội dung bằng tiếng Việt hiển thị trên đúng 2 dòng, Mỗi dòng tối thiểu 40 ký tự (tính cả khoảng trắng)
 - Thời gian hiển thị mỗi cue: 3-7 giây tùy độ dài
 - Thêm nội dung mô tả video background phù hợp cho các cue và phải bằng English.
 - Các cue đặt giữa 2 dấu #, các nội dung tiếng anh và độ dài đặt giữa 2 dấu $
 - 1 dòng mô tả tiếng anh có thể có thông số độ dài bằng nhiều hơn 1 đoạn subtitle, có nghĩa là đoạn tiếng anh đó đưa ra video background
-cho từ 1 đến 2 đoạn subtitle bên dưới
+cho từ 1 đến 2 đoạn subtitle bên dưới.
 - dòng mô tả tiếng anh chỉ được sử dụng dấu . để ngăn cách với độ dài.
-- Không cơ cấu theo kiểu mỗi cue là 1 video, ví dụ 10 cue thì 10 video là sai yêu cầu.
-
-2. **QUY TẮC THỜI GIAN:**
-- Bắt đầu từ 00:00:09,000
-- Tính toán thời gian hợp lý cho tốc độ đọc
-- Khoảng cách giữa các cue: 0.2-0.4 giây
-- Format thời gian: HH:MM:SS,mmm.
-- Tổng thời gian các cue và video không vượt quá 2 phút 30s, tối thiểu 1 phút 50s
-- thời gian các video background tối thiểu 5s và tối đa 17s.
-- Thời gian các video background phải khớp với thời gian các cue
 
 3. **NGUYÊN TẮC TÓM TẮT:**
 - Đảm bảo mạch văn logic giữa các cue, mỗi cue liên kết tự nhiên và phải các câu trong cue phải là câu hoàn chỉnh.

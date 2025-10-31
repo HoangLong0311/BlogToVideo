@@ -1,30 +1,93 @@
-const ffmpegStatic = require('ffmpeg-static');
-const ffmpeg = require('fluent-ffmpeg');
-const path = require('path');
-    
-ffmpeg.setFfmpegPath(ffmpegStatic);
-const videoInput = 'input_video.mp4';
-const audioInput = 'input_audio.mp3';
-const outputFileName = 'output_video_with_audio.mp4';
+import ffmpegStatic from 'ffmpeg-static';
+import ffmpeg from 'fluent-ffmpeg';
+import fs from 'fs';
 
-ffmpeg()
-    .input(videoInput) // Specify the input video file
-    .input(audioInput) // Specify the input audio file
-    .outputOptions([
-    '-c:v copy', // Copy the video stream without re-encoding
-    '-c:a aac', // Encode the audio to AAC format
-    '-map 0:v:0', // Map the first video stream from the first input (videoInput)
-    '-map 1:a:0'  // Map the first audio stream from the second input (audioInput)
-    ])
-    .saveToFile(outputFileName) // Save the output to a new file
-    .on('progress', (progress) => {
-    if (progress.percent) {
-        console.log(`Processing: ${Math.floor(progress.percent)}% done`);
-    }
+// Set ffmpeg path
+ffmpeg.setFfmpegPath(ffmpegStatic);
+
+/**
+ * Ghép file âm thanh output.mp3 vào video final_video_with_subtitle.mp4
+ * Audio sẽ bắt đầu từ giây thứ 9
+ */
+async function mergeAudioToVideo() {
+  const videoPath = './videos/final_video_with_subtitle.mp4';
+  const audioPath = './audio/output.mp3';
+  const outputPath = './videos/final_video_with_audio.mp4';
+  
+  // Kiểm tra files tồn tại
+  if (!fs.existsSync(videoPath)) {
+    throw new Error(`Video file not found: ${videoPath}`);
+  }
+  if (!fs.existsSync(audioPath)) {
+    throw new Error(`Audio file not found: ${audioPath}`);
+  }
+
+  console.log('🎬 Bắt đầu ghép audio vào video...');
+  console.log(`📹 Video: ${videoPath}`);
+  console.log(`🎵 Audio: ${audioPath}`);
+  console.log(`📁 Output: ${outputPath}`);
+
+  return new Promise((resolve, reject) => {
+    ffmpeg()
+      .input(videoPath)
+      .input(audioPath)
+      // Delay audio 9 seconds
+      .complexFilter([
+        {
+          filter: 'adelay',
+          options: '9000|9000', // 9 seconds in milliseconds for stereo
+          inputs: '1:a',
+          outputs: 'delayed_audio'
+        }
+      ])
+      .outputOptions([
+        '-c:v copy',                    // Copy video stream
+        '-c:a aac',                     // Convert audio to AAC
+        '-b:a 192k',                    // Audio bitrate 192kbps
+        '-ar 48000',                    // Sample rate 48kHz
+        '-ac 2',                        // Force stereo
+        '-movflags', '+faststart',      // Web compatible
+        '-map 0:v:0',                   // Map video from first input
+        '-map [delayed_audio]',         // Map delayed audio
+        '-shortest'                     // End when shortest stream ends
+      ])
+      .on('start', (commandLine) => {
+        console.log('▶️  FFmpeg started...');
+      })
+      .on('progress', (progress) => {
+        if (progress.percent) {
+          process.stdout.write(`\r⏳ Progress: ${Math.floor(progress.percent)}%`);
+        }
+      })
+      .on('end', () => {
+        console.log('\n✅ Ghép audio thành công!');
+        console.log(`📁 File output: ${outputPath}`);
+        resolve(outputPath);
+      })
+      .on('error', (err, stdout, stderr) => {
+        console.error('\n❌ Lỗi khi ghép audio:', err.message);
+        if (stderr) {
+          console.error('FFmpeg stderr:', stderr);
+        }
+        reject(err);
+      })
+      .save(outputPath);
+  });
+}
+
+// Chạy function khi file được execute trực tiếp
+const isMainModule = process.argv[1] && process.argv[1].includes('mergeAudio.js');
+
+if (isMainModule) {
+  mergeAudioToVideo()
+    .then((outputPath) => {
+      console.log(`\n🎉 Hoàn thành! File đã được tạo: ${outputPath}`);
+      console.log('💡 Hãy mở file này để kiểm tra audio!');
     })
-    .on('end', () => {
-    console.log('FFmpeg has finished binding audio to video.');
-    })
-    .on('error', (error) => {
-    console.error('Error during FFmpeg process:', error);
+    .catch((error) => {
+      console.error('💥 Lỗi:', error.message);
+      process.exit(1);
     });
+}
+
+export { mergeAudioToVideo };
