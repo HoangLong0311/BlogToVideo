@@ -24,7 +24,11 @@ async function exportVideo() {
         // await summarizeText(inputText);
         await returnVideo();
         await combineVideo();
-        await mergeAudioToVideo();
+        // Ghép audio với video, giữ độ dài video (cắt audio nếu dài hơn)
+        await mergeAudioToVideo({
+            keepVideoLength: true, // Luôn giữ độ dài video
+            audioDelay: 9         // Audio bắt đầu từ giây thứ 9
+        });
         await cleanupFileContents(filesToCleanup);
         console.log("🎉 Done!");
     } catch (error) {

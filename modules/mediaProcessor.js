@@ -8,11 +8,16 @@ ffmpeg.setFfmpegPath(ffmpegStatic);
 /**
  * Ghép file âm thanh output.mp3 vào video final_video_with_subtitle.mp4
  * Audio sẽ bắt đầu từ giây thứ 9
+ * Enhanced version để xử lý audio dài hơn video
  */
-async function mergeAudioToVideo() {
-  const videoPath = './videos/final_video_with_subtitle.mp4';
-  const audioPath = './audio/output.mp3';
-  const outputPath = './videos/final_video_with_audio.mp4';
+async function mergeAudioToVideo(options = {}) {
+  const {
+    videoPath = './videos/final_video_with_subtitle.mp4',
+    audioPath = './audio/output.mp3', 
+    outputPath = './videos/final_video_with_audio.mp4',
+    audioDelay = 9,
+    keepVideoLength = true // Giữ độ dài video, audio sẽ được cắt hoặc ghép theo
+  } = options;
   
   // Kiểm tra files tồn tại
   if (!fs.existsSync(videoPath)) {
@@ -26,31 +31,56 @@ async function mergeAudioToVideo() {
   console.log(`📹 Video: ${videoPath}`);
   console.log(`🎵 Audio: ${audioPath}`);
   console.log(`📁 Output: ${outputPath}`);
+  console.log(`⏰ Audio delay: ${audioDelay}s`);
+  console.log(`📏 Keep video length: ${keepVideoLength ? 'Yes (cut/fit audio to video)' : 'No (may extend video)'}`);
 
   return new Promise((resolve, reject) => {
-    ffmpeg()
+    const command = ffmpeg()
       .input(videoPath)
-      .input(audioPath)
-      // Delay audio 9 seconds
-      .complexFilter([
-        {
-          filter: 'adelay',
-          options: '9000|9000', // 9 seconds in milliseconds for stereo
-          inputs: '1:a',
-          outputs: 'delayed_audio'
-        }
-      ])
-      .outputOptions([
-        '-c:v copy',                    // Copy video stream
-        '-c:a aac',                     // Convert audio to AAC
-        '-b:a 192k',                    // Audio bitrate 192kbps
-        '-ar 48000',                    // Sample rate 48kHz
-        '-ac 2',                        // Force stereo
-        '-movflags', '+faststart',      // Web compatible
-        '-map 0:v:0',                   // Map video from first input
-        '-map [delayed_audio]',         // Map delayed audio
-        '-shortest'                     // End when shortest stream ends
-      ])
+      .input(audioPath);
+    
+    // Build complex filter
+    const filters = [];
+    
+    // Delay audio if specified
+    if (audioDelay > 0) {
+      filters.push({
+        filter: 'adelay',
+        options: `${audioDelay * 1000}|${audioDelay * 1000}`, // Convert to milliseconds for stereo
+        inputs: '1:a',
+        outputs: 'delayed_audio'
+      });
+    }
+    
+    if (filters.length > 0) {
+      command.complexFilter(filters);
+    }
+    
+    // Build output options
+    const outputOptions = [
+      '-c:v copy',                    // Copy video stream
+      '-c:a aac',                     // Convert audio to AAC  
+      '-b:a 192k',                    // Audio bitrate 192kbps
+      '-ar 48000',                    // Sample rate 48kHz
+      '-ac 2',                        // Force stereo
+      '-movflags', '+faststart',      // Web compatible
+      '-map 0:v:0',                   // Map video from first input
+      '-avoid_negative_ts', 'make_zero' // Handle timing issues
+    ];
+    
+    // Map audio - delayed or direct
+    if (audioDelay > 0) {
+      outputOptions.push('-map', '[delayed_audio]');
+    } else {
+      outputOptions.push('-map', '1:a:0');
+    }
+    
+    // Add duration control - always keep video length
+    if (keepVideoLength) {
+      outputOptions.push('-shortest'); // Cut to video duration
+    }
+    
+    command.outputOptions(outputOptions)
       .on('start', (commandLine) => {
         console.log('▶️  FFmpeg started...');
       })

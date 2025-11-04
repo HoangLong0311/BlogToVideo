@@ -1,69 +1,59 @@
 1
-00:00:09,000 --> 00:00:15,500
-Kính chào quý vị, trong lĩnh vực quản lý chi phí và xây dựng hiện đại,
-định mức kinh tế kỹ thuật là một khái niệm cốt lõi và không thể thiếu.
+00:00:09,000 --> 00:00:15,000
+Trong nền kinh tế đầy cạnh tranh, thành công của doanh nghiệp không chỉ đến từ đội ngũ nhân sự tài năng.
+Yếu tố then chốt còn nằm ở chiến lược phân công và quản trị nguồn nhân lực một cách phù hợp và hiệu quả.
 
 2
-00:00:15,800 --> 00:00:22,300
-Vậy định mức kinh tế kỹ thuật cụ thể là gì và đóng vai trò như thế nào,
-chúng ta hãy cùng nhau khám phá cách xây dựng chúng trong video này nhé.
+00:00:15,300 --> 00:00:21,600
+Đây là lý do mà HR Strategy, hay Chiến lược Nguồn nhân lực, đã trở thành yếu tố cốt lõi không thể thiếu.
+Vậy HR Strategy là gì và tầm quan trọng của nó ra sao, hãy cùng chúng tôi khám phá ngay sau đây.
 
 3
-00:00:22,600 --> 00:00:29,600
-Định mức kinh tế kỹ thuật là các trị số quy định mức hao hụt về vật liệu,
-nhân công và máy móc để hoàn thành một đơn vị sản phẩm xây dựng cụ thể.
+00:00:21,900 --> 00:00:28,300
+HR Strategy không chỉ là các tác vụ hành chính mà là vũ khí chiến lược giúp doanh nghiệp tạo nên sự bứt phá.
+Đó là việc xây dựng chính sách và quy trình quản trị nhân sự bài bản dựa trên đặc điểm riêng của tổ chức.
 
 4
-00:00:29,900 --> 00:00:36,900
-Chúng được xây dựng một cách khoa học từ quan sát thực tế, số liệu thống kê,
-phản ánh đúng trình độ công nghệ cũng như cách thức tổ chức sản xuất hiện tại.
+00:00:28,600 --> 00:00:35,400
+Chiến lược này là một lộ trình dài hạn, hình thành từ quá trình tuyển dụng, đào tạo đến việc điều chỉnh.
+Tất cả hoạt động luôn bổ trợ lẫn nhau, tạo nên một hệ thống phát triển nhân sự bền vững cho doanh nghiệp.
 
 5
-00:00:37,200 --> 00:00:43,700
-Vai trò của các định mức này là cực kỳ quan trọng vì một sai sót nhỏ cũng có thể
-dẫn đến lãng phí nguồn lực rất lớn và ảnh hưởng đến toàn bộ dự án.
+00:00:35,700 --> 00:00:42,500
+Hiện nay có hai loại chiến lược nhân sự phổ biến, đầu tiên là Chiến lược gia tăng sự cam kết của nhân viên.
+Các doanh nghiệp theo đuổi sự khác biệt hóa thường áp dụng chiến lược này để gắn kết mục tiêu cá nhân với tổ chức.
 
 6
-00:00:44,000 --> 00:00:50,500
-Ngoài ra, còn có định mức lao động xác định thời gian cần thiết để hoàn thành,
-và định mức nguyên vật liệu quy định lượng vật tư cho một đơn vị sản phẩm.
+00:00:42,800 --> 00:00:47,900
+Họ trả mức lương và phúc lợi hấp dẫn, đồng thời yêu cầu nhân viên có kiến thức và kỹ năng đa dạng.
+Mỗi cá nhân phải sẵn sàng thực hiện nhiều nhiệm vụ khác nhau vì mục tiêu phát triển chung của tập thể.
 
 7
-00:00:50,800 --> 00:00:57,300
-Các định mức này được phân loại rất đa dạng, ví dụ như theo phạm vi quản lý,
-bao gồm định mức của Bộ Xây dựng, định mức nội bộ và cho từng công trình.
+00:00:48,200 --> 00:00:54,700
+Ngược lại với chiến lược trên chính là Chiến lược kiểm soát, thường thấy ở các doanh nghiệp cạnh tranh về giá.
+Tại đây, hiệu suất làm việc và sự tuân thủ quy trình nghiêm ngặt luôn được đặt lên ưu tiên hàng đầu.
 
 8
-00:00:57,600 --> 01:00:04,100
-Nếu phân loại theo nội dung kỹ thuật, chúng ta sẽ có các định mức về vật tư,
-định mức về số ca máy hoạt động và định mức chi tiết về sức lao động.
+00:00:55,000 --> 00:01:00,500
+Công việc được chuyên môn hóa cao, ít đòi hỏi kỹ năng phức tạp nhưng đi kèm với sự giám sát chặt chẽ.
+Dù tối ưu chi phí, nó có thể hạn chế sự phát triển cá nhân và khả năng đổi mới sáng tạo trong công việc.
 
 9
-01:00:04,400 --> 01:00:10,900
-Để xây dựng được các định mức kinh tế kỹ thuật một cách chính xác và hiệu quả,
-hiện nay người ta thường áp dụng ba phương pháp chính đã được công nhận.
+00:01:00,800 --> 00:01:07,800
+Để triển khai HR Strategy hiệu quả, Mô hình 5P được xem là toàn diện nhất với các yếu tố cốt lõi.
+Mô hình này bao gồm Triết lý, Chính sách, Chương trình, Thông lệ và Quy trình quản trị nguồn nhân lực.
 
 10
-01:00:11,200 --> 01:00:17,700
-Phương pháp đầu tiên là dựa trên các tài liệu thống kê và báo cáo đã có sẵn,
-từ đó thu thập số liệu hao tổn thực tế và tiến hành lấy giá trị trung bình.
+00:01:08,100 --> 00:01:14,900
+Bên cạnh đó, ma trận giá trị nguồn nhân lực giúp phân loại nhân sự dựa trên giá trị và tính duy nhất của họ.
+Từ đó, doanh nghiệp có thể phân công công việc hiệu quả hơn cho các nhóm nhân lực chiến lược và cốt lõi.
 
 11
-01:00:18,000 --> 01:00:24,500
-Phương pháp thứ hai là phân tích chi tiết, nghiên cứu từng quá trình thi công,
-quan trắc thông số và tính toán các yếu tố ảnh hưởng một cách cẩn trọng.
+00:01:15,200 --> 00:01:22,000
+Tóm lại, HR Strategy là một hệ thống chiến lược linh hoạt, được cấu thành từ rất nhiều yếu tố khác nhau.
+Nó luôn cần được tùy chỉnh sao cho phù hợp với từng doanh nghiệp và từng giai đoạn phát triển cụ thể.
 
 12
-01:00:24,800 --> 01:00:31,800
-Và phương pháp thứ ba chính là phân tích khảo sát, sử dụng các phiếu điều tra,
-để thu thập thông tin đa chiều rồi từ đó đánh giá và đưa ra định mức cuối cùng.
-
-13
-01:00:32,100 --> 01:00:39,100
-Hy vọng những thông tin vừa rồi đã giúp quý vị hiểu rõ hơn về định mức kinh tế kỹ thuật,
-cũng như tầm quan trọng của việc nắm vững và áp dụng chúng một cách đúng đắn.
-
-14
-01:00:39,400 --> 01:00:45,900
-Việc áp dụng chính xác các định mức này sẽ giúp tối ưu chi phí và hiệu quả,
-xin chân thành cảm ơn quý vị và các bạn đã quan tâm theo dõi chương trình.
+00:01:22,300 --> 00:01:29,000
+Hy vọng những thông tin trên đã giúp quý vị có cái nhìn rõ nét hơn về Chiến lược Nguồn nhân lực.
+Hãy tiếp tục theo dõi để khám phá thêm nhiều kiến thức quản trị nhân sự bổ ích khác trong các số tiếp theo.
