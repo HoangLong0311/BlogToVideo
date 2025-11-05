@@ -1253,6 +1253,67 @@ export function fixSubtitleExceptions(subtitlePath) {
       if (finalPassModified) {
         modified = true;
       }
+
+    // NEW EXCEPTION: Backward Timeline Pattern (01:xx:xx --> 00:xx:xx)
+    console.log('🔧 Checking for backward timeline exceptions...');
+    const backwardTimelineRegex = /(\d{2}):(\d{2}):(\d{2}),(\d{3})\s*-->\s*(\d{2}):(\d{2}):(\d{2}),(\d{3})/g;
+    let backwardMatches;
+    let backwardFixed = 0;
+    
+    content = content.replace(backwardTimelineRegex, (match, sh, sm, ss, sms, eh, em, es, ems) => {
+      const startTotal = parseInt(sh) * 3600 + parseInt(sm) * 60 + parseInt(ss);
+      const endTotal = parseInt(eh) * 3600 + parseInt(em) * 60 + parseInt(es);
+      
+      // Pattern 1: End time is before start time (backward timeline)
+      if (endTotal < startTotal) {
+        // Strategy: Use start time and add reasonable 5-second duration
+        const newEndTotal = startTotal + 5;
+        const newEh = Math.floor(newEndTotal / 3600).toString().padStart(2, '0');
+        const newEm = Math.floor((newEndTotal % 3600) / 60).toString().padStart(2, '0');
+        const newEs = (newEndTotal % 60).toString().padStart(2, '0');
+        
+        const fixed = `${sh}:${sm}:${ss},${sms} --> ${newEh}:${newEm}:${newEs},${ems}`;
+        console.log(`   🔧 Fixed backward timeline: ${match} → ${fixed}`);
+        backwardFixed++;
+        modified = true;
+        return fixed;
+      }
+      
+      // Pattern 2: Hour mismatch (01:xx:xx --> 00:xx:xx) - Convert start hour to 00
+      if (parseInt(sh) === 1 && parseInt(eh) === 0) {
+        // Convert start hour from 01 to 00
+        const newSh = '00';
+        const newStartTotal = parseInt(sm) * 60 + parseInt(ss);
+        
+        // Ensure end time is after adjusted start time
+        if (endTotal < newStartTotal) {
+          const newEndTotal = newStartTotal + 5; // Add 5 seconds
+          const newEh = Math.floor(newEndTotal / 3600).toString().padStart(2, '0');
+          const newEm = Math.floor((newEndTotal % 3600) / 60).toString().padStart(2, '0'); 
+          const newEs = (newEndTotal % 60).toString().padStart(2, '0');
+          
+          const fixed = `${newSh}:${sm}:${ss},${sms} --> ${newEh}:${newEm}:${newEs},${ems}`;
+          console.log(`   🔧 Fixed hour mismatch: ${match} → ${fixed}`);
+          backwardFixed++;
+          modified = true;
+          return fixed;
+        } else {
+          const fixed = `${newSh}:${sm}:${ss},${sms} --> ${eh}:${em}:${es},${ems}`;
+          console.log(`   🔧 Fixed hour mismatch: ${match} → ${fixed}`);
+          backwardFixed++;
+          modified = true;
+          return fixed;
+        }
+      }
+      
+      return match; // No changes needed
+    });
+    
+    if (backwardFixed > 0) {
+      console.log(`✅ Fixed ${backwardFixed} backward timeline exceptions`);
+      fixCount += backwardFixed;
+      modified = true; // Ensure modified flag is set
+    }
       
       // Save to fixed file
       const outputPath = subtitlePath.replace('.srt', '_fixed_exceptions.srt');

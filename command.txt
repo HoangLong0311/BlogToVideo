@@ -6,7 +6,7 @@
 - Thời gian các video background phải khớp với thời gian các cue
 
 2. **QUY TẮC NỘI DUNG:**
-- Mỗi cue có nội dung bằng tiếng Việt hiển thị trên đúng 2 dòng, Mỗi dòng tối thiểu 40 ký tự (tính cả khoảng trắng)
+- Mỗi cue có nội dung bằng tiếng Việt hiển thị trên đúng 2 dòng, Mỗi dòng tối thiểu 20 ký tự (tính cả khoảng trắng)
 - Thời gian hiển thị mỗi cue: 3-7 giây tùy độ dài
 - Thêm nội dung mô tả video background phù hợp cho các cue và phải bằng English.
 - Các cue đặt giữa 2 dấu #, các nội dung tiếng anh và độ dài đặt giữa 2 dấu $
