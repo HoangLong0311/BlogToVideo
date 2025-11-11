@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { getAllContentBetweenDollarsExec, getAllContentBetweenSharp, subtitleWrite, writeFile } from "../utils/inputPreprocessor.js";
-// import { callViettelTTS } from "./callViettelTTS.js";
+import { callViettelTTS } from "./callViettelTTS.js";
 
 // Lấy đường dẫn thư mục hiện tại
 const __filename = fileURLToPath(import.meta.url);
@@ -58,14 +58,14 @@ async function callGemini(command, inputText) {
     try {
         // Lấy Kịch bản đọc
         const textToRead = await exportReadingText("130", "150", inputText);
-        // const audioTime = await callViettelTTS(textToRead, './audio/output.mp3');
-        const audioTime = "150";
+        const audioTime = await callViettelTTS(textToRead, './audio/output.mp3');
+        // const audioTime = "120";
 
         // Tạo subtitle
         const model = genAI.getGenerativeModel({ model: MODELS.GEMINI_2_5_PRO });
         const prompt =  `Từ nội dung sau hãy tạo kịch bản phụ đề chuẩn SRT với các yêu cầu:
                     1. **QUY TẮC THỜI GIAN:**
-                    - Tổng thời gian video không quá ${audioTime} giây. \n ${command} \n ${textToRead}`;
+                    - Tổng thời gian video từ ${audioTime} đến ${audioTime + 10} giây. \n ${command} \n ${textToRead}`;
 
         let result = await model.generateContent(prompt);
         const responseText = String(result.response.text());

@@ -4,7 +4,7 @@ import callGemini from './api/callGemini.js';
 import returnVideo from "./findVideo.js";
 import combineVideo from "./handleVideo.js";
 import audioBinder from './modules/bindAudio.js';
-// import cleanupFileContents from './utils/fileUtils.js';
+import cleanupFileContents from './utils/fileUtils.js';
 
 // Đoạn văn bản ví dụ
 const inputText = fs.readFileSync("./input.txt", "utf8"); // Nội dung blog;
@@ -28,7 +28,7 @@ async function exportVideo() {
             outputPath: './videos/final_video_with_audio.mp4',
             audioDelay: 9  // Audio bắt đầu từ giây thứ 9
         });
-        // await cleanupFileContents(filesToCleanup);
+        await cleanupFileContents(filesToCleanup);
         console.log("🎉 Done!");
     } catch (error) {
         console.error("❌ Lỗi:", error.message);

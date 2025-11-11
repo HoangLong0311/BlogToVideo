@@ -1,6 +1,6 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
-// import fs from 'fs';
+import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -61,4 +61,4 @@ export async function callViettelTTS(text, filename) {
     }
 }
 
-await callViettelTTS("Có thể nói, việc trao quyền chính là quá trình cho nhân viên thấy được ý nghĩa trong công việc của họ cũng như là quá trình giúp các doanh nghiệp tin tưởng hơn vào năng lực của nhân viên của mình. Đây cũng là một sự điều chỉnh mang tính cách mạng đồng thời giúp cho cả nhân viên và doanh nghiệp đều có được những lợi ích cần thiết của mình.Trên đây là những thông tin chi tiết về Empowerment. Mong rằng, qua bài viết này, các bạn đã hiểu được Empowerment.", "output.mp3");
+// await callViettelTTS("Có thể nói, việc trao quyền chính là quá trình cho nhân viên thấy được ý nghĩa trong công việc của họ cũng như là quá trình giúp các doanh nghiệp tin tưởng hơn vào năng lực của nhân viên của mình. Đây cũng là một sự điều chỉnh mang tính cách mạng đồng thời giúp cho cả nhân viên và doanh nghiệp đều có được những lợi ích cần thiết của mình.Trên đây là những thông tin chi tiết về Empowerment. Mong rằng, qua bài viết này, các bạn đã hiểu được Empowerment.", "output.mp3");
