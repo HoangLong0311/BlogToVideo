@@ -8,7 +8,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 async function rewriteEng(text) {
     try {
-        const model = genAI.getGenerativeModel({ model : "gemini-2.0-flash-exp"})
+        const model = genAI.getGenerativeModel({ model : "gemini-2.0-flash"})
         const prompt = `Rewrite this content with same mean but longer and more detail description and has 40 - 60 letters, just give me answer, do not use special characters: ${text}`
         const result = await model.generateContent(prompt);
         return String(result.response.text());

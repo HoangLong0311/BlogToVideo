@@ -11,13 +11,13 @@ import { mergeVideos, mergeVideosWithNormalization, mergeVideosWithReencode } fr
 import { handleVideoError, showHelp } from "./utils/errorHandler.js";
 import { findSubtitleFiles, findVideoFiles, generateOutputName } from "./utils/fileUtils.js";
 
-console.log("🎬 === BẮT ĐẦU GHÉP VIDEO ===");
-console.log("📋 Hướng dẫn sử dụng:");
-console.log("   1. Đặt tất cả video cần ghép vào thư mục 'videos'");
-console.log("   2. Đặt file subtitle (.srt) vào cùng thư mục (tùy chọn)");
-console.log("   3. Chạy script này");
-console.log("   4. Video đã ghép (và có subtitle) sẽ được lưu trong cùng thư mục");
-console.log("==========================================\n");
+// console.log("🎬 === BẮT ĐẦU GHÉP VIDEO ===");
+// console.log("📋 Hướng dẫn sử dụng:");
+// console.log("   1. Đặt tất cả video cần ghép vào thư mục 'videos'");
+// console.log("   2. Đặt file subtitle (.srt) vào cùng thư mục (tùy chọn)");
+// console.log("   3. Chạy script này");
+// console.log("   4. Video đã ghép (và có subtitle) sẽ được lưu trong cùng thư mục");
+// console.log("==========================================\n");
 
 // Hàm dọn dẹp các file video gốc sau khi ghép
 async function cleanupSourceVideos(videoPaths, mergedPath, finalPath, folder) {

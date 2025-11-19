@@ -7,7 +7,7 @@ import audioBinder from './modules/bindAudio.js';
 import cleanupFileContents from './utils/fileUtils.js';
 
 // Đoạn văn bản ví dụ
-const inputText = fs.readFileSync("./input.txt", "utf8"); // Nội dung blog;
+const inputText = fs.readFileSync("./input.txt", "utf8");
 const command = fs.readFileSync("./command.txt", "utf8"); // Lệnh sinh subtitle;
 
 // danh sách file được dọn sau khi xuất video
@@ -18,8 +18,9 @@ const filesToCleanup = [
 ];
 
 // Hàm gọi model để tóm tắt văn bản.
-async function exportVideo() {
+export async function exportVideo() {
     try {
+        // const inputText = fs.writeFileSync("./input.txt", input, "utf8"); // Nội dung blog;
         await callGemini(command, inputText);
         await returnVideo();
         await combineVideo();
@@ -38,6 +39,6 @@ async function exportVideo() {
 // const res = await callGemini(command, inputText);
 // const res1 = await callGROQ(command, inputText);
 // console.log("GROQ Response:", res);
-exportVideo();
+// exportVideo();
 
 

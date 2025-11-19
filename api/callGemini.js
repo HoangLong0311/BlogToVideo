@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { getAllContentBetweenDollarsExec, getAllContentBetweenSharp, subtitleWrite, writeFile } from "../utils/inputPreprocessor.js";
-import { callViettelTTS } from "./callViettelTTS.js";
+// import { callViettelTTS } from "./callViettelTTS.js";
 
 // Lấy đường dẫn thư mục hiện tại
 const __filename = fileURLToPath(import.meta.url);
@@ -23,7 +23,7 @@ const MODELS = {
 
 async function exportReadingText(time_min, time_max, inputText) {
     try {
-        const model = genAI.getGenerativeModel({ model: MODELS.GEMINI_2_5_FLASH });
+        const model = genAI.getGenerativeModel({ model: MODELS.GEMINI_2_0_FLASH });
         // const prompt = `Hãy tóm tắt đoạn văn bản chuyển thành kịch bản đọc với tốc độ trung bình khoảng 120-140 từ / phút, và có thời lượng tương ứng với thời gian ${time} giây, chỉ cần đưa nội dung đã xử lí xong
         // không cần giải thích, nội dung: ${inputText}`;
 
@@ -58,11 +58,11 @@ async function callGemini(command, inputText) {
     try {
         // Lấy Kịch bản đọc
         const textToRead = await exportReadingText("130", "150", inputText);
-        const audioTime = await callViettelTTS(textToRead, './audio/output.mp3');
-        // const audioTime = "120";
+        // const audioTime = await callViettelTTS(textToRead, './audio/output.mp3'); return thời gian audio
+        const audioTime = "120"; // giới hạn vid
 
         // Tạo subtitle
-        const model = genAI.getGenerativeModel({ model: MODELS.GEMINI_2_5_PRO });
+        const model = genAI.getGenerativeModel({ model: MODELS.GEMINI_2_0_FLASH });
         const prompt =  `Từ nội dung sau hãy tạo kịch bản phụ đề chuẩn SRT với các yêu cầu:
                     1. **QUY TẮC THỜI GIAN:**
                     - Tổng thời gian video từ ${audioTime} đến ${audioTime + 10} giây. \n ${command} \n ${textToRead}`;
