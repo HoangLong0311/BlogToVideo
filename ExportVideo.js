@@ -20,6 +20,7 @@ const filesToCleanup = [
 // Hàm gọi model để tóm tắt văn bản.
 export async function exportVideo() {
     try {
+        console.log("bắt đầu tiến trình sinh video...");
         // const inputText = fs.writeFileSync("./input.txt", input, "utf8"); // Nội dung blog;
         await callGemini(command, inputText);
         await returnVideo();

@@ -1,68 +1,97 @@
 1
-00:00:09,000 --> 00:00:16,000
-Chào mừng đến với video tìm hiểu
-về kết cấu trong xây dựng!
-Chắc hẳn bạn đã từng nghe đến thuật
-ngữ này, nhưng liệu bạn đã hiểu rõ?
+00:00:09,000 --> 00:00:20,000
+Chào mừng quý vị đến với video
+tìm hiểu về kết cấu xây dựng!
+Trong lĩnh vực xây dựng, hiểu rõ
+"kết cấu là gì" là bước quan trọng.
 
 2
-00:00:16,200 --> 00:00:23,200
-Kết cấu là hệ thống các bộ phận
-chịu lực như cột, dầm, sàn, mái...
-...được liên kết tạo thành công
-trình ổn định và an toàn.
+00:00:20,000 --> 00:00:27,000
+Kết cấu là hệ thống các bộ phận chịu lực
+như cột, dầm, sàn, mái...
+...được sắp xếp, liên kết để tạo thành
+công trình ổn định, bền vững.
 
 3
-00:00:23,400 --> 00:00:30,400
-Kết cấu quyết định đến chất lượng,
-độ bền và an toàn của công trình.
-Thiết kế kết cấu hợp lý có thể
-giúp công trình đạt tuổi thọ cao.
+00:00:27,200 --> 00:00:33,200
+Nó còn được gọi là cấu trúc công trình.
+Kết cấu xây dựng chịu và truyền tải
+trọng từ mái, sàn, tường xuống móng,
+bảo vệ công trình khỏi tác động.
 
 4
-00:00:30,600 --> 00:00:37,600
-Hiện nay có nhiều cách phân loại
-kết cấu, nhưng phổ biến nhất là:
-theo vật liệu, cơ chế chịu lực,
-dạng công trình và chức năng.
+00:00:33,400 --> 00:00:40,400
+Vai trò của kết cấu vô cùng quan trọng,
+định hình không gian kiến trúc.
+Đảm bảo công năng và quyết định độ bền,
+an toàn của công trình xây dựng.
 
 5
-00:00:37,800 --> 00:00:44,800
-Phân loại theo vật liệu, ta có kết
-cấu bê tông cốt thép cho nhà cao tầng,
-kết cấu thép cho nhà xưởng công
-nghiệp, kết cấu gỗ cho công trình nhẹ.
+00:00:40,600 --> 00:00:48,600
+Theo tiêu chuẩn Việt Nam năm 2025, thiết kế
+kết cấu hợp lý có thể tăng tuổi thọ.
+Công trình lên 50-100 năm nếu thi công
+đúng kỹ thuật và dùng vật liệu tốt.
 
 6
-00:00:45,000 --> 00:00:52,000
-Để đảm bảo kết cấu bền vững, cần
-thiết kế chính xác, vật liệu chuẩn,
-thi công đúng quy trình, giám sát
-chặt chẽ và bảo dưỡng định kỳ.
+00:00:48,800 --> 00:00:55,800
+Có nhiều cách phân loại kết cấu,
+ví dụ, theo vật liệu.
+Bê tông cốt thép cho nhà cao tầng,
+thép cho công trình công nghiệp.
 
 7
-00:00:52,200 --> 00:00:59,200
-Khi lựa chọn kết cấu công trình,
-cần xác định rõ mục đích sử dụng,
-đánh giá điều kiện địa chất, yếu tố
-môi trường, quy mô và ngân sách.
+00:00:56,000 --> 01:00:01,000
+Gỗ cho công trình nhẹ, và gạch đá
+cho tường chịu lực.
+Theo cơ chế chịu lực: kết cấu siêu tĩnh,
+tĩnh định, phẳng và không gian.
 
 8
-00:00:59,400 --> 00:01:06,400
-Kỹ sư kết cấu là người chịu trách
-nhiệm thiết kế, kết cấu và mọi
-thứ liên quan đến công trình.
-Họ cần có trình độ chuyên môn tốt.
+01:00:200 --> 01:07:200
+Kết cấu còn được phân loại theo dạng
+công trình như nhà ở, giao thông.
+Thủy lợi, công nghiệp; theo chức năng
+như chịu lực, nền móng...
 
 9
-00:01:06,600 --> 00:01:13,600
-Công việc của kỹ sư kết cấu bao
-gồm đảm bảo an toàn cho công trình,
-tiết kiệm chi phí, thực hiện hóa
-ý tưởng thiết kế và mang lại kết cấu tốt.
+01:07:400 --> 01:13:400
+Chống đỡ, liên kết; và theo phương pháp
+thi công như đổ tại chỗ, lắp ghép.
+Hoặc ứng dụng công nghệ xây dựng
+hiện đại như bê tông tự lèn, in 3D.
 
 10
-00:01:13,800 --> 00:01:20,000
-Hy vọng video này giúp bạn hiểu
-rõ hơn về kết cấu trong xây dựng.
-Cảm ơn bạn đã theo dõi video này!
+01:13:600 --> 01:20:600
+Để đảm bảo công trình bền vững,
+cần thiết kế chính xác.
+Sử dụng vật liệu đạt chuẩn từ nhà sản
+xuất uy tín, thi công đúng quy trình.
+
+11
+01:20:800 --> 01:29:800
+Kỹ thuật bởi đội ngũ lành nghề, giám sát
+chặt chẽ trong quá trình thi công.
+Và bảo dưỡng, kiểm tra định kỳ sau hoàn
+thiện để đảm bảo an toàn tuyệt đối.
+
+12
+01:30:000 --> 01:37:000
+Khi lựa chọn kết cấu, cần xác định
+mục đích sử dụng công trình.
+Đánh giá điều kiện địa chất và nền móng,
+xem xét yếu tố môi trường và khí hậu.
+
+13
+01:37:200 --> 01:45:200
+Cũng như xác định quy mô và ngân sách
+dự án, để đưa ra lựa chọn tốt nhất.
+Đáp ứng yêu cầu về kỹ thuật và tài chính
+cho công trình xây dựng.
+
+14
+01:45:400 --> 01:50:400
+Kỹ sư kết cấu đóng vai trò then chốt,
+đảm bảo an toàn, tiết kiệm chi phí.
+Thực hiện hóa ý tưởng thiết kế và đưa
+ra giải pháp cho kết cấu hoàn hảo.

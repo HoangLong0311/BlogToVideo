@@ -1,10 +1,8 @@
-Introduction to structural engineering.15
-Definition of structure in construction.16
-Importance of structural design and lifespan.14
-Classification of structures based on materials.16
-Examples of structures based on materials used.17
-Criteria for ensuring structural durability.15
-Factors to consider when choosing a structural design.15
-Role and responsibilities of a structural engineer.16
-Responsibilities of a structural engineer.16
-Conclusion and appreciation.11
+Introduction to construction structures.11
+Definition of structure in construction.17
+The important role of structure in defining architecture.14
+Classification of structures by materials and load-bearing mechanisms.15
+Classification of structures by type, function and construction method.17
+Ensuring the sustainability of the structure.17
+Factors to consider when choosing a structure.14
+The role of structural engineers in project success.5
